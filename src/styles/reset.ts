@@ -87,14 +87,15 @@ export const reset = css`
   mark,
   audio,
   video {
-    margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
+    font: 'Trispace', 'Noto Sans KR', sans-serif;
     vertical-align: baseline;
   }
-  /* HTML5 display-role reset for older browsers */
+  * {
+    font-family: 'Trispace', 'Noto Sans KR', sans-serif;
+  }
   article,
   aside,
   details,
