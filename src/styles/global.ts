@@ -32,4 +32,27 @@ export const globalStyle = css`
     font-weight: 400;
     letter-spacing: -0.03em;
   }
+
+  html,
+  body {
+    @media screen and (max-width: 2600px) and (min-width: 2000px) {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 2000px) and (min-width: 1000px) {
+      font-size: 16px;
+    }
+
+    @media screen and (max-width: 1000px) and (min-width: 700px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 700px) and (min-width: 500px) {
+      font-size: 12px;
+    }
+
+    @media screen and (max-width: 500px) and (min-width: 300px) {
+      font-size: 14px;
+    }
+  }
 `;
