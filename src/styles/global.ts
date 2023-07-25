@@ -23,6 +23,7 @@ export const globalStyle = css`
     height: 100%;
     color: ${colors.white};
     background-color: ${colors.background};
+    overflow: hidden;
   }
 
   #app,
