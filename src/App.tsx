@@ -6,7 +6,7 @@ import { DefaultLayout } from './components';
 
 export const App: React.FC = () => {
   return (
-    <Routes >
+    <Routes>
       <Route
         element={
           <DefaultLayout>

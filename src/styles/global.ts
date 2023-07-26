@@ -23,17 +23,15 @@ export const globalStyle = css`
     height: 100%;
     color: ${colors.white};
     background-color: ${colors.background};
-    overflow: hidden;
   }
 
   #app,
   #root,
   #__next {
-    font-size: 1.6rem;
+    font-size: 0.9rem;
     font-weight: 400;
     letter-spacing: -0.03em;
   }
-
   html,
   body {
     @media screen and (max-width: 2600px) and (min-width: 2000px) {
