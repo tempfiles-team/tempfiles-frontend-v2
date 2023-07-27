@@ -34,7 +34,7 @@ export const MainPageTextContainer = styled.div`
 export const MainPageTextButton = styled.button`
   border: none;
   background-color: ${colors.softPrimary};
-  font-size: 1.2rem;
+  font-size: 1.16rem;
   font-weight: 700;
   padding: 0.4rem;
   align-self: center;
@@ -67,11 +67,11 @@ export const MainPageTextArea = styled.textarea`
 
 export const MainPageFindButton = styled.button`
   border: none;
-  padding: 0.8rem 0.4rem;
+  padding: 0.7rem 0.6rem;
   font-size: 1.1rem;
   font-weight: 600;
   background-color: ${colors.primary};
-  border-radius: 0.4rem;
+  border-radius: 0.6rem;
 `;
 
 export const MainPageUploadButton = styled.button`
@@ -79,7 +79,7 @@ export const MainPageUploadButton = styled.button`
   width: 7.6rem;
   height: 3rem;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   background-color: ${colors.primary};
-  border-radius: 0.6rem;
+  border-radius: 0.8rem;
 `;
