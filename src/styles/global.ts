@@ -8,6 +8,7 @@ export const globalStyle = css`
 
   * {
     box-sizing: border-box;
+    color: ${colors.white};
   }
 
   html {
