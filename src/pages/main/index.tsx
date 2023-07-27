@@ -14,22 +14,26 @@ export const MainPage: React.FC = () => {
 
   return (
     <S.MainPageContainer>
-      <S.MainPageTextContainer>
-        {!textClick ? (
-          <>
-            <S.MainPageTextButton>NEW!</S.MainPageTextButton>
-            <S.MainPageText onClick={() => setTextClick(true)}>
-              여기에 텍스트를 붙혀넣어 보세요 :)
-            </S.MainPageText>
-          </>
-        ) : (
-          <S.MainPageTextArea
-            ref={textRef}
-            onChange={autoHeight}
-            placeholder="여기에 텍스트를 붙혀넣어 보세요 :)"
-          ></S.MainPageTextArea>
-        )}
-      </S.MainPageTextContainer>
+      <S.MainPageFindContainer>
+        <S.MainPageTextContainer>
+          {!textClick ? (
+            <>
+              <S.MainPageTextButton>NEW!</S.MainPageTextButton>
+              <S.MainPageText onClick={() => setTextClick(true)}>
+                여기에 텍스트를 붙혀넣어 보세요 :)
+              </S.MainPageText>
+            </>
+          ) : (
+            <S.MainPageTextArea
+              ref={textRef}
+              onChange={autoHeight}
+              placeholder="여기에 텍스트를 붙혀넣어 보세요 :)"
+            ></S.MainPageTextArea>
+          )}
+        </S.MainPageTextContainer>
+        <S.MainPageFindButton>파일 찾아보기</S.MainPageFindButton>
+      </S.MainPageFindContainer>
+      <S.MainPageUploadButton>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>
   );
 };

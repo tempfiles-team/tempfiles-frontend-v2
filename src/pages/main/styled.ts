@@ -8,13 +8,22 @@ export const MainPageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  row-gap: 3rem;
+`;
+
+export const MainPageFindContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  align-items: center;
 `;
 
 export const MainPageTextContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 65%;
   padding: 0.4rem;
   column-gap: 0.4rem;
   background-color: #252728;
@@ -26,7 +35,7 @@ export const MainPageTextButton = styled.button`
   border: none;
   background-color: ${colors.softPrimary};
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.4rem;
   align-self: center;
   justify-self: center;
@@ -54,4 +63,23 @@ export const MainPageTextArea = styled.textarea`
   &::placeholder {
     color: #c8beac;
   }
+`;
+
+export const MainPageFindButton = styled.button`
+  border: none;
+  padding: 0.8rem 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: ${colors.primary};
+  border-radius: 0.4rem;
+`;
+
+export const MainPageUploadButton = styled.button`
+  border: none;
+  width: 7.6rem;
+  height: 3rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: ${colors.primary};
+  border-radius: 0.6rem;
 `;
