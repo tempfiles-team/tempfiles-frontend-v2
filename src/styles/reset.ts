@@ -1,11 +1,8 @@
 import { css } from '@emotion/react';
 
 export const reset = css`
-  /*
-        http://meyerweb.com/eric/tools/css/reset/ 
-        v2.0 | 20110126
-        License: none (public domain)
-    */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Trispace&display=swap');
+
   html,
   body,
   div,
@@ -87,15 +84,18 @@ export const reset = css`
   mark,
   audio,
   video {
+    margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
     font: 'Trispace', 'Noto Sans KR', sans-serif;
     vertical-align: baseline;
   }
+
   * {
     font-family: 'Trispace', 'Noto Sans KR', sans-serif;
   }
+  /* HTML5 display-role reset for older browsers */
   article,
   aside,
   details,
