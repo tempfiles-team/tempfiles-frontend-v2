@@ -19,7 +19,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
           간단한 파일 공유 서비스
         </Text>
       </Text.Column>
-      {children}
+      <S.DefaultLayoutWrapper>{children}</S.DefaultLayoutWrapper>
       <Navbar />
     </S.DefaultLayoutContainer>
   );

@@ -7,7 +7,7 @@ import { RecoilRoot } from 'recoil';
 import { Global } from '@emotion/react';
 
 import App from './App';
-import { globalStyle } from './styles/global';
+import { globalStyle } from './styles';
 
 const client = new QueryClient();
 
