@@ -11,19 +11,27 @@ export const MainPageContainer = styled.div`
   row-gap: 3rem;
 `;
 
+export const MainPageUploadOptionContainer = styled.div`
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+`;
+
 export const MainPageFindContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   column-gap: 0.4rem;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const MainPageTextContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 65%;
+  width: 50%;
   padding: 0.4rem;
   column-gap: 0.4rem;
   background-color: #252728;
@@ -59,7 +67,6 @@ export const MainPageTextArea = styled.textarea`
   border: none;
   resize: none;
   height: fit-content;
-  caret: none;
   &::placeholder {
     color: #c8beac;
   }
@@ -67,7 +74,7 @@ export const MainPageTextArea = styled.textarea`
 
 export const MainPageFindButton = styled.button`
   border: none;
-  padding: 0.7rem 0.6rem;
+  padding: 0.8rem 0.6rem;
   font-size: 1.1rem;
   font-weight: 600;
   background-color: ${colors.primary};

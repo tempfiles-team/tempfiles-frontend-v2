@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import * as S from './styled';
+import * as S from "./styled"
+import { UPLOAD_OPTIONS_LIST } from '@/constant';
 
 export const MainPage: React.FC = () => {
   const [textClick, setTextClick] = useState(false);
@@ -14,6 +15,11 @@ export const MainPage: React.FC = () => {
 
   return (
     <S.MainPageContainer>
+      <S.MainPageUploadOptionContainer>
+        {UPLOAD_OPTIONS_LIST.map((option) => (
+          <h1>{option}</h1>
+        ))}
+      </S.MainPageUploadOptionContainer>
       <S.MainPageFindContainer>
         <S.MainPageTextContainer>
           {!textClick ? (
