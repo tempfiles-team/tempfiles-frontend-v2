@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
-import { ExpireTime } from '@/components';
+import { Button, ExpireTime } from '@/components';
 
 import * as S from './styled';
 
@@ -84,7 +84,7 @@ export const MainPage: React.FC = () => {
             ></S.MainPageTextArea>
           )}
         </S.MainPageTextWrapper>
-        {!textClick && <S.MainPageFindButton>파일 찾아보기</S.MainPageFindButton>}
+        {!textClick && <Button>파일 찾아보기</Button>}
       </S.MainPageFindContainer>
       <S.MainPageUploadButton>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>
