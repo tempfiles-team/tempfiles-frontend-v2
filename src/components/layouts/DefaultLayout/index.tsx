@@ -11,15 +11,17 @@ export interface DefaultLayoutProps {
 export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
   return (
     <S.DefaultLayoutContainer>
-      <Text.Column>
-        <Text fontSize="3.6rem" fontWeight={600}>
-          TMPF
-        </Text>
-        <Text fontSize="1.6rem" fontWeight={600}>
-          간단한 파일 공유 서비스
-        </Text>
-      </Text.Column>
-      <S.DefaultLayoutWrapper>{children}</S.DefaultLayoutWrapper>
+      <S.DefaultLayoutWrapper>
+        <Text.Column>
+          <Text fontSize="3.6rem" fontWeight={600}>
+            TMPF
+          </Text>
+          <Text fontSize="1.6rem" fontWeight={600}>
+            간단한 파일 공유 서비스
+          </Text>
+        </Text.Column>
+        {children}
+      </S.DefaultLayoutWrapper>
       <Navbar />
     </S.DefaultLayoutContainer>
   );

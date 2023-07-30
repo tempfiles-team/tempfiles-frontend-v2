@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
-import { Button, DownloadLimit, ExpireTime } from '@/components';
+import { Button, DownloadLimit, ExpireTime, Password } from '@/components';
 
 import * as S from './styled';
 
@@ -22,6 +22,7 @@ export const MainPage: React.FC = () => {
     minute: 0,
   });
   const [downloadLimit, setDownloadLimit] = useState<number>(0);
+  const [password, setPassword] = useState<string>('');
 
   const onOptionClick = (i: number) => {
     setActiveOption((prev) => ({ ...prev, [i]: !prev[i] }));
@@ -60,12 +61,7 @@ export const MainPage: React.FC = () => {
       {activeOption[1] && (
         <DownloadLimit setDownloadLimit={setDownloadLimit} downloadLimit={downloadLimit} />
       )}
-      {activeOption[2] && (
-        <div>
-          <h1>this is active option 2 but i am different</h1>
-          <span>Hello babies</span>
-        </div>
-      )}
+      {activeOption[2] && <Password setPassword={setPassword} password={password} />}
       <S.MainPageFindContainer>
         <S.MainPageTextWrapper textClick={textClick}>
           {!textClick ? (

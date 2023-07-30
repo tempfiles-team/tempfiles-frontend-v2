@@ -11,7 +11,8 @@ export const ExpireTimeTextWrapper = styled.span`
   align-items: center;
   justify-content: center;
   width: 56%;
-  padding: 0.34rem;
+  /* padding: 0.34rem;j */
+  height: 3rem;
   column-gap: 0.4rem;
   background-color: #252728;
   border-radius: 0.8rem;
