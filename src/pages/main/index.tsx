@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { FaCheck } from 'react-icons/fa';
 
-import * as S from "./styled"
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
+
+import * as S from './styled';
 
 export const MainPage: React.FC = () => {
   const [textClick, setTextClick] = useState(false);
-  const textRef = React.useRef<HTMLTextAreaElement>(null);
+  const textRef = useRef<HTMLTextAreaElement>(null);
+  const [activeOption, setActiveOption] = useState(UPLOAD_OPTIONS_LIST.map(() => false));
+
+  const onOptionClick = (i: number) => {
+    setActiveOption((prev) => ({ ...prev, [i]: !prev[i] }));
+  };
+
   const autoHeight = () => {
     if (textRef.current) {
       textRef.current.style.height = 'auto';
@@ -15,11 +23,30 @@ export const MainPage: React.FC = () => {
 
   return (
     <S.MainPageContainer>
-      <S.MainPageUploadOptionContainer>
-        {UPLOAD_OPTIONS_LIST.map((option) => (
-          <h1>{option}</h1>
+      <S.MainPageUploadOptionWrapper>
+        {UPLOAD_OPTIONS_LIST.map((option, i) => (
+          <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
+            <S.MainPageCheckBox>{activeOption[i] && <FaCheck size={24} />}</S.MainPageCheckBox>
+            <S.MainPageOptionName>{option}</S.MainPageOptionName>
+          </S.MainPageUploadOption>
         ))}
-      </S.MainPageUploadOptionContainer>
+      </S.MainPageUploadOptionWrapper>
+      {activeOption[0] && (
+        <div>
+          <h1>this is active option 1</h1>
+        </div>
+      )}
+      {activeOption[1] && (
+        <div>
+          <h1>this is active option 2 but i am different</h1>
+        </div>
+      )}
+      {activeOption[2] && (
+        <div>
+          <h1>this is active option 2 but i am different</h1>
+          <span>Hello babies</span>
+        </div>
+      )}
       <S.MainPageFindContainer>
         <S.MainPageTextContainer>
           {!textClick ? (

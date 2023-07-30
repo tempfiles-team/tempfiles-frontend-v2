@@ -8,10 +8,10 @@ export const MainPageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  row-gap: 3rem;
+  row-gap: 1.4rem;
 `;
 
-export const MainPageUploadOptionContainer = styled.div`
+export const MainPageUploadOptionWrapper = styled.div`
   display: flex;
   width: 50%;
   align-items: center;
@@ -31,8 +31,8 @@ export const MainPageTextContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
-  padding: 0.4rem;
+  width: 42%;
+  padding: 0.34rem;
   column-gap: 0.4rem;
   background-color: #252728;
   border-radius: 0.8rem;
@@ -42,8 +42,8 @@ export const MainPageTextContainer = styled.div`
 export const MainPageTextButton = styled.button`
   border: none;
   background-color: ${colors.softPrimary};
-  font-size: 1.16rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   padding: 0.4rem;
   align-self: center;
   justify-self: center;
@@ -62,7 +62,7 @@ export const MainPageTextArea = styled.textarea`
   background-color: transparent;
   width: 100%;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   border: none;
   resize: none;
@@ -74,7 +74,7 @@ export const MainPageTextArea = styled.textarea`
 
 export const MainPageFindButton = styled.button`
   border: none;
-  padding: 0.8rem 0.6rem;
+  padding: 0.74rem 0.6rem;
   font-size: 1.1rem;
   font-weight: 600;
   background-color: ${colors.primary};
@@ -89,4 +89,26 @@ export const MainPageUploadButton = styled.button`
   font-weight: 600;
   background-color: ${colors.primary};
   border-radius: 0.8rem;
+`;
+
+export const MainPageUploadOption = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.4rem;
+`;
+
+export const MainPageOptionName = styled.span`
+  font-size: 1.2rem;
+  font-weight: 700;
+`;
+
+export const MainPageCheckBox = styled.div`
+  width: 2.6rem;
+  height: 2.6rem;
+  background-color: ${colors.secondary};
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

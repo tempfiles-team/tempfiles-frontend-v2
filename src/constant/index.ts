@@ -1,2 +1,2 @@
-export * from "./navbar";
-export * from "./uploadOptions";
+export * from './navbar';
+export * from './uploadOptions';
