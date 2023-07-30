@@ -20,18 +20,18 @@ export const MainPageUploadOptionWrapper = styled.div`
 `;
 
 export const MainPageFindContainer = styled.div`
-  width: 100%;
+  width: 58%;
   display: flex;
   justify-content: center;
   column-gap: 0.4rem;
   align-items: flex-start;
 `;
 
-export const MainPageTextContainer = styled.div`
+export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42%;
+  width: ${({ textClick }) => (textClick ? '100%' : '80%')};
   padding: 0.34rem;
   column-gap: 0.4rem;
   background-color: #252728;
@@ -67,6 +67,8 @@ export const MainPageTextArea = styled.textarea`
   border: none;
   resize: none;
   height: fit-content;
+  max-height: 10rem;
+  overflow: scroll;
   &::placeholder {
     color: #c8beac;
   }

@@ -2,16 +2,38 @@ import React, { useRef, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
+import { ExpireTime } from '@/components';
 
 import * as S from './styled';
+
+export interface ExpireTimeValues {
+  day: number;
+  hour: number;
+  minute: number;
+}
 
 export const MainPage: React.FC = () => {
   const [textClick, setTextClick] = useState(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [activeOption, setActiveOption] = useState(UPLOAD_OPTIONS_LIST.map(() => false));
+  const [expireTime, setExpireTime] = useState<ExpireTimeValues>({
+    day: 0,
+    hour: 0,
+    minute: 0,
+  });
 
   const onOptionClick = (i: number) => {
     setActiveOption((prev) => ({ ...prev, [i]: !prev[i] }));
+  };
+
+  const onExpireTimeClick = (type: string, value: number) => {
+    setExpireTime((prev) => ({ ...prev, [type]: value }));
+    if (expireTime.minute > 59) {
+      setExpireTime((prev) => ({ ...prev, [type]: 0, hour: prev.hour + 1 }));
+    }
+    if (expireTime.hour > 23) {
+      setExpireTime((prev) => ({ ...prev, [type]: 0, day: prev.day + 1 }));
+    }
   };
 
   const autoHeight = () => {
@@ -32,9 +54,7 @@ export const MainPage: React.FC = () => {
         ))}
       </S.MainPageUploadOptionWrapper>
       {activeOption[0] && (
-        <div>
-          <h1>this is active option 1</h1>
-        </div>
+        <ExpireTime onExpireTimeClick={onExpireTimeClick} expireTime={expireTime} />
       )}
       {activeOption[1] && (
         <div>
@@ -48,7 +68,7 @@ export const MainPage: React.FC = () => {
         </div>
       )}
       <S.MainPageFindContainer>
-        <S.MainPageTextContainer>
+        <S.MainPageTextWrapper textClick={textClick}>
           {!textClick ? (
             <>
               <S.MainPageTextButton>NEW!</S.MainPageTextButton>
@@ -63,8 +83,8 @@ export const MainPage: React.FC = () => {
               placeholder="여기에 텍스트를 붙혀넣어 보세요 :)"
             ></S.MainPageTextArea>
           )}
-        </S.MainPageTextContainer>
-        <S.MainPageFindButton>파일 찾아보기</S.MainPageFindButton>
+        </S.MainPageTextWrapper>
+        {!textClick && <S.MainPageFindButton>파일 찾아보기</S.MainPageFindButton>}
       </S.MainPageFindContainer>
       <S.MainPageUploadButton>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>
