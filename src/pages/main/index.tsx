@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
-import { Button, ExpireTime } from '@/components';
+import { Button, DownloadLimit, ExpireTime } from '@/components';
 
 import * as S from './styled';
 
@@ -21,6 +21,7 @@ export const MainPage: React.FC = () => {
     hour: 0,
     minute: 0,
   });
+  const [downloadLimit, setDownloadLimit] = useState<number>(0);
 
   const onOptionClick = (i: number) => {
     setActiveOption((prev) => ({ ...prev, [i]: !prev[i] }));
@@ -57,9 +58,7 @@ export const MainPage: React.FC = () => {
         <ExpireTime onExpireTimeClick={onExpireTimeClick} expireTime={expireTime} />
       )}
       {activeOption[1] && (
-        <div>
-          <h1>this is active option 2 but i am different</h1>
-        </div>
+        <DownloadLimit setDownloadLimit={setDownloadLimit} downloadLimit={downloadLimit} />
       )}
       {activeOption[2] && (
         <div>
