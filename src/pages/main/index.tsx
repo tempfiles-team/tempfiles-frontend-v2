@@ -50,7 +50,7 @@ export const MainPage: React.FC = () => {
       <S.MainPageUploadOptionWrapper>
         {UPLOAD_OPTIONS_LIST.map((option, i) => (
           <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
-            <S.MainPageCheckBox>{activeOption[i] && <FaCheck size={24} />}</S.MainPageCheckBox>
+            <S.MainPageCheckBox>{activeOption[i] && <S.MainPageCheckIcon />}</S.MainPageCheckBox>
             <S.MainPageOptionName>{option}</S.MainPageOptionName>
           </S.MainPageUploadOption>
         ))}
@@ -68,18 +68,18 @@ export const MainPage: React.FC = () => {
             <>
               <S.MainPageTextButton>NEW!</S.MainPageTextButton>
               <S.MainPageText onClick={() => setTextClick(true)}>
-                여기에 텍스트를 붙혀넣어 보세요 :)
+                여기에 텍스트를 붙혀넣어 보세요
               </S.MainPageText>
             </>
           ) : (
             <S.MainPageTextArea
               ref={textRef}
               onChange={autoHeight}
-              placeholder="여기에 텍스트를 붙혀넣어 보세요 :)"
+              placeholder="여기에 텍스트를 붙혀넣어 보세요"
             ></S.MainPageTextArea>
           )}
         </S.MainPageTextWrapper>
-        {!textClick && <Button>파일 찾아보기</Button>}
+        {!textClick && <Button>파일 찾기</Button>}
       </S.MainPageFindContainer>
       <S.MainPageUploadButton>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>

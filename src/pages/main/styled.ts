@@ -1,3 +1,5 @@
+import { FaCheck } from 'react-icons/fa';
+
 import styled from '@emotion/styled';
 
 import { colors } from '@/styles';
@@ -17,6 +19,12 @@ export const MainPageUploadOptionWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+  @media screen and (min-width: 560px) and (max-width: 1150px) {
+    width: 70%;
+  }
+  @media screen and (max-width: 560px) {
+    width: 100%;
+  }
 `;
 
 export const MainPageFindContainer = styled.div`
@@ -25,6 +33,12 @@ export const MainPageFindContainer = styled.div`
   justify-content: center;
   column-gap: 0.4rem;
   align-items: flex-start;
+  @media screen and (min-width: 560px) and (max-width: 1150px) {
+    width: 70%;
+  }
+  @media screen and (max-width: 560px) {
+    width: 100%;
+  }
 `;
 
 export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
@@ -37,6 +51,9 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   background-color: #252728;
   border-radius: 0.8rem;
   border: 0.22rem solid ${colors.softPrimary};
+  @media screen and (max-width: 560px) {
+    width: ${({ textClick }) => (textClick ? '90%' : '70%')};
+  }
 `;
 
 export const MainPageTextButton = styled.button`
@@ -55,6 +72,10 @@ export const MainPageText = styled.span`
   font-size: 1.1rem;
   font-weight: 700;
   color: #c8beac;
+  @media screen and (max-width: 560px) {
+    font-size: 1rem;
+    font-weight: 600;
+  }
 `;
 
 export const MainPageTextArea = styled.textarea`
@@ -66,11 +87,20 @@ export const MainPageTextArea = styled.textarea`
   display: flex;
   border: none;
   resize: none;
-  height: fit-content;
+  height: 3rem;
+  padding: 0;
   max-height: 10rem;
-  overflow: scroll;
   &::placeholder {
     color: #c8beac;
+  }
+  &::-webkit-scrollbar {
+    width: 0;
+    color: ${colors.softPrimary};
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${colors.softPrimary};
+    border-radius: 0.4rem;
   }
 `;
 
@@ -103,6 +133,9 @@ export const MainPageUploadOption = styled.div`
 export const MainPageOptionName = styled.span`
   font-size: 1.2rem;
   font-weight: 700;
+  @media screen and (max-width: 560px) {
+    font-size: 1rem;
+  }
 `;
 
 export const MainPageCheckBox = styled.div`
@@ -113,4 +146,17 @@ export const MainPageCheckBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 560px) {
+    width: 2rem;
+    height: 2rem;
+  }
+`;
+
+export const MainPageCheckIcon = styled(FaCheck)`
+  width: 1.6rem;
+  height: 1.6rem;
+  @media screen and (max-width: 560px) {
+    width: 1rem;
+    height: 1rem;
+  }
 `;

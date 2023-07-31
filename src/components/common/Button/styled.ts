@@ -9,4 +9,8 @@ export const ButtonElement = styled.button`
   font-weight: 600;
   background-color: ${colors.primary};
   border-radius: 0.6rem;
+  @media screen and (max-width: 630px) {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
 `;
