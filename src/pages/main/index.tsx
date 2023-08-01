@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
 import { Button, DownloadLimit, ExpireTime, Password } from '@/components';

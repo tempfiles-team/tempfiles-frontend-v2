@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ExpireTimeValues } from '@/pages';
-import { Button } from '@/components/common';
 
 import * as S from './styled';
 
@@ -17,15 +16,17 @@ export const ExpireTime: React.FC<ExpireTimeProps> = ({ onExpireTimeClick, expir
 
   return (
     <S.ExpireTimeContainer>
-      <S.ExpireTimeTextWrapper>
-        <S.ExpireTimeText>
-          {expireTime.minute}분, {expireTime.hour}시간, {expireTime.day}일
-        </S.ExpireTimeText>
-      </S.ExpireTimeTextWrapper>
-      <Button onClick={() => onMinuteClick(1)}>+1분</Button>
-      <Button onClick={() => onMinuteClick(10)}>+10분</Button>
-      <Button onClick={() => onExpireTimeClick('hour', expireTime.hour + 1)}>+1시간</Button>
-      <Button onClick={() => onExpireTimeClick('day', expireTime.day + 1)}>+1일</Button>
+      <S.ExpireTimeText>
+        {expireTime.minute}분, {expireTime.hour}시간, {expireTime.day}일
+      </S.ExpireTimeText>
+      <S.ExpireTimeOptionButton onClick={() => onMinuteClick(1)}>+1분</S.ExpireTimeOptionButton>
+      <S.ExpireTimeOptionButton onClick={() => onMinuteClick(10)}>+10분</S.ExpireTimeOptionButton>
+      <S.ExpireTimeOptionButton onClick={() => onExpireTimeClick('hour', expireTime.hour + 1)}>
+        +1시간
+      </S.ExpireTimeOptionButton>
+      <S.ExpireTimeOptionButton onClick={() => onExpireTimeClick('day', expireTime.day + 1)}>
+        +1일
+      </S.ExpireTimeOptionButton>
     </S.ExpireTimeContainer>
   );
 };

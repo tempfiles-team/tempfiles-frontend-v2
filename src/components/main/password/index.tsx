@@ -21,9 +21,9 @@ export const Password: React.FC<PasswordProps> = ({ setPassword, password }) => 
         value={password}
       />
       {showPassword ? (
-        <FaEye size={26} onClick={() => setShowPassword(false)} />
+        <FaEye size={'1.4rem'} onClick={() => setShowPassword(false)} />
       ) : (
-        <FaEyeSlash size={26} onClick={() => setShowPassword(true)} />
+        <FaEyeSlash size={'1.4rem'} onClick={() => setShowPassword(true)} />
       )}
     </S.PasswordContainer>
   );

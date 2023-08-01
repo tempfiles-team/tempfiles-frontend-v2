@@ -7,6 +7,12 @@ export const DownloadLimitContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 0.4rem;
+  @media screen and (min-width: 560px) and (max-width: 1150px) {
+    width: 70%;
+  }
+  @media screen and (max-width: 560px) {
+    width: 85%;
+  }
 `;
 
 export const DownloadLimitSlider = styled.input`

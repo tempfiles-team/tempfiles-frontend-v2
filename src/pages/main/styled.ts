@@ -30,14 +30,14 @@ export const MainPageUploadOptionWrapper = styled.div`
 export const MainPageFindContainer = styled.div`
   width: 58%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   column-gap: 0.4rem;
   align-items: flex-start;
   @media screen and (min-width: 560px) and (max-width: 1150px) {
     width: 70%;
   }
   @media screen and (max-width: 560px) {
-    width: 100%;
+    width: 85%;
   }
 `;
 
@@ -45,14 +45,14 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ textClick }) => (textClick ? '100%' : '80%')};
+  width: 100%;
   padding: 0.34rem;
   column-gap: 0.4rem;
   background-color: #252728;
   border-radius: 0.8rem;
   border: 0.22rem solid ${colors.softPrimary};
   @media screen and (max-width: 560px) {
-    width: ${({ textClick }) => (textClick ? '90%' : '70%')};
+    width: 100%;
   }
 `;
 
