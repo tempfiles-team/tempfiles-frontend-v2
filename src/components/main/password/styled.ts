@@ -9,7 +9,7 @@ export const PasswordContainer = styled.div`
   justify-content: center;
   padding: 0.6rem;
   column-gap: 0.4rem;
-  background-color: #252728;
+  background-color: ${colors.secondary};
   border-radius: 0.8rem;
   border: 0.22rem solid ${colors.softPrimary};
   @media screen and (min-width: 560px) and (max-width: 1150px) {
@@ -28,4 +28,11 @@ export const PasswordInput = styled.input`
   height: 1.2rem;
   border: none;
   outline: 0;
+  &::placeholder {
+    color: #c8beac;
+  }
+  @media screen and (max-width: 560px) {
+    font-size: 1rem;
+    font-weight: 600;
+  }
 `;

@@ -19,6 +19,7 @@ export const Password: React.FC<PasswordProps> = ({ setPassword, password }) => 
         type={showPassword ? 'text' : 'password'}
         onChange={onChange}
         value={password}
+        placeholder="비밀번호를 입력해주세요"
       />
       {showPassword ? (
         <FaEye size={'1.4rem'} onClick={() => setShowPassword(false)} />

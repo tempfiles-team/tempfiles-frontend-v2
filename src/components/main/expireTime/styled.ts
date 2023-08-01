@@ -24,7 +24,7 @@ export const ExpireTimeText = styled.div`
   justify-content: center;
   font-size: 1.1rem;
   border-radius: 0.8rem;
-  background-color: #252728;
+  background-color: ${colors.secondary};
   font-weight: 700;
   @media screen and (max-width: 560px) {
     font-size: 1rem;

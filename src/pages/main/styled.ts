@@ -90,17 +90,24 @@ export const MainPageTextArea = styled.textarea`
   height: 3rem;
   padding: 0;
   max-height: 10rem;
+  /* border: 1px solid red; */
   &::placeholder {
     color: #c8beac;
   }
   &::-webkit-scrollbar {
-    width: 0;
-    color: ${colors.softPrimary};
+    width: 0.4rem;
+  }
+  &::-webkit-scrollbar-track {
     background-color: transparent;
+    border-radius: 1rem;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: ${colors.softPrimary};
-    border-radius: 0.4rem;
+    background-color: #4f4f4f;
+    border-radius: 1rem;
+  }
+  @media screen and (max-width: 560px) {
+    font-size: 1rem;
+    font-weight: 600;
   }
 `;
 
