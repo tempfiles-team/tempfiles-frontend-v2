@@ -17,10 +17,10 @@ export const MainPage: React.FC = () => {
   const [activeOption, setActiveOption] = useState(UPLOAD_OPTIONS_LIST.map(() => false));
   const [expireTime, setExpireTime] = useState<ExpireTimeValues>({
     day: 0,
-    hour: 0,
+    hour: 3,
     minute: 0,
   });
-  const [downloadLimit, setDownloadLimit] = useState<number>(0);
+  const [downloadLimit, setDownloadLimit] = useState<number>(50);
   const [password, setPassword] = useState<string>('');
 
   const onOptionClick = (i: number) => {

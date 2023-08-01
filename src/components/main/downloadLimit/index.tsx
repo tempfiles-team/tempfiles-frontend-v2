@@ -21,7 +21,7 @@ export const DownloadLimit: React.FC<DownloadLimitProps> = ({
         type="range"
         min={1}
         max={100}
-        defaultValue={1}
+        defaultValue={50}
         onChange={onDownloadLimitChange}
         step={1}
       />
