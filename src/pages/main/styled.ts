@@ -27,17 +27,19 @@ export const MainPageUploadOptionWrapper = styled.div`
   }
 `;
 
-export const MainPageFindContainer = styled.div`
+export const MainPageFindContainer = styled.div<{ textClick: boolean }>`
   width: 58%;
-  display: flex;
-  justify-content: space-between;
+  display: ${({ textClick }) => (textClick ? 'flex' : 'grid')};
+  grid-template-columns: 1fr 0.24fr;
   column-gap: 0.4rem;
-  align-items: flex-start;
   @media screen and (min-width: 560px) and (max-width: 1150px) {
     width: 70%;
   }
   @media screen and (max-width: 560px) {
     width: 85%;
+  }
+  @media screen and (max-width: 375px) {
+    grid-template-columns: 1fr 0.26fr;
   }
 `;
 
@@ -48,6 +50,7 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   width: 100%;
   padding: 0.34rem;
   column-gap: 0.4rem;
+  height: ${({ textClick }) => (textClick ? 'fit-content' : '3rem')};
   background-color: #252728;
   border-radius: 0.8rem;
   border: 0.22rem solid ${colors.softPrimary};
@@ -87,10 +90,8 @@ export const MainPageTextArea = styled.textarea`
   display: flex;
   border: none;
   resize: none;
-  height: 3rem;
   padding: 0;
   max-height: 10rem;
-  /* border: 1px solid red; */
   &::placeholder {
     color: #c8beac;
   }
@@ -111,13 +112,22 @@ export const MainPageTextArea = styled.textarea`
   }
 `;
 
-export const MainPageFindButton = styled.button`
-  border: none;
-  padding: 0.74rem 0.6rem;
+export const MainPageFindButton = styled.div`
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
   font-size: 1.1rem;
   font-weight: 600;
   background-color: ${colors.primary};
   border-radius: 0.6rem;
+  cursor: pointer;
+  @media screen and (max-width: 630px) {
+    padding: 0 0.8rem;
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
 `;
 
 export const MainPageUploadButton = styled.button`
@@ -134,7 +144,7 @@ export const MainPageUploadOption = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 0.4rem;
+  column-gap: 0.6rem;
 `;
 
 export const MainPageOptionName = styled.span`

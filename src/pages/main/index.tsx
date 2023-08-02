@@ -20,7 +20,7 @@ export const MainPage: React.FC = () => {
     hour: 3,
     minute: 0,
   });
-  const [downloadLimit, setDownloadLimit] = useState<number>(50);
+  const [downloadLimit, setDownloadLimit] = useState<number>(1);
   const [password, setPassword] = useState<string>('');
 
   const onOptionClick = (i: number) => {
@@ -61,7 +61,7 @@ export const MainPage: React.FC = () => {
         <DownloadLimit setDownloadLimit={setDownloadLimit} downloadLimit={downloadLimit} />
       )}
       {activeOption[2] && <Password setPassword={setPassword} password={password} />}
-      <S.MainPageFindContainer>
+      <S.MainPageFindContainer textClick={textClick}>
         <S.MainPageTextWrapper textClick={textClick}>
           {!textClick ? (
             <>

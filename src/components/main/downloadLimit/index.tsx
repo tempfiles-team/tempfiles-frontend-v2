@@ -16,12 +16,12 @@ export const DownloadLimit: React.FC<DownloadLimitProps> = ({
   };
   return (
     <S.DownloadLimitContainer>
-      <S.DownloadLimitText>- 다운로드 횟수 {downloadLimit}번</S.DownloadLimitText>
+      <S.DownloadLimitText>{downloadLimit}</S.DownloadLimitText>
       <S.DownloadLimitSlider
         type="range"
         min={1}
         max={100}
-        defaultValue={50}
+        defaultValue={0}
         onChange={onDownloadLimitChange}
         step={1}
       />

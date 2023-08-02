@@ -11,6 +11,7 @@ export const PasswordContainer = styled.div`
   column-gap: 0.4rem;
   background-color: ${colors.secondary};
   border-radius: 0.8rem;
+  height: 3rem;
   border: 0.22rem solid ${colors.softPrimary};
   @media screen and (min-width: 560px) and (max-width: 1150px) {
     width: 70%;
@@ -25,7 +26,7 @@ export const PasswordInput = styled.input`
   background-color: transparent;
   font-size: 1.1rem;
   font-weight: 700;
-  height: 1.2rem;
+  height: 100%;
   border: none;
   outline: 0;
   &::placeholder {

@@ -6,7 +6,7 @@ export const ExpireTimeContainer = styled.div`
   width: 58%;
   display: flex;
   column-gap: 0.4rem;
-  height: 2.6rem;
+  height: 3rem;
   justify-content: space-between;
   @media screen and (min-width: 560px) and (max-width: 1150px) {
     width: 70%;
@@ -31,16 +31,17 @@ export const ExpireTimeText = styled.div`
   }
 `;
 
-export const ExpireTimeOptionButton = styled.div`
+export const ExpireTimeOptionButton = styled.div<{ isTertiary?: boolean }>`
   padding: 0 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2.6rem;
+  height: 100%;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: ${colors.primary};
+  background-color: ${({ isTertiary }) => (isTertiary ? colors.tertiary : colors.primary)};
   border-radius: 0.6rem;
+  cursor: pointer;
   @media screen and (max-width: 630px) {
     padding: 0 0.8rem;
     font-size: 0.94rem;

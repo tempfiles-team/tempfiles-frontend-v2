@@ -5,8 +5,13 @@ import * as S from './styled';
 export interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
+  isTertiary?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
-  return <S.ButtonElement onClick={onClick}>{children}</S.ButtonElement>;
+export const Button: React.FC<ButtonProps> = ({ children, onClick, isTertiary }) => {
+  return (
+    <S.ButtonElement onClick={onClick} isTertiary={isTertiary}>
+      {children}
+    </S.ButtonElement>
+  );
 };

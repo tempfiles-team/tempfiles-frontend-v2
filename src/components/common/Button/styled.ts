@@ -2,16 +2,20 @@ import styled from '@emotion/styled';
 
 import { colors } from '@/styles';
 
-export const ButtonElement = styled.button`
-  border: none;
-  width: 7.6rem;
-  padding: 0.8rem 0;
+export const ButtonElement = styled.div<{ isTertiary?: boolean }>`
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: ${colors.primary};
+  background-color: ${({ isTertiary }) => (isTertiary ? colors.tertiary : colors.primary)};
   border-radius: 0.6rem;
+  cursor: pointer;
   @media screen and (max-width: 630px) {
-    font-size: 1rem;
+    padding: 0 0.8rem;
+    font-size: 0.94rem;
     font-weight: 600;
   }
 `;

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ExpireTimeValues } from '@/pages';
+import { Button } from '@/components';
 
 import * as S from './styled';
 
@@ -10,8 +11,10 @@ export interface ExpireTimeProps {
 }
 
 export const ExpireTime: React.FC<ExpireTimeProps> = ({ onExpireTimeClick, expireTime }) => {
-  const onMinuteClick = (min: number) => {
-    onExpireTimeClick('minute', expireTime.minute + min);
+  const onResetClick = () => {
+    onExpireTimeClick('minute', 0);
+    onExpireTimeClick('hour', 0);
+    onExpireTimeClick('day', 0);
   };
 
   return (
@@ -19,14 +22,11 @@ export const ExpireTime: React.FC<ExpireTimeProps> = ({ onExpireTimeClick, expir
       <S.ExpireTimeText>
         {expireTime.minute}분, {expireTime.hour}시간, {expireTime.day}일
       </S.ExpireTimeText>
-      <S.ExpireTimeOptionButton onClick={() => onMinuteClick(1)}>+1분</S.ExpireTimeOptionButton>
-      <S.ExpireTimeOptionButton onClick={() => onMinuteClick(10)}>+10분</S.ExpireTimeOptionButton>
-      <S.ExpireTimeOptionButton onClick={() => onExpireTimeClick('hour', expireTime.hour + 1)}>
-        +1시간
-      </S.ExpireTimeOptionButton>
-      <S.ExpireTimeOptionButton onClick={() => onExpireTimeClick('day', expireTime.day + 1)}>
-        +1일
-      </S.ExpireTimeOptionButton>
+      <Button onClick={() => onExpireTimeClick('minute', expireTime.minute + 10)}>+10분</Button>
+      <Button onClick={() => onExpireTimeClick('hour', expireTime.hour + 1)}>+1시간</Button>
+      <Button isTertiary={true} onClick={onResetClick}>
+        초기화
+      </Button>
     </S.ExpireTimeContainer>
   );
 };
