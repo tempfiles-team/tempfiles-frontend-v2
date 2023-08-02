@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { OptionSection } from '../optionSection';
+
 import * as S from './styled';
 
 export interface DownloadLimitProps {
@@ -15,8 +17,7 @@ export const DownloadLimit: React.FC<DownloadLimitProps> = ({
     setDownloadLimit(Number(e.target.value));
   };
   return (
-    <S.DownloadLimitContainer>
-      <S.DownloadLimitText>{downloadLimit}</S.DownloadLimitText>
+    <OptionSection text={`다운로드 횟수 ${downloadLimit}번`}>
       <S.DownloadLimitSlider
         type="range"
         min={1}
@@ -25,6 +26,6 @@ export const DownloadLimit: React.FC<DownloadLimitProps> = ({
         onChange={onDownloadLimitChange}
         step={1}
       />
-    </S.DownloadLimitContainer>
+    </OptionSection>
   );
 };

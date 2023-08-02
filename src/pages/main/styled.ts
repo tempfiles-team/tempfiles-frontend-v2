@@ -131,6 +131,7 @@ export const MainPageFindButton = styled.div`
 `;
 
 export const MainPageUploadButton = styled.button`
+  margin-top: 2rem;
   border: none;
   width: 7.6rem;
   height: 3rem;
