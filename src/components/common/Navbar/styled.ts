@@ -5,8 +5,6 @@ import styled from '@emotion/styled';
 import { colors } from '@/styles/colors';
 
 export const NavbarContainer = styled.div`
-  position: absolute;
-  bottom: 0;
   width: 100%;
   margin: 0;
   padding: 30px 0;
@@ -14,6 +12,7 @@ export const NavbarContainer = styled.div`
   align-items: center;
   justify-content: center;
   column-gap: 6rem;
+  z-index: 9999;
 `;
 
 export const NavbarText = styled(Link)`

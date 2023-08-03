@@ -5,12 +5,12 @@ export const DefaultLayoutContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  row-gap: 3rem;
+  align-items: center;
 `;
 
-export const DefaultLayoutWrapper = styled.div`
-  width: 100%;
+export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
+  min-height: 90%;
   max-width: 1150px;
+  row-gap: 3rem;
 `;
