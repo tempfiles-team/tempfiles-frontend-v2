@@ -48,11 +48,11 @@ export const globalStyle = css`
       font-size: 14px;
     }
 
-    @media screen and (max-width: 700px) and (min-width: 300px) {
+    @media screen and (max-width: 700px) and (min-width: 500px) {
       font-size: 12px;
     }
     @media screen and (max-width: 500px) and (min-width: 300px) {
-      font-size: 11px;
+      font-size: 14px;
     }
   }
 `;

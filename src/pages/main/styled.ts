@@ -23,7 +23,7 @@ export const MainPageUploadOptionWrapper = styled.div`
     width: 70%;
   }
   @media screen and (max-width: 560px) {
-    width: 85%;
+    width: 100%;
   }
 `;
 
@@ -36,7 +36,8 @@ export const MainPageFindContainer = styled.div<{ textClick: boolean }>`
     width: 70%;
   }
   @media screen and (max-width: 560px) {
-    width: 85%;
+    grid-template-columns: 1fr 0.3fr;
+    width: 90%;
   }
   @media screen and (max-width: 375px) {
     grid-template-columns: 1fr 0.26fr;
@@ -47,16 +48,14 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 0.3rem;
-  column-gap: 0.4rem;
-  height: ${({ textClick }) => (textClick ? 'fit-content' : '3rem')};
-  background-color: #252728;
+  background-color: ${colors.secondary};
+  border: 0.2rem solid ${colors.softPrimary};
+  align-self: center;
   border-radius: 0.8rem;
-  border: 0.22rem solid ${colors.softPrimary};
-  @media screen and (max-width: 560px) {
-    width: 100%;
-  }
+  height: 3rem;
+  padding: 0.3rem;
+  width: 100%;
+  column-gap: 0.4rem;
 `;
 
 export const MainPageTextButton = styled.button`
@@ -131,7 +130,7 @@ export const MainPageFindButton = styled.div`
 `;
 
 export const MainPageUploadButton = styled.button`
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   border: none;
   width: 7.6rem;
   height: 3rem;

@@ -5,14 +5,15 @@ import { colors } from '@/styles';
 export const OptionSection = styled.div`
   width: 58%;
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 0.5fr 0.53fr;
   column-gap: 1.2rem;
   height: 3rem;
   @media screen and (min-width: 560px) and (max-width: 1150px) {
     width: 70%;
   }
   @media screen and (max-width: 560px) {
-    width: 85%;
+    grid-template-columns: 0.5fr 1fr;
+    width: 90%;
   }
 `;
 
@@ -27,6 +28,6 @@ export const OptionSectionTextWrapper = styled.div`
   background-color: ${colors.secondary};
   font-weight: 700;
   @media screen and (max-width: 560px) {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 `;

@@ -15,7 +15,7 @@ export const ButtonElement = styled.div<{ isTertiary?: boolean }>`
   cursor: pointer;
   @media screen and (max-width: 630px) {
     padding: 0 0.6rem;
-    font-size: 0.96rem;
+    font-size: 0.8rem;
     font-weight: 600;
   }
 `;

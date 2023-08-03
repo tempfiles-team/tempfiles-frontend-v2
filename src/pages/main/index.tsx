@@ -67,7 +67,7 @@ export const MainPage: React.FC = () => {
             <>
               <S.MainPageTextButton>NEW!</S.MainPageTextButton>
               <S.MainPageText onClick={() => setTextClick(true)}>
-                여기에 텍스트를 붙혀넣어 보세요
+                텍스트를 붙혀넣어 보세요
               </S.MainPageText>
             </>
           ) : (
