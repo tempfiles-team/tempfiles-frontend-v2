@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const API_SUFFIX = {
   BASEURL: import.meta.env.DEV ? 'http://127.0.0.1:5050' : import.meta.env.VITE_BASEURL,
+  UPLOAD: '/upload',
   FILE: '/file',
   TEXT: '/text',
   LIST: '/list',

@@ -4,7 +4,7 @@ import { API_SUFFIX } from './api';
 
 export interface FileUploadValues {
   file: FormData;
-  password: string;
+  password?: string;
   downloadLimit: number;
   timeLimit: number;
 }
@@ -21,13 +21,18 @@ export interface FileUploadResponse {
   uploadDate: string;
 }
 
-export const upLoadFile = async ({ file, downloadLimit, timeLimit }: FileUploadValues) => {
+export const upLoadFile = async ({
+  file,
+  downloadLimit,
+  timeLimit,
+  password,
+}: FileUploadValues) => {
   const { data } = await axios({
     method: 'post',
-    url: `${API_SUFFIX.BASEURL}/${API_SUFFIX.FILE}`,
+    url: `${API_SUFFIX.BASEURL}${API_SUFFIX.UPLOAD}${password ? `?pw=${password}` : ''}`,
     data: file,
     headers: {
-      'Content-Type': 'text/plain',
+      'Content-Type': 'multipart/form-data',
       'X-Download-Limit': downloadLimit,
       'X-Time-Limit': timeLimit,
     },

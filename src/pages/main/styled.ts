@@ -54,11 +54,17 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   border-radius: 0.8rem;
   height: 3rem;
   padding: 0.3rem;
+  overflow: scroll;
+  cursor: pointer;
   width: 100%;
   column-gap: 0.4rem;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const MainPageTextButton = styled.button`
+  color: ${colors.white};
   border: none;
   background-color: ${colors.softPrimary};
   font-size: 1.1rem;
@@ -73,6 +79,7 @@ export const MainPageText = styled.span`
   width: 100%;
   font-size: 1.1rem;
   font-weight: 700;
+  white-space: nowrap;
   color: #c8beac;
   @media screen and (max-width: 500px) {
     font-size: 1rem;
@@ -86,10 +93,10 @@ export const MainPageTextArea = styled.textarea`
   width: 100%;
   font-size: 1.1rem;
   font-weight: 600;
+  color: ${colors.white};
   display: flex;
   border: none;
   resize: none;
-  padding: 0;
   max-height: 10rem;
   &::placeholder {
     color: #c8beac;
@@ -118,6 +125,7 @@ export const MainPageUploadButton = styled.button`
   height: 3rem;
   font-size: 1.1rem;
   font-weight: 600;
+  color: ${colors.white};
   background-color: ${colors.primary};
   border-radius: 0.8rem;
 `;

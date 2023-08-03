@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
 import { DownloadLimit, ExpireTime, Password } from '@/components';
@@ -87,8 +88,22 @@ export const MainPage: React.FC = () => {
   };
 
   const onSubmit = () => {
-    console.log(file);
-    console.log('submit');
+    const formData = new FormData();
+    formData.append('file', file.fileData);
+    if (file.fileData.name === '') {
+      return toast.error('파일을 선택해주세요!', {
+        autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    }
+    mutate({
+      file: formData,
+      timeLimit: activeOption[0]
+        ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
+        : 180,
+      downloadLimit: activeOption[1] ? downloadLimit : 100,
+      password: password !== '' ? password : undefined,
+    });
   };
 
   return (
@@ -112,10 +127,20 @@ export const MainPage: React.FC = () => {
         <S.MainPageTextWrapper textClick={textClick}>
           {!textClick ? (
             <>
-              <S.MainPageTextButton>NEW!</S.MainPageTextButton>
-              <S.MainPageText onClick={() => setTextClick(true)}>
-                텍스트를 붙혀넣어 보세요
-              </S.MainPageText>
+              {file.filename === '' && file.size === '' && file.fileType === '' ? (
+                <>
+                  <S.MainPageTextButton>NEW!</S.MainPageTextButton>
+                  <S.MainPageText onClick={() => setTextClick(true)}>
+                    텍스트를 붙혀넣어 보세요
+                  </S.MainPageText>
+                </>
+              ) : (
+                <>
+                  <S.MainPageText>
+                    이름: {file.filename} / 크기:({file.size}) / 타입: {file.fileType}
+                  </S.MainPageText>
+                </>
+              )}
             </>
           ) : (
             <S.MainPageTextArea
