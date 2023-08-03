@@ -23,7 +23,7 @@ export const MainPageUploadOptionWrapper = styled.div`
     width: 70%;
   }
   @media screen and (max-width: 560px) {
-    width: 100%;
+    width: 85%;
   }
 `;
 
@@ -48,7 +48,7 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.34rem;
+  padding: 0.3rem;
   column-gap: 0.4rem;
   height: ${({ textClick }) => (textClick ? 'fit-content' : '3rem')};
   background-color: #252728;
@@ -64,7 +64,7 @@ export const MainPageTextButton = styled.button`
   background-color: ${colors.softPrimary};
   font-size: 1.1rem;
   font-weight: 600;
-  padding: 0.4rem;
+  padding: 0.3rem;
   align-self: center;
   justify-self: center;
   border-radius: 0.2rem;
