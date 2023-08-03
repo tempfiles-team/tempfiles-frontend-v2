@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
@@ -38,6 +38,8 @@ export const MainPage: React.FC = () => {
     fileType: '',
     fileData: new File([], ''),
   });
+
+  const isFileExits = file.filename !== '' && file.size !== '' && file.fileType !== '';
 
   const { mutate } = useUploadFile();
 
@@ -90,7 +92,7 @@ export const MainPage: React.FC = () => {
   const onSubmit = () => {
     const formData = new FormData();
     formData.append('file', file.fileData);
-    if (file.fileData.name === '') {
+    if (!isFileExits) {
       return toast.error('파일을 선택해주세요!', {
         autoClose: 3000,
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -103,6 +105,12 @@ export const MainPage: React.FC = () => {
         : 180,
       downloadLimit: activeOption[1] ? downloadLimit : 100,
       password: password !== '' ? password : undefined,
+    });
+    setFile({
+      filename: '',
+      size: '',
+      fileType: '',
+      fileData: new File([], ''),
     });
   };
 
@@ -127,7 +135,7 @@ export const MainPage: React.FC = () => {
         <S.MainPageTextWrapper textClick={textClick}>
           {!textClick ? (
             <>
-              {file.filename === '' && file.size === '' && file.fileType === '' ? (
+              {!isFileExits ? (
                 <>
                   <S.MainPageTextButton>NEW!</S.MainPageTextButton>
                   <S.MainPageText onClick={() => setTextClick(true)}>
