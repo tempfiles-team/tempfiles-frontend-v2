@@ -44,6 +44,8 @@ export const MainPage: React.FC = () => {
     }
   };
 
+  console.log(import.meta.env.VITE_BASEURL);
+
   return (
     <S.MainPageContainer>
       <S.MainPageUploadOptionWrapper>
@@ -78,7 +80,7 @@ export const MainPage: React.FC = () => {
             ></S.MainPageTextArea>
           )}
         </S.MainPageTextWrapper>
-        {!textClick && <Button>파일 찾기</Button>}
+        {!textClick && <S.MainPageFindFileButton>파일 찾기</S.MainPageFindFileButton>}
       </S.MainPageFindContainer>
       <S.MainPageUploadButton>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>

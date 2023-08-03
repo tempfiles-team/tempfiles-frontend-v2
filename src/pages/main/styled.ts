@@ -19,10 +19,10 @@ export const MainPageUploadOptionWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  @media screen and (min-width: 560px) and (max-width: 1150px) {
+  @media screen and (min-width: 500px) and (max-width: 850px) {
     width: 70%;
   }
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
   }
 `;
@@ -32,10 +32,10 @@ export const MainPageFindContainer = styled.div<{ textClick: boolean }>`
   display: ${({ textClick }) => (textClick ? 'flex' : 'grid')};
   grid-template-columns: 1fr 0.24fr;
   column-gap: 0.4rem;
-  @media screen and (min-width: 560px) and (max-width: 1150px) {
+  @media screen and (min-width: 500px) and (max-width: 850px) {
     width: 70%;
   }
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     grid-template-columns: 1fr 0.3fr;
     width: 90%;
   }
@@ -74,7 +74,7 @@ export const MainPageText = styled.span`
   font-size: 1.1rem;
   font-weight: 700;
   color: #c8beac;
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     font-size: 1rem;
     font-weight: 600;
   }
@@ -105,7 +105,7 @@ export const MainPageTextArea = styled.textarea`
     background-color: #4f4f4f;
     border-radius: 1rem;
   }
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     font-size: 1rem;
     font-weight: 600;
   }
@@ -140,6 +140,11 @@ export const MainPageUploadButton = styled.button`
   border-radius: 0.8rem;
 `;
 
+export const MainPageFindFileButton = styled(MainPageUploadButton)`
+  margin-top: 0;
+  width: 6.6rem;
+`;
+
 export const MainPageUploadOption = styled.div`
   display: flex;
   align-items: center;
@@ -150,7 +155,7 @@ export const MainPageUploadOption = styled.div`
 export const MainPageOptionName = styled.span`
   font-size: 1.2rem;
   font-weight: 700;
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     font-size: 1rem;
   }
 `;
@@ -163,7 +168,7 @@ export const MainPageCheckBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     width: 2rem;
     height: 2rem;
   }
@@ -172,7 +177,7 @@ export const MainPageCheckBox = styled.div`
 export const MainPageCheckIcon = styled(FaCheck)`
   width: 1.6rem;
   height: 1.6rem;
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     width: 1rem;
     height: 1rem;
   }
