@@ -111,24 +111,6 @@ export const MainPageTextArea = styled.textarea`
   }
 `;
 
-export const MainPageFindButton = styled.div`
-  padding: 0 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background-color: ${colors.primary};
-  border-radius: 0.6rem;
-  cursor: pointer;
-  @media screen and (max-width: 630px) {
-    padding: 0 0.8rem;
-    font-size: 0.94rem;
-    font-weight: 600;
-  }
-`;
-
 export const MainPageUploadButton = styled.button`
   margin-top: 1.5rem;
   border: none;
@@ -140,9 +122,22 @@ export const MainPageUploadButton = styled.button`
   border-radius: 0.8rem;
 `;
 
-export const MainPageFindFileButton = styled(MainPageUploadButton)`
+export const MainPageFindFileButton = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: ${colors.primary};
+  border-radius: 0.8rem;
   margin-top: 0;
   width: 6.6rem;
+  @media screen and (max-width: 500px) {
+    font-size: 1rem;
+    font-weight: 600;
+  }
 `;
 
 export const MainPageUploadOption = styled.div`

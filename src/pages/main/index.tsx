@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { UPLOAD_OPTIONS_LIST } from '@/constant';
-import { Button, DownloadLimit, ExpireTime, Password } from '@/components';
+import { DownloadLimit, ExpireTime, Password } from '@/components';
+import { useUploadFile } from '@/hooks';
 
 import * as S from './styled';
 
@@ -12,6 +14,8 @@ export interface ExpireTimeValues {
 }
 
 export const MainPage: React.FC = () => {
+  const { handleSubmit } = useForm();
+
   const [textClick, setTextClick] = useState(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [activeOption, setActiveOption] = useState(UPLOAD_OPTIONS_LIST.map(() => false));
@@ -22,6 +26,19 @@ export const MainPage: React.FC = () => {
   });
   const [downloadLimit, setDownloadLimit] = useState<number>(1);
   const [password, setPassword] = useState<string>('');
+  const [file, setFile] = useState<{
+    filename: string;
+    size: string;
+    fileType: string;
+    fileData: File;
+  }>({
+    filename: '',
+    size: '',
+    fileType: '',
+    fileData: new File([], ''),
+  });
+
+  const { mutate } = useUploadFile();
 
   const onOptionClick = (i: number) => {
     setActiveOption((prev) => ({ ...prev, [i]: !prev[i] }));
@@ -44,7 +61,35 @@ export const MainPage: React.FC = () => {
     }
   };
 
-  console.log(import.meta.env.VITE_BASEURL);
+  const getFileSize = (size: number) => {
+    const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    let l = 0,
+      n = parseInt(String(size), 10) || 0;
+
+    while (n >= 1024 && ++l) {
+      n = n / 1024;
+    }
+
+    return n.toFixed(n < 10 && l > 0 ? 1 : 0) + units[l];
+  };
+
+  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.files) {
+      setFile({
+        filename: e.target.files[0].name,
+        size: getFileSize(e.target.files[0].size),
+        fileType:
+          e.target.files[0].type === '' ? 'application/actet-stream' : e.target.files[0].type,
+        fileData: e.target.files[0],
+      });
+    }
+  };
+
+  const onSubmit = () => {
+    console.log(file);
+    console.log('submit');
+  };
 
   return (
     <S.MainPageContainer>
@@ -80,9 +125,19 @@ export const MainPage: React.FC = () => {
             ></S.MainPageTextArea>
           )}
         </S.MainPageTextWrapper>
-        {!textClick && <S.MainPageFindFileButton>파일 찾기</S.MainPageFindFileButton>}
+        {!textClick && (
+          <S.MainPageFindFileButton id="label-file-upload" htmlFor="input-file-upload">
+            파일 찾기
+          </S.MainPageFindFileButton>
+        )}
+        <input
+          id="input-file-upload"
+          type={'file'}
+          style={{ display: 'none' }}
+          onChange={handleChangeFile}
+        />
       </S.MainPageFindContainer>
-      <S.MainPageUploadButton>업로드</S.MainPageUploadButton>
+      <S.MainPageUploadButton onClick={handleSubmit(onSubmit)}>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>
   );
 };

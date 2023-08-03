@@ -24,7 +24,7 @@ export interface FileUploadResponse {
 export const upLoadFile = async ({ file, downloadLimit, timeLimit }: FileUploadValues) => {
   const { data } = await axios({
     method: 'post',
-    url: `${process.env.REACT_APP_BACKEND_BASEURL}/${API_SUFFIX.FILE}`,
+    url: `${API_SUFFIX.BASEURL}/${API_SUFFIX.FILE}`,
     data: file,
     headers: {
       'Content-Type': 'text/plain',

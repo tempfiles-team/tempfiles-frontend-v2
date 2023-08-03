@@ -9,10 +9,16 @@ export const API_SUFFIX = {
 
 export type APIResponseStatusType = 'SUCCESS' | 'FAILED';
 
-export interface APIResponse {
+export interface APIResponse<T = unknown> {
   status: APIResponseStatusType;
   message: string;
-  result: {} | [];
+  result: T;
+}
+
+export interface APIErrorResponse {
+  status: 'FAILED';
+  message: string;
+  result?: null;
 }
 
 export const instance = axios.create({
