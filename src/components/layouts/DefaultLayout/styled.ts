@@ -5,11 +5,12 @@ export const DefaultLayoutContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
+  justify-content: center;
   min-height: 90%;
   max-width: 1150px;
   row-gap: 3rem;

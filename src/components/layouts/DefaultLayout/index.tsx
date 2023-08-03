@@ -12,6 +12,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
   return (
     <S.DefaultLayoutContainer>
       <S.DefaultLayoutWrapper>
+        {/* <div> */}
         <Text.Column>
           <Text fontSize="3.6rem" fontWeight={600}>
             TMPF
@@ -21,6 +22,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
           </Text>
         </Text.Column>
         {children}
+        {/* </div> */}
       </S.DefaultLayoutWrapper>
       <Navbar />
     </S.DefaultLayoutContainer>

@@ -26,8 +26,8 @@ export const PasswordInput = styled.input`
   background-color: transparent;
   font-size: 1.1rem;
   font-weight: 700;
-  height: 100%;
-  border: none;
+  height: 3rem;
+  border: 1px solid red;
   outline: 0;
   &::placeholder {
     color: #c8beac;
