@@ -52,8 +52,8 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   border: 0.2rem solid ${colors.softPrimary};
   align-self: center;
   border-radius: 0.8rem;
-  height: 3rem;
-  padding: 0.3rem;
+  height: ${({ textClick }) => (textClick ? 'fit-content' : '3rem')};
+  padding: ${({ textClick }) => (textClick ? '0rem' : '0.3rem')};
   overflow: scroll;
   cursor: pointer;
   width: 100%;
@@ -97,6 +97,7 @@ export const MainPageTextArea = styled.textarea`
   display: flex;
   border: none;
   resize: none;
+  padding: 0.3rem;
   max-height: 10rem;
   &::placeholder {
     color: #c8beac;
