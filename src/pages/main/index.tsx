@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react';
-import { set, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { UPLOAD_OPTIONS_LIST } from '@/constant';
+import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE } from '@/constant';
 import { DownloadLimit, ExpireTime, Password } from '@/components';
 import { useUploadFile } from '@/hooks';
+import { getFileSize } from '@/utils';
 
 import * as S from './styled';
 
+type ActiveOptionState = { [key in UPLOAD_OPTIONS_LIST_TYPE]?: boolean };
 export interface ExpireTimeValues {
   day: number;
   hour: number;
@@ -15,11 +16,17 @@ export interface ExpireTimeValues {
 }
 
 export const MainPage: React.FC = () => {
-  const { handleSubmit } = useForm();
-
   const [textClick, setTextClick] = useState(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
-  const [activeOption, setActiveOption] = useState(UPLOAD_OPTIONS_LIST.map(() => false));
+  const [activeOption, setActiveOption] = useState<ActiveOptionState>(() => {
+    const initialState: ActiveOptionState = {}; // initialState를 ActiveOptionState 타입으로 설정
+    UPLOAD_OPTIONS_LIST.forEach((option) => {
+      // UPLOAD_OPTIONS_LIST의 각 요소를 option으로 받아와서
+      initialState[option] = false; // initialState에 option을 key로 하는 요소를 false로 설정
+    });
+    return initialState; // initialState를 반환
+    // 최종적으로 activeOption의 값은 {유지기간: false, 다운로드 횟수: false, 비밀번호: false}가 됨
+  });
   const [expireTime, setExpireTime] = useState<ExpireTimeValues>({
     day: 0,
     hour: 3,
@@ -43,8 +50,9 @@ export const MainPage: React.FC = () => {
 
   const { mutate } = useUploadFile();
 
-  const onOptionClick = (i: number) => {
-    setActiveOption((prev) => ({ ...prev, [i]: !prev[i] }));
+  const onOptionClick = (index: number) => {
+    const option = UPLOAD_OPTIONS_LIST[index];
+    setActiveOption((prev) => ({ ...prev, [option]: !prev[option] }));
   };
 
   const onExpireTimeClick = (type: string, value: number) => {
@@ -62,18 +70,6 @@ export const MainPage: React.FC = () => {
       textRef.current.style.height = 'auto';
       textRef.current.style.height = textRef.current.scrollHeight + 'px';
     }
-  };
-
-  const getFileSize = (size: number) => {
-    const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    let l = 0,
-      n = parseInt(String(size), 10) || 0;
-
-    while (n >= 1024 && ++l) {
-      n = n / 1024;
-    }
-
-    return n.toFixed(n < 10 && l > 0 ? 1 : 0) + units[l];
   };
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,10 +96,10 @@ export const MainPage: React.FC = () => {
     }
     mutate({
       file: formData,
-      timeLimit: activeOption[0]
+      timeLimit: activeOption['유지기간']
         ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
         : 180,
-      downloadLimit: activeOption[1] ? downloadLimit : 100,
+      downloadLimit: activeOption['비밀번호'] ? downloadLimit : 100,
       password: password !== '' ? password : undefined,
     });
     setFile({
@@ -119,18 +115,20 @@ export const MainPage: React.FC = () => {
       <S.MainPageUploadOptionWrapper>
         {UPLOAD_OPTIONS_LIST.map((option, i) => (
           <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
-            <S.MainPageCheckBox>{activeOption[i] && <S.MainPageCheckIcon />}</S.MainPageCheckBox>
+            <S.MainPageCheckBox>
+              {activeOption[option] && <S.MainPageCheckIcon />}
+            </S.MainPageCheckBox>
             <S.MainPageOptionName>{option}</S.MainPageOptionName>
           </S.MainPageUploadOption>
         ))}
       </S.MainPageUploadOptionWrapper>
-      {activeOption[0] && (
+      {activeOption['유지기간'] && (
         <ExpireTime onExpireTimeClick={onExpireTimeClick} expireTime={expireTime} />
       )}
-      {activeOption[1] && (
+      {activeOption['다운로드 횟수'] && (
         <DownloadLimit setDownloadLimit={setDownloadLimit} downloadLimit={downloadLimit} />
       )}
-      {activeOption[2] && <Password setPassword={setPassword} password={password} />}
+      {activeOption['비밀번호'] && <Password setPassword={setPassword} password={password} />}
       <S.MainPageFindContainer textClick={textClick}>
         <S.MainPageTextWrapper textClick={textClick}>
           {!textClick ? (
@@ -170,7 +168,7 @@ export const MainPage: React.FC = () => {
           onChange={handleChangeFile}
         />
       </S.MainPageFindContainer>
-      <S.MainPageUploadButton onClick={handleSubmit(onSubmit)}>업로드</S.MainPageUploadButton>
+      <S.MainPageUploadButton onClick={onSubmit}>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>
   );
 };

@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import { API_SUFFIX } from './api';
+import { API_SUFFIX, instance } from './api';
 
 export interface FileUploadValues {
   file: FormData;
@@ -27,15 +25,16 @@ export const upLoadFile = async ({
   timeLimit,
   password,
 }: FileUploadValues) => {
-  const { data } = await axios({
-    method: 'post',
-    url: `${API_SUFFIX.BASEURL}${API_SUFFIX.UPLOAD}${password ? `?pw=${password}` : ''}`,
-    data: file,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      'X-Download-Limit': downloadLimit,
-      'X-Time-Limit': timeLimit,
+  const { data } = await instance.post(
+    `${API_SUFFIX.UPLOAD}${password ? `?pw=${password}` : ''}`,
+    file,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'X-Download-Limit': downloadLimit,
+        'X-Time-Limit': timeLimit,
+      },
     },
-  });
+  );
   return data;
 };
