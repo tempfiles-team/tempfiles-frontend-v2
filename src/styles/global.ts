@@ -2,13 +2,14 @@ import { css } from '@emotion/react';
 
 import { reset } from './reset';
 import { colors } from './colors';
+import { toastify } from './toastify';
 
 export const globalStyle = css`
   ${reset}
+  ${toastify}
 
   * {
     box-sizing: border-box;
-    color: ${colors.white};
   }
 
   html {

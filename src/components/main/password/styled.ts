@@ -13,10 +13,10 @@ export const PasswordContainer = styled.div`
   border-radius: 0.8rem;
   height: 3rem;
   border: 0.2rem solid ${colors.softPrimary};
-  @media screen and (min-width: 560px) and (max-width: 1150px) {
+  @media screen and (min-width: 500px) and (max-width: 850px) {
     width: 70%;
   }
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     width: 90%;
   }
 `;
@@ -32,7 +32,7 @@ export const PasswordInput = styled.input`
   &::placeholder {
     color: #c8beac;
   }
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 500px) {
     font-size: 1rem;
     font-weight: 600;
   }
