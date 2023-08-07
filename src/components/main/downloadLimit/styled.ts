@@ -9,8 +9,7 @@ export const DownloadLimitSlider = styled.input`
   border-radius: 0.8rem;
   background: ${colors.secondary};
   outline: none;
-  padding-left: 0.14rem;
-  padding-right: 0.16rem;
+  padding: 0 0.14rem;
   border: 0.16rem solid ${colors.softPrimary};
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
