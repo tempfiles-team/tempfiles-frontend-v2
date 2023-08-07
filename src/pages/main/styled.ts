@@ -98,7 +98,7 @@ export const MainPageTextArea = styled.textarea`
   border: none;
   height: 3rem;
   resize: none;
-  padding: 0.6rem 0.3rem 0.3rem 0.3rem;
+  padding: 0.6rem;
   max-height: 10rem;
   &::placeholder {
     color: #c8beac;
