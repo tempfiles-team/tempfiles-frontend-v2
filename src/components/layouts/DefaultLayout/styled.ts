@@ -12,14 +12,14 @@ export const DefaultLayoutContainer = styled.div`
 export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
   justify-content: flex-start;
   position: relative;
-  height: 64%;
+  height: 68%;
   max-width: 1150px;
   row-gap: 3rem;
   @media screen and (min-height: 800px) and (max-height: 1100px) {
-    height: 74%;
+    height: 76%;
   }
   @media screen and (max-width: 500px) {
-    height: 70%;
+    height: 72%;
   }
 `;
 

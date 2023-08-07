@@ -69,6 +69,9 @@ export const MainPage: React.FC = () => {
     if (textRef.current) {
       textRef.current.style.height = 'auto';
       textRef.current.style.height = textRef.current.scrollHeight + 'px';
+      if (textRef.current.value === '') {
+        setTextClick(false);
+      }
     }
   };
 
