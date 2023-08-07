@@ -32,7 +32,7 @@ export const MainPage: React.FC = () => {
     hour: 3,
     minute: 0,
   });
-  const [downloadLimit, setDownloadLimit] = useState<number>(1);
+  const [downloadLimit, setDownloadLimit] = useState<number>(50);
   const [password, setPassword] = useState<string>('');
   const [file, setFile] = useState<{
     filename: string;
@@ -69,6 +69,9 @@ export const MainPage: React.FC = () => {
     if (textRef.current) {
       textRef.current.style.height = 'auto';
       textRef.current.style.height = textRef.current.scrollHeight + 'px';
+      if (textRef.current.value === '') {
+        setTextClick(false);
+      }
     }
   };
 

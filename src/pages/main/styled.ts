@@ -52,8 +52,8 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   border: 0.2rem solid ${colors.softPrimary};
   align-self: center;
   border-radius: 0.8rem;
-  height: 3rem;
-  padding: 0.3rem;
+  height: ${({ textClick }) => (textClick ? 'auto' : '3rem')};
+  padding: ${({ textClick }) => (textClick ? '0rem' : '0.3rem')};
   overflow: scroll;
   cursor: pointer;
   width: 100%;
@@ -96,7 +96,9 @@ export const MainPageTextArea = styled.textarea`
   color: ${colors.white};
   display: flex;
   border: none;
+  height: 3rem;
   resize: none;
+  padding: 0.6rem;
   max-height: 10rem;
   &::placeholder {
     color: #c8beac;
@@ -112,7 +114,11 @@ export const MainPageTextArea = styled.textarea`
     background-color: #4f4f4f;
     border-radius: 1rem;
   }
+  @media screen and (min-width: 700px) and (max-width: 1000px) {
+    max-height: 8rem;
+  }
   @media screen and (max-width: 500px) {
+    max-height: 8rem;
     font-size: 1rem;
     font-weight: 600;
   }
@@ -141,7 +147,6 @@ export const MainPageFindFileButton = styled.label`
   background-color: ${colors.primary};
   border-radius: 0.8rem;
   margin-top: 0;
-  width: 6.6rem;
   @media screen and (max-width: 500px) {
     font-size: 1rem;
     font-weight: 600;

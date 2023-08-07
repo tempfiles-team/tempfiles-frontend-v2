@@ -29,6 +29,7 @@ export const PasswordInput = styled.input`
   height: 3rem;
   outline: 0;
   border: none;
+  color: white;
   &::placeholder {
     color: #c8beac;
   }
