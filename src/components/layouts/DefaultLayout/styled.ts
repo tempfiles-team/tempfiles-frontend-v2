@@ -7,7 +7,7 @@ export const DefaultLayoutContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  overflow: hidden;
+  border: 1px solid red;
 `;
 
 export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
