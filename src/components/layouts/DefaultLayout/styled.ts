@@ -7,7 +7,6 @@ export const DefaultLayoutContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  border: 1px solid red;
 `;
 
 export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
@@ -20,12 +19,11 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
     height: 76%;
   }
   @media screen and (max-width: 500px) {
-    height: 80;
+    height: 80%;
   }
 `;
 
 export const DefaultLayoutTitleContainer = styled.div`
   position: static;
   top: 0;
-  z-index: 9999;
 `;

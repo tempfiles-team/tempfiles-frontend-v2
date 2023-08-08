@@ -12,7 +12,6 @@ export const NavbarContainer = styled.div`
   align-items: center;
   justify-content: center;
   column-gap: 6rem;
-  z-index: 9999;
 `;
 
 export const NavbarText = styled(Link)`

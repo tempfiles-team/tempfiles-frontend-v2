@@ -14,6 +14,7 @@ export const globalStyle = css`
 
   html {
     font-size: 10px;
+    overflow: hidden;
   }
 
   html,
