@@ -6,7 +6,7 @@ import { css } from '@emotion/react';
 
 import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE } from '@/constant';
 import { DownloadLimit, ExpireTime, Password } from '@/components';
-import { useUploadFile } from '@/hooks';
+import { useUploadFile, useUploadText } from '@/hooks';
 import { getFileSize } from '@/utils';
 
 import * as S from './styled';
@@ -19,9 +19,13 @@ export interface ExpireTimeValues {
 }
 
 export const MainPage: React.FC = () => {
+  /** 텍스트 영역 클릭 여부 */
   const [textClick, setTextClick] = useState(false);
-  const [text, setText] = useState('');
+
+  /** 텍스트 영역 ref */
   const textRef = useRef<HTMLTextAreaElement>(null);
+
+  /** 옵션 상태 관리 */
   const [activeOption, setActiveOption] = useState<ActiveOptionState>(() => {
     const initialState: ActiveOptionState = {}; // initialState를 ActiveOptionState 타입으로 설정
     UPLOAD_OPTIONS_LIST.forEach((option) => {
@@ -31,13 +35,21 @@ export const MainPage: React.FC = () => {
     return initialState; // initialState를 반환
     // 최종적으로 activeOption의 값은 {유지기간: false, 다운로드 횟수: false, 비밀번호: false}가 됨
   });
+
+  /** 유지기간 상태 관리 */
   const [expireTime, setExpireTime] = useState<ExpireTimeValues>({
     day: 0,
     hour: 3,
     minute: 0,
   });
+
+  /** 다운로드 횟수 상태 관리 */
   const [downloadLimit, setDownloadLimit] = useState<number>(50);
+
+  /** 비밀번호 상태 관리 */
   const [password, setPassword] = useState<string>('');
+
+  /** 파일 상태 관리 */
   const [file, setFile] = useState<{
     filename: string;
     size: string;
@@ -50,9 +62,13 @@ export const MainPage: React.FC = () => {
     fileData: new File([], ''),
   });
 
+  /** 텍스트 상태 관리 */
+  const [text, setText] = useState('');
+
   const isFileExits = file.filename !== '' && file.size !== '' && file.fileType !== '';
 
-  const { mutate } = useUploadFile();
+  const { mutate: fileMutate } = useUploadFile();
+  const { mutate: textMutate } = useUploadText();
 
   const onOptionClick = (index: number) => {
     const option = UPLOAD_OPTIONS_LIST[index];
@@ -80,7 +96,6 @@ export const MainPage: React.FC = () => {
       if (textAreaValue === '') {
         setTextClick(false);
       }
-      console.log(textAreaValue);
       setText(textAreaValue);
     }
   };
@@ -101,19 +116,28 @@ export const MainPage: React.FC = () => {
   const onSubmit = () => {
     const formData = new FormData();
     formData.append('file', file.fileData);
-    if (!isFileExits) {
-      return toast.error('파일을 선택해주세요!', {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
+    if (isFileExits) {
+      fileMutate({
+        file: formData,
+        timeLimit: activeOption['유지기간']
+          ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
+          : 180,
+        downloadLimit: activeOption['다운로드 횟수'] ? downloadLimit : 100,
+        password: password !== '' ? password : undefined,
+      });
+    } else if (text !== '') {
+      textMutate({
+        textData: text,
+        timeLimit: activeOption['유지기간']
+          ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
+          : 180,
+        downloadLimit: activeOption['다운로드 횟수'] ? downloadLimit : 100,
+        password: password !== '' ? password : undefined,
       });
     }
-    mutate({
-      file: formData,
-      timeLimit: activeOption['유지기간']
-        ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
-        : 180,
-      downloadLimit: activeOption['비밀번호'] ? downloadLimit : 100,
-      password: password !== '' ? password : undefined,
+    toast.error('파일이나 텍스트를 입력해주세요.', {
+      autoClose: 3000,
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
     setFile({
       filename: '',
@@ -121,6 +145,7 @@ export const MainPage: React.FC = () => {
       fileType: '',
       fileData: new File([], ''),
     });
+    setText('');
   };
 
   return (
