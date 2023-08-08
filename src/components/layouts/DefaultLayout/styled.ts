@@ -7,6 +7,7 @@ export const DefaultLayoutContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
@@ -19,7 +20,7 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
     height: 76%;
   }
   @media screen and (max-width: 500px) {
-    height: 72%;
+    height: 80;
   }
 `;
 
