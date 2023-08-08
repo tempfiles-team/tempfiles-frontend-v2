@@ -27,9 +27,9 @@ export const MainPageUploadOptionWrapper = styled.div`
   }
 `;
 
-export const MainPageFindContainer = styled.div<{ textClick: boolean }>`
+export const MainPageFindContainer = styled.div`
   width: 58%;
-  display: ${({ textClick }) => (textClick ? 'flex' : 'grid')};
+  display: grid;
   grid-template-columns: 1fr 0.24fr;
   column-gap: 0.4rem;
   @media screen and (min-width: 500px) and (max-width: 850px) {
@@ -44,7 +44,7 @@ export const MainPageFindContainer = styled.div<{ textClick: boolean }>`
   }
 `;
 
-export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
+export const MainPageTextWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,8 +52,8 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   border: 0.2rem solid ${colors.softPrimary};
   align-self: center;
   border-radius: 0.8rem;
-  height: ${({ textClick }) => (textClick ? 'auto' : '3rem')};
-  padding: ${({ textClick }) => (textClick ? '0rem' : '0.3rem')};
+  height: 3rem;
+  padding: 0.3rem;
   overflow: scroll;
   cursor: pointer;
   width: 100%;

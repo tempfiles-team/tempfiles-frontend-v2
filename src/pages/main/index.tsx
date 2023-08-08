@@ -1,5 +1,8 @@
+/** @jsxImportSource @emotion/react */
 import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
+
+import { css } from '@emotion/react';
 
 import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE } from '@/constant';
 import { DownloadLimit, ExpireTime, Password } from '@/components';
@@ -17,6 +20,7 @@ export interface ExpireTimeValues {
 
 export const MainPage: React.FC = () => {
   const [textClick, setTextClick] = useState(false);
+  const [text, setText] = useState('');
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [activeOption, setActiveOption] = useState<ActiveOptionState>(() => {
     const initialState: ActiveOptionState = {}; // initialState를 ActiveOptionState 타입으로 설정
@@ -65,13 +69,19 @@ export const MainPage: React.FC = () => {
     }
   };
 
-  const autoHeight = () => {
-    if (textRef.current) {
-      textRef.current.style.height = 'auto';
-      textRef.current.style.height = textRef.current.scrollHeight + 'px';
-      if (textRef.current.value === '') {
+  const onTextChange = () => {
+    const textArea = textRef.current;
+    if (textArea) {
+      const textAreaValue = textArea.value;
+
+      textArea.style.height = 'auto';
+      textArea.style.height = textArea.scrollHeight + 'px';
+
+      if (textAreaValue === '') {
         setTextClick(false);
       }
+      console.log(textAreaValue);
+      setText(textAreaValue);
     }
   };
 
@@ -132,8 +142,23 @@ export const MainPage: React.FC = () => {
         <DownloadLimit setDownloadLimit={setDownloadLimit} downloadLimit={downloadLimit} />
       )}
       {activeOption['비밀번호'] && <Password setPassword={setPassword} password={password} />}
-      <S.MainPageFindContainer textClick={textClick}>
-        <S.MainPageTextWrapper textClick={textClick}>
+      <S.MainPageFindContainer
+        css={
+          textClick &&
+          css`
+            display: flex;
+          `
+        }
+      >
+        <S.MainPageTextWrapper
+          css={
+            textClick &&
+            css`
+              height: auto;
+              padding: 0;
+            `
+          }
+        >
           {!textClick ? (
             <>
               {!isFileExits ? (
@@ -154,7 +179,7 @@ export const MainPage: React.FC = () => {
           ) : (
             <S.MainPageTextArea
               ref={textRef}
-              onChange={autoHeight}
+              onChange={onTextChange}
               placeholder="여기에 텍스트를 붙혀넣어 보세요"
             ></S.MainPageTextArea>
           )}
@@ -165,9 +190,12 @@ export const MainPage: React.FC = () => {
           </S.MainPageFindFileButton>
         )}
         <input
+          placeholder="파일 찾기"
           id="input-file-upload"
           type={'file'}
-          style={{ display: 'none' }}
+          css={css`
+            display: none;
+          `}
           onChange={handleChangeFile}
         />
       </S.MainPageFindContainer>
