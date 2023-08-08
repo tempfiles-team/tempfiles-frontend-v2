@@ -114,10 +114,11 @@ export const MainPageTextArea = styled.textarea`
     background-color: #4f4f4f;
     border-radius: 1rem;
   }
-  @media screen and (min-width: 500px) and (max-width: 1000px) {
+  @media screen and (min-width: 700px) and (max-width: 1000px) {
     max-height: 8rem;
   }
   @media screen and (max-width: 500px) {
+    max-height: 8rem;
     font-size: 1rem;
     font-weight: 600;
   }
@@ -133,6 +134,9 @@ export const MainPageUploadButton = styled.button`
   color: ${colors.white};
   background-color: ${colors.primary};
   border-radius: 0.8rem;
+  @media screen and (max-width: 500px) {
+    margin: 0;
+  }
 `;
 
 export const MainPageFindFileButton = styled.label`
