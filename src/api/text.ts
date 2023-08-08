@@ -26,7 +26,6 @@ export const upLoadText = async ({
 }: UploadTextValues) => {
   instance.defaults.headers['X-Download-Limit'] = downloadLimit;
   instance.defaults.headers['X-Time-Limit'] = timeLimit;
-  console.log(textData);
   const { data } = await instance.post(
     `${API_SUFFIX.TEXT}/new${password ? `?pw=${password}` : ''}`,
     textData,

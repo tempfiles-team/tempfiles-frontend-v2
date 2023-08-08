@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+
 import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -116,36 +117,49 @@ export const MainPage: React.FC = () => {
   const onSubmit = () => {
     const formData = new FormData();
     formData.append('file', file.fileData);
+
+    const options = {
+      timeLimit: activeOption['유지기간']
+        ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
+        : 180,
+      downloadLimit: activeOption['다운로드 횟수'] ? downloadLimit : 100,
+      password: password !== '' ? password : undefined,
+    };
+
     if (isFileExits) {
       fileMutate({
         file: formData,
-        timeLimit: activeOption['유지기간']
-          ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
-          : 180,
-        downloadLimit: activeOption['다운로드 횟수'] ? downloadLimit : 100,
-        password: password !== '' ? password : undefined,
+        timeLimit: options.timeLimit,
+        downloadLimit: options.downloadLimit,
+        password: options.password,
       });
     } else if (text !== '') {
       textMutate({
         textData: text,
-        timeLimit: activeOption['유지기간']
-          ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
-          : 180,
-        downloadLimit: activeOption['다운로드 횟수'] ? downloadLimit : 100,
-        password: password !== '' ? password : undefined,
+        timeLimit: options.timeLimit,
+        downloadLimit: options.downloadLimit,
+        password: options.password,
       });
     }
-    toast.error('파일이나 텍스트를 입력해주세요.', {
-      autoClose: 3000,
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
+
+    if (!isFileExits && text === '') {
+      toast.error('파일이나 텍스트를 입력해주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    }
+
+    setText('');
+    if (textRef.current) {
+      textRef.current.value = '';
+    }
+
     setFile({
       filename: '',
       size: '',
       fileType: '',
       fileData: new File([], ''),
     });
-    setText('');
   };
 
   return (
@@ -206,7 +220,7 @@ export const MainPage: React.FC = () => {
               ref={textRef}
               onChange={onTextChange}
               placeholder="여기에 텍스트를 붙혀넣어 보세요"
-            ></S.MainPageTextArea>
+            />
           )}
         </S.MainPageTextWrapper>
         {!textClick && (
