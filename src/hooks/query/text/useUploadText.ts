@@ -24,7 +24,7 @@ export const useUploadText = (): UseMutationResult<
         autoClose: 3000,
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-      navigation(`/text/${id}`);
+      //   navigation(`/text/${id}`);
     },
     onError: () => {
       toast.error('텍스트 업로드에 실패했어요', {

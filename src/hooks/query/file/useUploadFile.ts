@@ -24,7 +24,7 @@ export const useUploadFile = (): UseMutationResult<
         autoClose: 3000,
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-      navigation(`/file/${id}`);
+      // navigation(`/file/${id}`);
     },
     onError: () => {
       toast.error('파일 업로드에 실패했어요', {
