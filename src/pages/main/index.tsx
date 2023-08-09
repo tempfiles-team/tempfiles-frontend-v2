@@ -4,8 +4,9 @@ import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { css } from '@emotion/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE } from '@/constant';
+import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE, variants } from '@/constant';
 import { DownloadLimit, ExpireTime, Password } from '@/components';
 import { useUploadFile, useUploadText } from '@/hooks';
 import { getFileSize } from '@/utils';
@@ -94,9 +95,14 @@ export const MainPage: React.FC = () => {
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
 
-      if (textAreaValue === '') {
-        setTextClick(false);
-      }
+      console.log(textAreaValue);
+
+      const newTextAreaValue = textAreaValue.replace(/\n/g, '');
+      textArea.value = newTextAreaValue;
+
+      // if (textAreaValue === '') {
+      //   setTextClick(false);
+      // }
       setText(textAreaValue);
     }
   };
@@ -164,23 +170,53 @@ export const MainPage: React.FC = () => {
 
   return (
     <S.MainPageContainer>
-      <S.MainPageUploadOptionWrapper>
-        {UPLOAD_OPTIONS_LIST.map((option, i) => (
-          <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
-            <S.MainPageCheckBox>
-              {activeOption[option] && <S.MainPageCheckIcon />}
-            </S.MainPageCheckBox>
-            <S.MainPageOptionName>{option}</S.MainPageOptionName>
-          </S.MainPageUploadOption>
-        ))}
-      </S.MainPageUploadOptionWrapper>
-      {activeOption['유지기간'] && (
-        <ExpireTime onExpireTimeClick={onExpireTimeClick} expireTime={expireTime} />
-      )}
-      {activeOption['다운로드 횟수'] && (
-        <DownloadLimit setDownloadLimit={setDownloadLimit} downloadLimit={downloadLimit} />
-      )}
-      {activeOption['비밀번호'] && <Password setPassword={setPassword} password={password} />}
+      <AnimatePresence>
+        <S.MainPageUploadOptionWrapper>
+          {UPLOAD_OPTIONS_LIST.map((option, i) => (
+            <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
+              <S.MainPageCheckBox>
+                <motion.div
+                  variants={variants}
+                  animate={activeOption[option] ? 'visible' : 'hidden'}
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 0.1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <S.MainPageCheckIcon />
+                </motion.div>
+              </S.MainPageCheckBox>
+              <S.MainPageOptionName>{option}</S.MainPageOptionName>
+            </S.MainPageUploadOption>
+          ))}
+        </S.MainPageUploadOptionWrapper>
+      </AnimatePresence>
+      <AnimatePresence>
+        {activeOption['유지기간'] && (
+          <ExpireTime
+            animate={activeOption['유지기간'] ? 'visible' : 'hidden'}
+            onExpireTimeClick={onExpireTimeClick}
+            expireTime={expireTime}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {activeOption['다운로드 횟수'] && (
+          <DownloadLimit
+            animate={activeOption['다운로드 횟수'] ? 'visible' : 'hidden'}
+            setDownloadLimit={setDownloadLimit}
+            downloadLimit={downloadLimit}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {activeOption['비밀번호'] && (
+          <Password
+            animate={activeOption['비밀번호'] ? 'visible' : 'hidden'}
+            setPassword={setPassword}
+            password={password}
+          />
+        )}
+      </AnimatePresence>
       <S.MainPageFindContainer
         css={
           textClick &&

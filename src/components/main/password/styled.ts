@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 
 import { colors } from '@/styles';
 
-export const PasswordContainer = styled.div`
+export const PasswordContainer = styled(motion.div)`
   width: 58%;
   display: flex;
   align-items: center;
