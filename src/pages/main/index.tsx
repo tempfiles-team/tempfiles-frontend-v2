@@ -3,7 +3,6 @@
 import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import Button from '@mui/material/Button';
 import { css } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -96,14 +95,6 @@ export const MainPage: React.FC = () => {
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
 
-      console.log(textAreaValue);
-
-      const newTextAreaValue = textAreaValue.replace(/\n/g, '');
-      textArea.value = newTextAreaValue;
-
-      // if (textAreaValue === '') {
-      //   setTextClick(false);
-      // }
       setText(textAreaValue);
     }
   };
@@ -219,6 +210,11 @@ export const MainPage: React.FC = () => {
         )}
       </AnimatePresence>
       <S.MainPageFindContainer
+        animate={{ y: 0, opacity: 1 }}
+        key={!textClick ? 'text' : 'file'}
+        initial={{ y: 20, opacity: 0 }}
+        exit={{ y: -20, opacity: 0 }}
+        transition={{ duration: 0.4 }}
         css={
           textClick &&
           css`
@@ -261,21 +257,26 @@ export const MainPage: React.FC = () => {
           )}
         </S.MainPageTextWrapper>
         {!textClick && (
-          <S.MainPageFindFileButton variant="contained">
-            <label id="label-file-upload" htmlFor="input-file-upload">
+          <>
+            <S.MainPageFindFileButton id="label-file-upload" htmlFor="input-file-upload">
               파일 찾기
-            </label>
-          </S.MainPageFindFileButton>
+            </S.MainPageFindFileButton>
+            <input
+              placeholder="파일 찾기"
+              id="input-file-upload"
+              type={'file'}
+              css={css`
+                display: none;
+              `}
+              onChange={handleChangeFile}
+            />
+          </>
         )}
-        <input
-          placeholder="파일 찾기"
-          id="input-file-upload"
-          type={'file'}
-          css={css`
-            display: none;
-          `}
-          onChange={handleChangeFile}
-        />
+        {textClick && (
+          <S.MainPageSwitchButtonWrapper variant="contained" onClick={() => setTextClick(false)}>
+            <S.MainPageChangeIcon size={26} />
+          </S.MainPageSwitchButtonWrapper>
+        )}
       </S.MainPageFindContainer>
       <S.MainPageUploadButton onClick={onSubmit}>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>

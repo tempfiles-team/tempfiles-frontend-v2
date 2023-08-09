@@ -1,7 +1,9 @@
 import { FaCheck } from 'react-icons/fa';
+import { TbRefresh } from 'react-icons/tb';
 
 import styled from '@emotion/styled';
 import { Button } from '@mui/material';
+import { motion } from 'framer-motion';
 
 import { colors } from '@/styles';
 
@@ -28,7 +30,7 @@ export const MainPageUploadOptionWrapper = styled.div`
   }
 `;
 
-export const MainPageFindContainer = styled.div`
+export const MainPageFindContainer = styled(motion.div)`
   width: 58%;
   display: grid;
   grid-template-columns: 1fr 0.24fr;
@@ -125,7 +127,7 @@ export const MainPageTextArea = styled.textarea`
   }
 `;
 
-export const MainPageFindFileButton = styled(Button)`
+export const MainPageFindFileButton = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,7 +150,7 @@ export const MainPageFindFileButton = styled(Button)`
   }
 `;
 
-export const MainPageUploadButton = styled(MainPageFindFileButton)`
+export const MainPageUploadButton = styled(Button)`
   margin-top: 1.5rem;
   border: none;
   width: 7.6rem;
@@ -158,9 +160,21 @@ export const MainPageUploadButton = styled(MainPageFindFileButton)`
   color: ${colors.white};
   background-color: ${colors.primary};
   border-radius: 0.8rem;
+  .MuiTouchRipple-root {
+    filter: blur(5px) !important;
+  }
+  &:hover {
+    background-color: ${colors.primary};
+  }
   @media screen and (max-width: 500px) {
     margin: 0;
   }
+`;
+
+export const MainPageSwitchButtonWrapper = styled(MainPageUploadButton)`
+  margin-top: 0;
+  width: 2.6rem;
+  height: 100%;
 `;
 
 export const MainPageUploadOption = styled.div`
@@ -199,4 +213,9 @@ export const MainPageCheckIcon = styled(FaCheck)`
     width: 1rem;
     height: 1rem;
   }
+`;
+
+export const MainPageChangeIcon = styled(TbRefresh)`
+  width: 1.6rem;
+  height: 1.6rem;
 `;
