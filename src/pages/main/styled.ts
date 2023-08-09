@@ -1,6 +1,7 @@
 import { FaCheck } from 'react-icons/fa';
 
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
 
 import { colors } from '@/styles';
 
@@ -124,7 +125,30 @@ export const MainPageTextArea = styled.textarea`
   }
 `;
 
-export const MainPageUploadButton = styled.button`
+export const MainPageFindFileButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: ${colors.primary};
+  border-radius: 0.8rem;
+  margin-top: 0;
+  .MuiTouchRipple-root {
+    filter: blur(5px) !important;
+  }
+  &:hover {
+    background-color: ${colors.primary};
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+`;
+
+export const MainPageUploadButton = styled(MainPageFindFileButton)`
   margin-top: 1.5rem;
   border: none;
   width: 7.6rem;
@@ -136,23 +160,6 @@ export const MainPageUploadButton = styled.button`
   border-radius: 0.8rem;
   @media screen and (max-width: 500px) {
     margin: 0;
-  }
-`;
-
-export const MainPageFindFileButton = styled.label`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  height: 3rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background-color: ${colors.primary};
-  border-radius: 0.8rem;
-  margin-top: 0;
-  @media screen and (max-width: 500px) {
-    font-size: 1rem;
-    font-weight: 600;
   }
 `;
 

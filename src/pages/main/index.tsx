@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
+import Button from '@mui/material/Button';
 import { css } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -179,7 +180,7 @@ export const MainPage: React.FC = () => {
                   variants={variants}
                   animate={activeOption[option] ? 'visible' : 'hidden'}
                   initial={{ opacity: 0 }}
-                  transition={{ duration: 0.1 }}
+                  transition={{ duration: 0.2 }}
                   exit={{ opacity: 0 }}
                 >
                   <S.MainPageCheckIcon />
@@ -260,8 +261,10 @@ export const MainPage: React.FC = () => {
           )}
         </S.MainPageTextWrapper>
         {!textClick && (
-          <S.MainPageFindFileButton id="label-file-upload" htmlFor="input-file-upload">
-            파일 찾기
+          <S.MainPageFindFileButton variant="contained">
+            <label id="label-file-upload" htmlFor="input-file-upload">
+              파일 찾기
+            </label>
           </S.MainPageFindFileButton>
         )}
         <input

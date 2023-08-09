@@ -20,7 +20,7 @@ export const Password: React.FC<PasswordProps> = ({ setPassword, password, anima
     <S.PasswordContainer
       variants={variants}
       animate={animate}
-      transition={{ duration: 0.1 }}
+      transition={{ duration: 0.2 }}
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
     >
