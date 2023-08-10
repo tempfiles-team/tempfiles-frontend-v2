@@ -148,9 +148,6 @@ export const MainPage: React.FC = () => {
     }
 
     setText('');
-    if (textRef.current) {
-      textRef.current.value = '';
-    }
 
     setFile({
       filename: '',
@@ -211,7 +208,7 @@ export const MainPage: React.FC = () => {
       </AnimatePresence>
       <S.MainPageFindContainer
         animate={{ y: 0, opacity: 1 }}
-        key={!textClick ? 'text' : 'file'}
+        key={!textClick ? 'file' : 'text'}
         initial={{ y: 20, opacity: 0 }}
         exit={{ y: -20, opacity: 0 }}
         transition={{ duration: 0.4 }}
@@ -232,24 +229,23 @@ export const MainPage: React.FC = () => {
           }
         >
           {!textClick ? (
-            <>
-              {!isFileExits ? (
-                <>
-                  <S.MainPageTextButton>NEW!</S.MainPageTextButton>
-                  <S.MainPageText onClick={() => setTextClick(true)}>
-                    텍스트를 붙혀넣어 보세요
-                  </S.MainPageText>
-                </>
-              ) : (
-                <>
-                  <S.MainPageText>
-                    이름: {file.filename} / 크기:({file.size}) / 타입: {file.fileType}
-                  </S.MainPageText>
-                </>
-              )}
-            </>
+            !isFileExits ? (
+              <>
+                <S.MainPageTextButton>NEW!</S.MainPageTextButton>
+                <S.MainPageText onClick={() => setTextClick(true)}>
+                  텍스트를 붙혀넣어 보세요
+                </S.MainPageText>
+              </>
+            ) : (
+              <>
+                <S.MainPageText>
+                  이름: {file.filename} / 크기:({file.size}) / 타입: {file.fileType}
+                </S.MainPageText>
+              </>
+            )
           ) : (
             <S.MainPageTextArea
+              value={text}
               ref={textRef}
               onChange={onTextChange}
               placeholder="여기에 텍스트를 붙혀넣어 보세요"

@@ -13,8 +13,8 @@ export const OptionSection: React.FC<OptionSectionProps> = ({ children, text, an
   return (
     <S.OptionSection
       variants={variants}
-      transition={{ duration: 0.2 }}
       animate={animate}
+      transition={{ duration: 0.2 }}
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
     >

@@ -24,11 +24,16 @@ export const upLoadText = async ({
   downloadLimit,
   timeLimit,
 }: UploadTextValues) => {
-  instance.defaults.headers['X-Download-Limit'] = downloadLimit;
-  instance.defaults.headers['X-Time-Limit'] = timeLimit;
   const { data } = await instance.post(
     `${API_SUFFIX.TEXT}/new${password ? `?pw=${password}` : ''}`,
     textData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'X-Download-Limit': downloadLimit,
+        'X-Time-Limit': timeLimit,
+      },
+    },
   );
   return data;
 };
