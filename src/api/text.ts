@@ -7,7 +7,8 @@ export interface UploadTextValues extends UploadOptions {
 }
 
 export interface UploadTextResponse extends UploadResponse {
-  textData: string;
+  data: string;
+  numberOfText: number;
 }
 
 export const upLoadText = async ({
