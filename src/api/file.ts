@@ -1,22 +1,12 @@
-import { API_SUFFIX, instance } from './api';
+import { API_SUFFIX, UploadOptions, UploadResponse, instance } from './api';
 
-export interface FileUploadValues {
+export interface FileUploadValues extends UploadOptions {
   file: FormData;
-  password?: string;
-  downloadLimit: number;
-  timeLimit: number;
 }
 
-export interface FileUploadResponse {
-  downloadCount: number;
-  downloadLimit: number;
-  expireTime: string;
+export interface FileUploadResponse extends UploadResponse {
   filename: string;
-  id: string;
-  isEncrypted: boolean;
   size: number;
-  token: string;
-  uploadDate: string;
 }
 
 export const upLoadFile = async ({

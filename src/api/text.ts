@@ -1,21 +1,13 @@
-import { API_SUFFIX, instance } from './api';
+import { UploadOptions } from '@/api';
 
-export interface UploadTextValues {
+import { API_SUFFIX, UploadResponse, instance } from './api';
+
+export interface UploadTextValues extends UploadOptions {
   textData: string;
-  password?: string;
-  downloadLimit: number;
-  timeLimit: number;
 }
 
-export interface UploadTextResponse {
-  id: string;
+export interface UploadTextResponse extends UploadResponse {
   textData: string;
-  isEncrypted: boolean;
-  uploadDate: string;
-  token: string;
-  downloadLimit: number;
-  downloadCount: number;
-  expireTime: string;
 }
 
 export const upLoadText = async ({
@@ -29,7 +21,7 @@ export const upLoadText = async ({
     textData,
     {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'text/plain',
         'X-Download-Limit': downloadLimit,
         'X-Time-Limit': timeLimit,
       },

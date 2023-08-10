@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE, variants } from '@/constant';
 import { DownloadLimit, ExpireTime, Password } from '@/components';
-import { useUploadFile, useUploadText } from '@/hooks';
+import { useUpload } from '@/hooks';
 import { getFileSize } from '@/utils';
 
 import * as S from './styled';
@@ -69,8 +69,7 @@ export const MainPage: React.FC = () => {
 
   const isFileExits = file.filename !== '' && file.size !== '' && file.fileType !== '';
 
-  const { mutate: fileMutate } = useUploadFile();
-  const { mutate: textMutate } = useUploadText();
+  const { mutate } = useUpload();
 
   const onOptionClick = (index: number) => {
     const option = UPLOAD_OPTIONS_LIST[index];
@@ -125,19 +124,9 @@ export const MainPage: React.FC = () => {
     };
 
     if (isFileExits) {
-      fileMutate({
-        file: formData,
-        timeLimit: options.timeLimit,
-        downloadLimit: options.downloadLimit,
-        password: options.password,
-      });
+      mutate({ type: 'file', data: formData, options });
     } else if (text !== '') {
-      textMutate({
-        textData: text,
-        timeLimit: options.timeLimit,
-        downloadLimit: options.downloadLimit,
-        password: options.password,
-      });
+      mutate({ type: 'text', data: text, options });
     }
 
     if (!isFileExits && text === '') {
