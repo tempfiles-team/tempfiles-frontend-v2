@@ -14,6 +14,7 @@ export interface UploadTextResponse extends DataResponse {
 export interface GetTextResponse extends DataResponse {
   textData: string;
 }
+
 export type GetTextOptions = GetItemOptions;
 
 export const upLoadText = async ({
