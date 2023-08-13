@@ -1,6 +1,7 @@
 import { UseQueryResult, useQuery } from 'react-query';
 
 import { AxiosError } from 'axios';
+import { useRecoilValue } from 'recoil';
 
 import {
   APIErrorResponse,
@@ -11,26 +12,23 @@ import {
   getFileItem,
   getTextItem,
 } from '@/api';
-
-export interface GetItemValues {
-  type: 'file' | 'text';
-  options: GetItemOptions;
-}
+import { checkFile } from '@/atom';
 
 export const useGetItem = ({
-  type,
-  options,
-}: GetItemValues): UseQueryResult<
+  id,
+  token,
+}: GetItemOptions): UseQueryResult<
   APIResponse<GetTextResponse | GetFileResponse>,
   AxiosError<APIErrorResponse>
 > => {
+  const isFile = useRecoilValue(checkFile);
   return useQuery(
     'useUpload',
     () => {
-      if (type === 'file') {
-        return getFileItem({ ...options });
+      if (isFile) {
+        return getFileItem({ id, token });
       } else {
-        return getTextItem({ ...options });
+        return getTextItem({ id, token });
       }
     },
     {

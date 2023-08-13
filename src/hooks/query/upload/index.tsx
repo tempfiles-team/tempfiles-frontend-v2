@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
+import { useSetRecoilState } from 'recoil';
 
 import {
   APIErrorResponse,
@@ -13,6 +14,7 @@ import {
   upLoadFile,
   upLoadText,
 } from '@/api';
+import { checkFile } from '@/atom';
 
 export interface UploadValues {
   type: 'file' | 'text';
@@ -25,13 +27,16 @@ export const useUpload = (): UseMutationResult<
   AxiosError<APIErrorResponse>,
   UploadValues
 > => {
+  const setFile = useSetRecoilState(checkFile);
   const navigation = useNavigate();
   return useMutation(
     'useUpload',
     ({ type, data, options }) => {
       if (type === 'file') {
+        setFile(true);
         return upLoadFile({ file: data as FormData, ...options });
       } else {
+        setFile(false);
         return upLoadText({ textData: data as string, ...options });
       }
     },
