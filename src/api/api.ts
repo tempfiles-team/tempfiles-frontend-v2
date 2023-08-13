@@ -14,13 +14,13 @@ export type APIResponseStatusType = 'SUCCESS' | 'FAILED';
 export interface APIResponse<T = unknown> {
   status: APIResponseStatusType;
   message: string;
-  result: T;
+  data: T;
 }
 
 export interface APIErrorResponse {
   status: 'FAILED';
   message: string;
-  result?: null;
+  data?: null;
 }
 
 export interface UploadOptions {
@@ -37,6 +37,7 @@ export interface DataResponse {
   isEncrypted: boolean;
   token: string;
   uploadDate: string;
+  provide_token?: boolean;
 }
 
 export interface GetItemOptions {
