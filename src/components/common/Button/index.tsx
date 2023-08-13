@@ -10,7 +10,7 @@ export interface ButtonProps {
 
 export const Button: React.FC<ButtonProps> = ({ children, onClick, isTertiary }) => {
   return (
-    <S.ButtonElement onClick={onClick} isTertiary={isTertiary}>
+    <S.ButtonElement onClick={onClick} variant="contained" isTertiary={isTertiary}>
       {children}
     </S.ButtonElement>
   );
