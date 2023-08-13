@@ -10,6 +10,7 @@ import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE, variants } from '@/const
 import { DownloadLimit, ExpireTime, Password } from '@/components';
 import { useUpload } from '@/hooks';
 import { getFileSize } from '@/utils';
+import { useGetItem } from '@/hooks/query/getItem';
 
 import * as S from './styled';
 

@@ -1,5 +1,6 @@
 import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 
@@ -24,6 +25,7 @@ export const useUpload = (): UseMutationResult<
   AxiosError<APIErrorResponse>,
   UploadValues
 > => {
+  const navigation = useNavigate();
   return useMutation(
     'useUpload',
     ({ type, data, options }) => {
@@ -34,7 +36,8 @@ export const useUpload = (): UseMutationResult<
       }
     },
     {
-      onSuccess: () => {
+      onSuccess: ({ data }) => {
+        navigation(`/detail/${data.id}`);
         toast.success(` 업로드에 성공했어요!`, {
           autoClose: 3000,
           position: toast.POSITION.BOTTOM_RIGHT,

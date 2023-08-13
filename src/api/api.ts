@@ -5,6 +5,7 @@ export const API_SUFFIX = {
   UPLOAD: '/upload',
   FILE: '/file',
   TEXT: '/text',
+  TEXTS: '/texts',
   LIST: '/list',
 };
 
@@ -28,7 +29,7 @@ export interface UploadOptions {
   password?: string;
 }
 
-export interface UploadResponse {
+export interface DataResponse {
   downloadCount: number;
   downloadLimit: number;
   expireTime: string;
@@ -36,6 +37,11 @@ export interface UploadResponse {
   isEncrypted: boolean;
   token: string;
   uploadDate: string;
+}
+
+export interface GetItemOptions {
+  id: string;
+  token?: string;
 }
 
 export const instance = axios.create({
