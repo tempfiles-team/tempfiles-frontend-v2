@@ -1,3 +1,3 @@
 export * from './Text';
 export * from './Navbar';
-export * from './Button';
+export * from '../main/Button';
