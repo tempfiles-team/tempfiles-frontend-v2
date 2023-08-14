@@ -84,6 +84,7 @@ export const MainPageText = styled.span`
   font-weight: 700;
   white-space: nowrap;
   color: #c8beac;
+  padding: 0 0.6rem;
   @media screen and (max-width: 500px) {
     font-size: 1rem;
     font-weight: 600;

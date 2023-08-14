@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OptionSection } from '../optionSection';
+import { OptionSection } from '../OptionSection';
 
 import * as S from './styled';
 
