@@ -41,7 +41,7 @@ export interface DataResponse {
 }
 
 export interface GetItemOptions {
-  id: string;
+  id?: string;
   token?: string;
 }
 

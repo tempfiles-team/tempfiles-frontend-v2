@@ -13,6 +13,7 @@ import {
   upLoadFile,
   upLoadText,
 } from '@/api';
+import { toastError, toastSuccess } from '@/utils';
 
 export interface UploadValues {
   type: 'file' | 'text';
@@ -38,16 +39,10 @@ export const useUpload = (): UseMutationResult<
     {
       onSuccess: ({ data }, variables) => {
         navigation(`/detail/${data.id}?type=${variables.type}`);
-        toast.success(` 업로드에 성공했어요!`, {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+        toastSuccess(`업로드에 성공했어요!`);
       },
       onError: () => {
-        toast.error(`업로드에 실패했어요`, {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+        toastError('업로드에 실패했어요.');
       },
       retry: 0,
     },

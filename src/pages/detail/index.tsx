@@ -15,7 +15,7 @@ export const DetailPage: React.FC = () => {
   const { data, isLoading } = useGetItem({
     type: type as 'file' | 'text',
     options: {
-      id: id ? id : '',
+      id: id,
     },
   });
   return (
