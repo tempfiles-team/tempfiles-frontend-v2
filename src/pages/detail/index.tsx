@@ -4,6 +4,9 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useGetItem } from '@/hooks';
 import { GetFileResponse, GetTextResponse } from '@/api';
 import { SkeletonUI } from '@/components';
+import { getDate, getExpireTime } from '@/utils';
+
+import * as S from './styled';
 
 interface ItemTypeMap {
   file: GetFileResponse;
@@ -33,26 +36,23 @@ export const DetailPage: React.FC = () => {
     );
   }
 
-  const content = getContent(type, data.data as ItemTypeMap[ItemType]);
+  const textData = data.data as GetTextResponse;
+  const fileData = data.data as GetFileResponse;
 
-  return <>{content}</>;
-};
+  const expireDate = getExpireTime(textData.expireTime);
+  const uploadDate = getDate(fileData.uploadDate);
 
-const getContent = (type: ItemType, data: ItemTypeMap[ItemType]) => {
-  switch (type) {
-    case 'file':
-      const fileData = data as GetFileResponse;
-      return (
-        <>
-          <span>{fileData.filename}</span>
-          <span>{fileData.isEncrypted}</span>
-          <span>{fileData.downloadLimit}</span>
-        </>
-      );
-    case 'text':
-      const textData = data as GetTextResponse;
-      return <span>{textData.textData}</span>;
-    default:
-      return null;
-  }
+  return (
+    <S.DetailPageContainer>
+      <S.FileBox>
+        {textData.textData || fileData.filename}
+        <br />
+        크기: {fileData.size} / 업로드된 날짜: {uploadDate.year}-{uploadDate.month}-{uploadDate.day}
+      </S.FileBox>
+      <S.DetailPageInfo>
+        만료까지 {expireDate.day}일 {expireDate.hour}시간 {expireDate.minute}분 /{' '}
+        {textData.downloadLimit}번 남았습니다.
+      </S.DetailPageInfo>
+    </S.DetailPageContainer>
+  );
 };

@@ -19,7 +19,7 @@ export const MainPageContainer = styled.div`
 export const MainPageUploadOptionWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 100%;
   justify-content: space-between;
   padding: 0 2rem;
 `;
@@ -29,12 +29,8 @@ export const MainPageFindContainer = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 0.24fr;
   column-gap: 0.4rem;
-  @media screen and (min-width: 500px) and (max-width: 850px) {
-    width: 70%;
-  }
   @media screen and (max-width: 500px) {
     grid-template-columns: 1fr 0.3fr;
-    width: 90%;
   }
   @media screen and (max-width: 375px) {
     grid-template-columns: 1fr 0.26fr;
@@ -102,6 +98,7 @@ export const MainPageTextArea = styled.textarea`
     color: #c8beac;
   }
   &::-webkit-scrollbar {
+    z-index: 999;
     width: 0.4rem;
   }
   &::-webkit-scrollbar-track {

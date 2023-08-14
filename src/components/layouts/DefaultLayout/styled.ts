@@ -21,12 +21,13 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
     height: 80%;
   }
   width: 46%;
+  overflow: hidden;
   max-width: 1150px;
   @media screen and (min-width: 500px) and (max-width: 850px) {
     width: 70%;
   }
   @media screen and (max-width: 500px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
