@@ -7,7 +7,7 @@ export const DetailPageContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  row-gap: 1.4rem;
+  row-gap: 1.6rem;
 `;
 
 export const FileBox = styled.div`
@@ -49,4 +49,13 @@ export const DetailPageInfo = styled.div`
   color: ${colors.white};
   font-size: 1.2rem;
   font-weight: 600;
+`;
+
+export const DetailPageButtonContainer = styled.div`
+  margin-top: 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 1.6rem;
+  align-items: center;
 `;

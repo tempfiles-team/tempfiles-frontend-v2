@@ -3,17 +3,12 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import { useGetItem } from '@/hooks';
 import { GetFileResponse, GetTextResponse } from '@/api';
-import { SkeletonUI } from '@/components';
+import { Button, SkeletonUI } from '@/components';
 import { getDate, getExpireTime } from '@/utils';
 
 import * as S from './styled';
 
-interface ItemTypeMap {
-  file: GetFileResponse;
-  text: GetTextResponse;
-}
-
-type ItemType = keyof ItemTypeMap;
+type ItemType = 'file' | 'text';
 
 export const DetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -44,15 +39,26 @@ export const DetailPage: React.FC = () => {
 
   return (
     <S.DetailPageContainer>
-      <S.FileBox>
-        {textData.textData || fileData.filename}
-        <br />
-        크기: {fileData.size} / 업로드된 날짜: {uploadDate.year}-{uploadDate.month}-{uploadDate.day}
-      </S.FileBox>
+      {type === 'file' ? (
+        <S.FileBox>
+          {fileData.filename}
+          <br />
+          크기: {fileData.size} / 업로드된 날짜: {uploadDate.year}-{uploadDate.month}-
+          {uploadDate.day}
+        </S.FileBox>
+      ) : (
+        <S.FileBox>{textData.textData}</S.FileBox>
+      )}
       <S.DetailPageInfo>
         만료까지 {expireDate.day}일 {expireDate.hour}시간 {expireDate.minute}분 /{' '}
-        {textData.downloadLimit}번 남았습니다.
+        {data.data.downloadLimit}번 남았습니다.
       </S.DetailPageInfo>
+      <S.DetailPageButtonContainer>
+        <Button isPrimary={true}>다운로드</Button>
+        <Button isPrimary={true}>링크 복사</Button>
+        <Button isPrimary={false}>파일 삭제</Button>
+        <Button isPrimary={false}>신고</Button>
+      </S.DetailPageButtonContainer>
     </S.DetailPageContainer>
   );
 };
