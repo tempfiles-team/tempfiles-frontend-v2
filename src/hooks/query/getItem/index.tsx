@@ -28,7 +28,7 @@ export const useGetItem = ({
 > => {
   const navigation = useNavigate();
   return useQuery(
-    'useUpload',
+    'useGetItem',
     () => {
       if (options.id === '' || options.id === undefined) {
         toastError('잘못된 접근입니다.');

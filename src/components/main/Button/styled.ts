@@ -4,7 +4,6 @@ import { Button } from '@mui/material';
 import { colors } from '@/styles';
 
 export const ButtonElement = styled(Button)<{ isTertiary?: boolean }>`
-  padding: 0 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,11 +14,18 @@ export const ButtonElement = styled(Button)<{ isTertiary?: boolean }>`
   border-radius: 0.6rem;
   cursor: pointer;
   border: none;
+  margin: 0;
   &:hover {
     background-color: ${({ isTertiary }) => (isTertiary ? colors.tertiary : colors.primary)};
   }
+  &.MuiButtonBase-root {
+    padding: 0 1rem;
+    min-width: auto;
+    @media screen and (max-width: 630px) {
+      padding: 0 0.9rem;
+    }
+  }
   @media screen and (max-width: 630px) {
-    padding: 0 0.6rem;
     font-size: 0.8rem;
     font-weight: 600;
   }
