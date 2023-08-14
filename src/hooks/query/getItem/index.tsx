@@ -1,6 +1,5 @@
 import { UseQueryResult, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { AxiosError } from 'axios';
 
@@ -13,6 +12,7 @@ import {
   getFileItem,
   getTextItem,
 } from '@/api';
+import { toastError } from '@/utils';
 
 export interface GetItemValues {
   type: 'file' | 'text';
@@ -31,10 +31,8 @@ export const useGetItem = ({
     'useUpload',
     () => {
       if (options.id === '' || options.id === undefined) {
-        toast.error(`잘못된 접근입니다.`, {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+        toastError('잘못된 접근입니다.');
+        navigation('/');
       } else {
         if (type === 'file') {
           return getFileItem({ ...options });
@@ -48,6 +46,9 @@ export const useGetItem = ({
         if (isEncrypted && !provide_token) {
           navigation('/check/pw');
         }
+      },
+      onError: () => {
+        toastError('잘못된 접근입니다.');
       },
       retry: 0,
     },

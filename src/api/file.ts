@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import { API_SUFFIX, UploadOptions, DataResponse, instance, GetItemOptions } from './api';
 
 export interface FileUploadValues extends UploadOptions {
