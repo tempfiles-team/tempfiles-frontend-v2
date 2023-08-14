@@ -14,12 +14,15 @@ export const OptionSection = styled(motion.div)`
     width: 70%;
   }
   @media screen and (max-width: 500px) {
-    grid-template-columns: 0.5fr 1fr;
+    grid-template-columns: 0.55fr 0.9fr;
+    column-gap: 0.6rem;
     width: 90%;
   }
+  justify-content: space-between;
 `;
 
 export const OptionSectionTextWrapper = styled.div`
+  width: 100%;
   flex: 1 1 auto;
   display: flex;
   height: 100%;
