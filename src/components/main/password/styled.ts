@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { colors } from '@/styles';
 
 export const PasswordContainer = styled(motion.div)`
-  width: 58%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,12 +14,6 @@ export const PasswordContainer = styled(motion.div)`
   border-radius: 0.8rem;
   height: 3rem;
   border: 0.2rem solid ${colors.softPrimary};
-  @media screen and (min-width: 500px) and (max-width: 850px) {
-    width: 70%;
-  }
-  @media screen and (max-width: 500px) {
-    width: 90%;
-  }
 `;
 
 export const PasswordInput = styled.input`

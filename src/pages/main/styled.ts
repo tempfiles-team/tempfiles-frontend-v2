@@ -18,20 +18,14 @@ export const MainPageContainer = styled.div`
 
 export const MainPageUploadOptionWrapper = styled.div`
   display: flex;
-  width: 50%;
   align-items: center;
+  width: 90%;
   justify-content: space-between;
   padding: 0 2rem;
-  @media screen and (min-width: 500px) and (max-width: 850px) {
-    width: 70%;
-  }
-  @media screen and (max-width: 500px) {
-    width: 100%;
-  }
 `;
 
 export const MainPageFindContainer = styled(motion.div)`
-  width: 58%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 0.24fr;
   column-gap: 0.4rem;

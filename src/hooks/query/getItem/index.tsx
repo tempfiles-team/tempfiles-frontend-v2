@@ -49,6 +49,7 @@ export const useGetItem = ({
       },
       onError: () => {
         toastError('잘못된 접근입니다.');
+        navigation('/');
       },
       retry: 0,
     },

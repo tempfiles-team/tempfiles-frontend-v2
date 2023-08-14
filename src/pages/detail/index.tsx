@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import { useGetItem } from '@/hooks';
 import { GetFileResponse, GetTextResponse } from '@/api';
+import { SkeletonUI } from '@/components';
 
 interface ItemTypeMap {
   file: GetFileResponse;
@@ -24,17 +25,17 @@ export const DetailPage: React.FC = () => {
   });
 
   if (isLoading || !data) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <SkeletonUI width="100%" height="3rem" margin="3rem 0px 0px 0px" />
+        <SkeletonUI width="80%" height="2.8rem" margin="0" />
+      </>
+    );
   }
 
   const content = getContent(type, data.data as ItemTypeMap[ItemType]);
 
-  return (
-    <div>
-      <h1>Detail Page</h1>
-      {content}
-    </div>
-  );
+  return <>{content}</>;
 };
 
 const getContent = (type: ItemType, data: ItemTypeMap[ItemType]) => {
