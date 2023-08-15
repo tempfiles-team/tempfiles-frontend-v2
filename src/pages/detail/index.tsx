@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-import { useGetItem } from '@/hooks';
+import { useDelete, useGetItem } from '@/hooks';
 import { Button, FileDetails, SkeletonUI } from '@/components';
 import { getDate, getExpireTime, getFileSize } from '@/utils';
 import { GetFileResponse, GetTextResponse } from '@/api';
@@ -14,14 +14,15 @@ export const DetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { search } = useLocation();
   const type = search.split('=')[1] as ItemType;
-  const contentRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading } = useGetItem({
     type,
     options: {
-      id,
+      id: id ? id : '',
     },
   });
+
+  const { mutate: deleteMutate } = useDelete();
 
   if (isLoading || !data) {
     return (
@@ -42,9 +43,13 @@ export const DetailPage: React.FC = () => {
 
   const filenameLength = fileData.filename.length;
 
+  const onDeleteClick = () => {
+    deleteMutate({ type, id: id ? id : '' });
+  };
+
   return (
     <S.DetailPageContainer>
-      <S.DetailPageContent ref={contentRef}>
+      <S.DetailPageContent>
         {type === 'file' ? (
           <FileDetails
             fileData={fileData}
@@ -63,7 +68,9 @@ export const DetailPage: React.FC = () => {
       <S.DetailPageButtonContainer>
         <Button isPrimary>다운로드</Button>
         <Button isPrimary>링크 복사</Button>
-        <Button isPrimary={false}>파일 삭제</Button>
+        <Button isPrimary={false} onClick={() => onDeleteClick()}>
+          파일 삭제
+        </Button>
       </S.DetailPageButtonContainer>
     </S.DetailPageContainer>
   );

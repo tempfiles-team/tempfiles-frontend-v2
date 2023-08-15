@@ -1,4 +1,11 @@
-import { API_SUFFIX, UploadOptions, DataResponse, instance, GetItemOptions } from './api';
+import {
+  API_SUFFIX,
+  UploadOptions,
+  DataResponse,
+  instance,
+  GetItemOptions,
+  DeleteValue,
+} from './api';
 
 export interface FileUploadValues extends UploadOptions {
   file: FormData;
@@ -18,6 +25,8 @@ export interface GetFileResponse extends DataResponse {
   provide_token: boolean;
   size: number;
 }
+
+export type DeleteFileValue = DeleteValue;
 
 export const upLoadFile = async ({
   file,
@@ -39,7 +48,12 @@ export const upLoadFile = async ({
   return data;
 };
 
-export const getFileItem = async ({ id, token }: GetFileOptions) => {
+export const getFile = async ({ id, token }: GetFileOptions) => {
   const { data } = await instance.get(`${API_SUFFIX.FILE}/${id}${token ? `?token=${token}` : ''}`);
+  return data;
+};
+
+export const deleteFile = async ({ id }: DeleteFileValue) => {
+  const { data } = await instance.delete(`${API_SUFFIX.FILE}/${id}`);
   return data;
 };

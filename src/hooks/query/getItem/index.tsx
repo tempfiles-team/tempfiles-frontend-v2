@@ -9,8 +9,8 @@ import {
   GetFileResponse,
   GetItemOptions,
   GetTextResponse,
-  getFileItem,
-  getTextItem,
+  getFile,
+  getText,
 } from '@/api';
 import { toastError } from '@/utils';
 
@@ -35,9 +35,9 @@ export const useGetItem = ({
         navigation('/');
       } else {
         if (type === 'file') {
-          return getFileItem({ ...options });
+          return getFile({ ...options });
         } else {
-          return getTextItem({ ...options });
+          return getText({ ...options });
         }
       }
     },
