@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-import { useGetItem } from '@/hooks';
-import { GetFileResponse, GetTextResponse } from '@/api';
+import { useGetItem, useGetWindowSize } from '@/hooks';
 import { Button, SkeletonUI } from '@/components';
-import { getDate, getExpireTime } from '@/utils';
+import { getDate, getExpireTime, getFileSize } from '@/utils';
+import { GetFileResponse, GetTextResponse } from '@/api';
 
 import * as S from './styled';
 
@@ -14,11 +14,13 @@ export const DetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { search } = useLocation();
   const type = search.split('=')[1] as ItemType;
+  const { windowSize } = useGetWindowSize();
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading } = useGetItem({
-    type: type,
+    type,
     options: {
-      id: id,
+      id,
     },
   });
 
@@ -31,33 +33,56 @@ export const DetailPage: React.FC = () => {
     );
   }
 
+  const { expireTime, downloadLimit } = data.data;
   const textData = data.data as GetTextResponse;
   const fileData = data.data as GetFileResponse;
+  const expireDate = getExpireTime(expireTime);
+  const uploadDate = getDate(data.data.uploadDate);
+  const fileSize = getFileSize(fileData.size);
+  const filenameLength = fileData.filename.length;
 
-  const expireDate = getExpireTime(textData.expireTime);
-  const uploadDate = getDate(fileData.uploadDate);
+  const renderFileDetails = () => {
+    if (windowSize < 550 && filenameLength <= 18) {
+      return (
+        <>
+          {fileData.filename} / {fileSize} <br />
+          업로드된 날짜: {uploadDate.year}-{uploadDate.month}-{uploadDate.day}
+        </>
+      );
+    } else if (
+      (windowSize < 1180 && windowSize > 550 && filenameLength <= 46 && filenameLength >= 18) ||
+      (windowSize < 1200 && filenameLength > 46)
+    ) {
+      return (
+        <>
+          {fileData.filename}
+          <br />
+          크기: {fileSize} / 업로드된 날짜: {uploadDate.year}-{uploadDate.month}-{uploadDate.day}
+        </>
+      );
+    } else {
+      return (
+        <>
+          파일 이름: {fileData.filename} / 크기: {fileSize} / 업로드된 날짜: {uploadDate.year}-
+          {uploadDate.month}-{uploadDate.day}
+        </>
+      );
+    }
+  };
 
   return (
     <S.DetailPageContainer>
-      {type === 'file' ? (
-        <S.FileBox>
-          {fileData.filename}
-          <br />
-          크기: {fileData.size} / 업로드된 날짜: {uploadDate.year}-{uploadDate.month}-
-          {uploadDate.day}
-        </S.FileBox>
-      ) : (
-        <S.FileBox>{textData.textData}</S.FileBox>
-      )}
+      <S.DetailPageContent ref={contentRef}>
+        {type === 'file' ? renderFileDetails() : <>{textData.textData}</>}
+      </S.DetailPageContent>
       <S.DetailPageInfo>
-        만료까지 {expireDate.day}일 {expireDate.hour}시간 {expireDate.minute}분 /{' '}
-        {data.data.downloadLimit}번 남았습니다.
+        만료까지 {expireDate.day}일 {expireDate.hour}시간 {expireDate.minute}분 / {downloadLimit}번
+        남았습니다.
       </S.DetailPageInfo>
       <S.DetailPageButtonContainer>
-        <Button isPrimary={true}>다운로드</Button>
-        <Button isPrimary={true}>링크 복사</Button>
+        <Button isPrimary>다운로드</Button>
+        <Button isPrimary>링크 복사</Button>
         <Button isPrimary={false}>파일 삭제</Button>
-        <Button isPrimary={false}>신고</Button>
       </S.DetailPageButtonContainer>
     </S.DetailPageContainer>
   );

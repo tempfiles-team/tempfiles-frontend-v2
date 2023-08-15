@@ -17,7 +17,7 @@ export const App: React.FC = () => {
         }
       >
         <Route path="/" element={<MainPage />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/dl/:id" element={<DetailPage />} />
       </Route>
     </Routes>
   );
