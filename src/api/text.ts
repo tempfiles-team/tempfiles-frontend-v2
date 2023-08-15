@@ -1,6 +1,6 @@
 import { UploadOptions } from '@/api';
 
-import { API_SUFFIX, DataResponse, DeleteValue, GetItemOptions, instance } from './api';
+import { API_SUFFIX, DataResponse, CommonValue, GetItemOptions, instance } from './api';
 
 export interface UploadTextValues extends UploadOptions {
   textData: string;
@@ -17,7 +17,9 @@ export interface GetTextResponse extends DataResponse {
 
 export type GetTextOptions = GetItemOptions;
 
-export type DeleteTextValue = DeleteValue;
+export type DeleteTextValue = CommonValue;
+
+export type DownloadTextValue = CommonValue;
 
 export const upLoadText = async ({
   textData,
@@ -46,5 +48,10 @@ export const getText = async ({ id, token }: GetTextOptions) => {
 
 export const deleteText = async ({ id }: DeleteTextValue) => {
   const { data } = await instance.delete(`${API_SUFFIX.TEXT}/${id}`);
+  return data;
+};
+
+export const downloadText = async ({ id }: DownloadTextValue) => {
+  const { data } = await instance.get(`${API_SUFFIX.TEXT}/${id}/download`);
   return data;
 };

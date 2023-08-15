@@ -3,8 +3,9 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import { useDelete, useGetItem } from '@/hooks';
 import { Button, FileDetails, SkeletonUI } from '@/components';
-import { getDate, getExpireTime, getFileSize } from '@/utils';
+import { getDate, getExpireTime, getFileSize, toastSuccess } from '@/utils';
 import { GetFileResponse, GetTextResponse } from '@/api';
+import { useDownload } from '@/hooks/query/download';
 
 import * as S from './styled';
 
@@ -23,6 +24,8 @@ export const DetailPage: React.FC = () => {
   });
 
   const { mutate: deleteMutate } = useDelete();
+  const { mutate: downloadMutate } = useDownload();
+  const location = useLocation();
 
   if (isLoading || !data) {
     return (
@@ -47,6 +50,15 @@ export const DetailPage: React.FC = () => {
     deleteMutate({ type, id: id ? id : '' });
   };
 
+  const onDownloadClick = () => {
+    downloadMutate({ type, id: id ? id : '' });
+  };
+
+  const onLinkClick = () => {
+    navigator.clipboard.writeText(location.pathname);
+    toastSuccess('링크가 복사되었어요.');
+  };
+
   return (
     <S.DetailPageContainer>
       <S.DetailPageContent>
@@ -66,8 +78,12 @@ export const DetailPage: React.FC = () => {
         남았습니다.
       </S.DetailPageInfo>
       <S.DetailPageButtonContainer>
-        <Button isPrimary>다운로드</Button>
-        <Button isPrimary>링크 복사</Button>
+        <Button isPrimary onClick={() => onDownloadClick()}>
+          다운로드
+        </Button>
+        <Button isPrimary onClick={onLinkClick}>
+          링크 복사
+        </Button>
         <Button isPrimary={false} onClick={() => onDeleteClick()}>
           파일 삭제
         </Button>

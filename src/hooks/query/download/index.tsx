@@ -8,42 +8,42 @@ import {
   APIResponse,
   FileUploadResponse,
   UploadTextResponse,
-  deleteFile,
-  deleteText,
+  downloadFile,
+  downloadText,
 } from '@/api';
 import { toastError, toastSuccess } from '@/utils';
 
-export interface DeleteValues {
+export interface DownloadValues {
   type: 'file' | 'text';
   id: string;
 }
 
-export const useDelete = (): UseMutationResult<
+export const useDownload = (): UseMutationResult<
   APIResponse<UploadTextResponse | FileUploadResponse>, // 수정 필요
   AxiosError<APIErrorResponse>,
-  DeleteValues
+  DownloadValues
 > => {
   const navigation = useNavigate();
   return useMutation(
-    'useDelete',
+    'useDownload',
     ({ type, id }) => {
       if (id === '' || id === undefined) {
         toastError('잘못된 접근입니다.');
         navigation('/');
       }
       if (type === 'file') {
-        return deleteFile({ id });
+        return downloadFile({ id });
       } else {
-        return deleteText({ id });
+        return downloadText({ id });
       }
     },
     {
       onSuccess: () => {
         navigation(`/`);
-        toastSuccess(`삭제에 성공했어요!`);
+        toastSuccess(`다운로드에 성공했어요!`);
       },
       onError: () => {
-        toastError('삭제에 실패했어요.');
+        toastError('다운로드에 실패했어요.');
       },
       retry: 0,
     },
