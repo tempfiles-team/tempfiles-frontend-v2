@@ -4,7 +4,7 @@ import {
   DataResponse,
   instance,
   GetItemOptions,
-  DeleteValue,
+  CommonValue,
 } from './api';
 
 export interface FileUploadValues extends UploadOptions {
@@ -26,7 +26,9 @@ export interface GetFileResponse extends DataResponse {
   size: number;
 }
 
-export type DeleteFileValue = DeleteValue;
+export type DeleteFileValue = CommonValue;
+
+export type DownloadFileValue = CommonValue;
 
 export const upLoadFile = async ({
   file,
@@ -55,5 +57,10 @@ export const getFile = async ({ id, token }: GetFileOptions) => {
 
 export const deleteFile = async ({ id }: DeleteFileValue) => {
   const { data } = await instance.delete(`${API_SUFFIX.FILE}/${id}`);
+  return data;
+};
+
+export const downloadFile = async ({ id }: DownloadFileValue) => {
+  const { data } = await instance.put(`${API_SUFFIX.FILE}/${id}/download`);
   return data;
 };

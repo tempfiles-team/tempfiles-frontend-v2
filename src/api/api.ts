@@ -45,7 +45,7 @@ export interface GetItemOptions {
   token?: string;
 }
 
-export interface DeleteValue {
+export interface CommonValue {
   id: string;
 }
 
