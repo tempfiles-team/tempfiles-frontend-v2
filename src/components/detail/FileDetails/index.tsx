@@ -21,8 +21,11 @@ export const FileDetails: React.FC<FileDetailsProps> = ({
   fileSize,
 }) => {
   const { windowSize } = useGetWindowSize();
+
+  let detailsText: React.ReactNode;
+
   if (windowSize < 550 && filenameLength <= 18) {
-    return (
+    detailsText = (
       <>
         {fileData.filename} / {fileSize} <br />
         업로드된 날짜: {uploadDate.year}-{uploadDate.month}-{uploadDate.day}
@@ -30,9 +33,9 @@ export const FileDetails: React.FC<FileDetailsProps> = ({
     );
   } else if (
     (windowSize < 1180 && windowSize > 550 && filenameLength <= 46 && filenameLength >= 18) ||
-    (windowSize < 1200 && filenameLength > 46)
+    (windowSize < 550 && filenameLength > 30)
   ) {
-    return (
+    detailsText = (
       <>
         {fileData.filename}
         <br />
@@ -40,11 +43,13 @@ export const FileDetails: React.FC<FileDetailsProps> = ({
       </>
     );
   } else {
-    return (
+    detailsText = (
       <>
         파일 이름: {fileData.filename} / 크기: {fileSize} / 업로드된 날짜: {uploadDate.year}-
         {uploadDate.month}-{uploadDate.day}
       </>
     );
   }
+
+  return <>{detailsText}</>;
 };

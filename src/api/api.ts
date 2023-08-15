@@ -41,8 +41,12 @@ export interface DataResponse {
 }
 
 export interface GetItemOptions {
-  id?: string;
+  id: string;
   token?: string;
+}
+
+export interface DeleteValue {
+  id: string;
 }
 
 export const instance = axios.create({

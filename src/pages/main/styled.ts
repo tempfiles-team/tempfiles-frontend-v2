@@ -185,7 +185,7 @@ export const MainPageUploadOption = styled.div`
 export const MainPageOptionName = styled.span`
   font-size: 1.2rem;
   font-weight: 700;
-  @media screen and (max-width: 500px) {
+  @media screen and (min-width: 380px) and (max-width: 500px) {
     font-size: 1rem;
   }
 `;
