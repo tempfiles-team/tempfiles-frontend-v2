@@ -14,20 +14,16 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
   position: relative;
   height: 68%;
   row-gap: 3rem;
+  width: 100%;
+  padding: 0 2rem;
+  overflow: hidden;
+  max-width: 1250px;
   @media screen and (min-height: 800px) and (max-height: 1100px) {
     height: 76%;
   }
   @media screen and (max-width: 500px) {
+    padding: 0 1rem;
     height: 80%;
-  }
-  width: 46%;
-  overflow: hidden;
-  max-width: 1150px;
-  @media screen and (min-width: 500px) and (max-width: 850px) {
-    width: 70%;
-  }
-  @media screen and (max-width: 500px) {
-    width: 90%;
   }
 `;
 

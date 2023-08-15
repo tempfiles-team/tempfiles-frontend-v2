@@ -14,4 +14,7 @@ export const ButtonElement = styled(Button)<{ isPrimary: boolean }>`
   &:hover {
     background-color: ${({ isPrimary }) => (isPrimary ? colors.primary : colors.tertiary)};
   }
+  @media screen and (max-width: 500px) {
+    font-size: 1.1rem;
+  }
 `;

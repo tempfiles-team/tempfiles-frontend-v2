@@ -37,7 +37,7 @@ export const useUpload = (): UseMutationResult<
     },
     {
       onSuccess: ({ data }, variables) => {
-        navigation(`/detail/${data.id}?type=${variables.type}`);
+        navigation(`/dl/${data.id}?type=${variables.type}`);
         toastSuccess(`업로드에 성공했어요!`);
       },
       onError: () => {

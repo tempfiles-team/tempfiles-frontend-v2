@@ -8,12 +8,18 @@ import { motion } from 'framer-motion';
 import { colors } from '@/styles';
 
 export const MainPageContainer = styled.div`
-  width: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   row-gap: 1.4rem;
+  @media screen and (min-width: 500px) and (max-width: 850px) {
+    width: 70%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const MainPageUploadOptionWrapper = styled.div`
