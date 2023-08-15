@@ -4,3 +4,8 @@ export const UPLOAD_OPTIONS_LIST: UPLOAD_OPTIONS_LIST_TYPE[] = [
   '다운로드 횟수',
   '비밀번호',
 ];
+
+export const variants = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};

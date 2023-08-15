@@ -8,9 +8,14 @@ import * as S from './styled';
 export interface ExpireTimeProps {
   onExpireTimeClick: (type: string, value: number) => void;
   expireTime: ExpireTimeValues;
+  animate: 'visible' | 'hidden';
 }
 
-export const ExpireTime: React.FC<ExpireTimeProps> = ({ onExpireTimeClick, expireTime }) => {
+export const ExpireTime: React.FC<ExpireTimeProps> = ({
+  onExpireTimeClick,
+  expireTime,
+  animate,
+}) => {
   const onResetClick = () => {
     onExpireTimeClick('minute', 0);
     onExpireTimeClick('hour', 0);
@@ -18,7 +23,10 @@ export const ExpireTime: React.FC<ExpireTimeProps> = ({ onExpireTimeClick, expir
   };
 
   return (
-    <OptionSection text={`${expireTime.minute}분, ${expireTime.hour}시간, ${expireTime.day}일`}>
+    <OptionSection
+      animate={animate}
+      text={`${expireTime.minute}분, ${expireTime.hour}시간, ${expireTime.day}일`}
+    >
       <S.ExpireTimeOptionContainer>
         <Button onClick={() => onExpireTimeClick('minute', expireTime.minute + 10)}>+10분</Button>
         <Button onClick={() => onExpireTimeClick('hour', expireTime.hour + 1)}>+1시간</Button>

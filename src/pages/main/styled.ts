@@ -1,6 +1,9 @@
 import { FaCheck } from 'react-icons/fa';
+import { TbRefresh } from 'react-icons/tb';
 
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
+import { motion } from 'framer-motion';
 
 import { colors } from '@/styles';
 
@@ -27,9 +30,9 @@ export const MainPageUploadOptionWrapper = styled.div`
   }
 `;
 
-export const MainPageFindContainer = styled.div<{ textClick: boolean }>`
+export const MainPageFindContainer = styled(motion.div)`
   width: 58%;
-  display: ${({ textClick }) => (textClick ? 'flex' : 'grid')};
+  display: grid;
   grid-template-columns: 1fr 0.24fr;
   column-gap: 0.4rem;
   @media screen and (min-width: 500px) and (max-width: 850px) {
@@ -44,7 +47,7 @@ export const MainPageFindContainer = styled.div<{ textClick: boolean }>`
   }
 `;
 
-export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
+export const MainPageTextWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,8 +55,8 @@ export const MainPageTextWrapper = styled.div<{ textClick: boolean }>`
   border: 0.2rem solid ${colors.softPrimary};
   align-self: center;
   border-radius: 0.8rem;
-  height: ${({ textClick }) => (textClick ? 'auto' : '3rem')};
-  padding: ${({ textClick }) => (textClick ? '0rem' : '0.3rem')};
+  height: 3rem;
+  padding: 0.3rem;
   overflow: scroll;
   cursor: pointer;
   width: 100%;
@@ -124,21 +127,6 @@ export const MainPageTextArea = styled.textarea`
   }
 `;
 
-export const MainPageUploadButton = styled.button`
-  margin-top: 1.5rem;
-  border: none;
-  width: 7.6rem;
-  height: 3rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: ${colors.white};
-  background-color: ${colors.primary};
-  border-radius: 0.8rem;
-  @media screen and (max-width: 500px) {
-    margin: 0;
-  }
-`;
-
 export const MainPageFindFileButton = styled.label`
   display: flex;
   justify-content: center;
@@ -150,10 +138,43 @@ export const MainPageFindFileButton = styled.label`
   background-color: ${colors.primary};
   border-radius: 0.8rem;
   margin-top: 0;
+  .MuiTouchRipple-root {
+    filter: blur(5px) !important;
+  }
+  &:hover {
+    background-color: ${colors.primary};
+  }
   @media screen and (max-width: 500px) {
     font-size: 1rem;
     font-weight: 600;
   }
+`;
+
+export const MainPageUploadButton = styled(Button)`
+  margin-top: 1.5rem;
+  border: none;
+  width: 7.6rem;
+  height: 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: ${colors.white};
+  background-color: ${colors.primary};
+  border-radius: 0.8rem;
+  .MuiTouchRipple-root {
+    filter: blur(5px) !important;
+  }
+  &:hover {
+    background-color: ${colors.primary};
+  }
+  @media screen and (max-width: 500px) {
+    margin: 0;
+  }
+`;
+
+export const MainPageSwitchButtonWrapper = styled(MainPageUploadButton)`
+  margin-top: 0;
+  width: 2.6rem;
+  height: 100%;
 `;
 
 export const MainPageUploadOption = styled.div`
@@ -192,4 +213,9 @@ export const MainPageCheckIcon = styled(FaCheck)`
     width: 1rem;
     height: 1rem;
   }
+`;
+
+export const MainPageChangeIcon = styled(TbRefresh)`
+  width: 1.6rem;
+  height: 1.6rem;
 `;

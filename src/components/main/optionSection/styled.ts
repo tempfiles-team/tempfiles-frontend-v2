@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 
 import { colors } from '@/styles';
 
-export const OptionSection = styled.div`
+export const OptionSection = styled(motion.div)`
   width: 58%;
   display: grid;
   grid-template-columns: 0.5fr 0.7fr;

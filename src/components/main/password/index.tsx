@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
+import { variants } from '@/constant';
+
 import * as S from './styled';
 
 export interface PasswordProps {
   setPassword: (value: string) => void;
   password: string;
+  animate: 'visible' | 'hidden';
 }
 
-export const Password: React.FC<PasswordProps> = ({ setPassword, password }) => {
+export const Password: React.FC<PasswordProps> = ({ setPassword, password, animate }) => {
   const [showPassword, setShowPassword] = useState(false);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
   return (
-    <S.PasswordContainer>
+    <S.PasswordContainer
+      variants={variants}
+      animate={animate}
+      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+    >
       <S.PasswordInput
         type={showPassword ? 'text' : 'password'}
         onChange={onChange}

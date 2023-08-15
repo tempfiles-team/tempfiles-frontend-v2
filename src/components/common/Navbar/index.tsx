@@ -8,7 +8,9 @@ export const Navbar: React.FC = () => {
   return (
     <S.NavbarContainer>
       {NAVBAR_MENU.map(({ text, href }) => (
-        <S.NavbarText to={href}>{text}</S.NavbarText>
+        <S.NavbarText to={href} key={href}>
+          {text}
+        </S.NavbarText>
       ))}
     </S.NavbarContainer>
   );

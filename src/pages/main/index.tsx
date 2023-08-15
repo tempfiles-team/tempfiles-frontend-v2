@@ -1,9 +1,14 @@
+/** @jsxImportSource @emotion/react */
+
 import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE } from '@/constant';
+import { css } from '@emotion/react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE, variants } from '@/constant';
 import { DownloadLimit, ExpireTime, Password } from '@/components';
-import { useUploadFile } from '@/hooks';
+import { useUpload } from '@/hooks';
 import { getFileSize } from '@/utils';
 
 import * as S from './styled';
@@ -16,8 +21,13 @@ export interface ExpireTimeValues {
 }
 
 export const MainPage: React.FC = () => {
+  /** 텍스트 영역 클릭 여부 */
   const [textClick, setTextClick] = useState(false);
+
+  /** 텍스트 영역 ref */
   const textRef = useRef<HTMLTextAreaElement>(null);
+
+  /** 옵션 상태 관리 */
   const [activeOption, setActiveOption] = useState<ActiveOptionState>(() => {
     const initialState: ActiveOptionState = {}; // initialState를 ActiveOptionState 타입으로 설정
     UPLOAD_OPTIONS_LIST.forEach((option) => {
@@ -27,13 +37,21 @@ export const MainPage: React.FC = () => {
     return initialState; // initialState를 반환
     // 최종적으로 activeOption의 값은 {유지기간: false, 다운로드 횟수: false, 비밀번호: false}가 됨
   });
+
+  /** 유지기간 상태 관리 */
   const [expireTime, setExpireTime] = useState<ExpireTimeValues>({
     day: 0,
     hour: 3,
     minute: 0,
   });
+
+  /** 다운로드 횟수 상태 관리 */
   const [downloadLimit, setDownloadLimit] = useState<number>(50);
+
+  /** 비밀번호 상태 관리 */
   const [password, setPassword] = useState<string>('');
+
+  /** 파일 상태 관리 */
   const [file, setFile] = useState<{
     filename: string;
     size: string;
@@ -46,9 +64,12 @@ export const MainPage: React.FC = () => {
     fileData: new File([], ''),
   });
 
+  /** 텍스트 상태 관리 */
+  const [text, setText] = useState('');
+
   const isFileExits = file.filename !== '' && file.size !== '' && file.fileType !== '';
 
-  const { mutate } = useUploadFile();
+  const { mutate } = useUpload();
 
   const onOptionClick = (index: number) => {
     const option = UPLOAD_OPTIONS_LIST[index];
@@ -65,13 +86,15 @@ export const MainPage: React.FC = () => {
     }
   };
 
-  const autoHeight = () => {
-    if (textRef.current) {
-      textRef.current.style.height = 'auto';
-      textRef.current.style.height = textRef.current.scrollHeight + 'px';
-      if (textRef.current.value === '') {
-        setTextClick(false);
-      }
+  const onTextChange = () => {
+    const textArea = textRef.current;
+    if (textArea) {
+      const textAreaValue = textArea.value;
+
+      textArea.style.height = 'auto';
+      textArea.style.height = textArea.scrollHeight + 'px';
+
+      setText(textAreaValue);
     }
   };
 
@@ -91,20 +114,30 @@ export const MainPage: React.FC = () => {
   const onSubmit = () => {
     const formData = new FormData();
     formData.append('file', file.fileData);
-    if (!isFileExits) {
-      return toast.error('파일을 선택해주세요!', {
+
+    const options = {
+      timeLimit: activeOption['유지기간']
+        ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
+        : 180,
+      downloadLimit: activeOption['다운로드 횟수'] ? downloadLimit : 100,
+      password: password !== '' ? password : undefined,
+    };
+
+    if (isFileExits) {
+      mutate({ type: 'file', data: formData, options });
+    } else if (text !== '') {
+      mutate({ type: 'text', data: text, options });
+    }
+
+    if (!isFileExits && text === '') {
+      toast.error('파일이나 텍스트를 입력해주세요.', {
         autoClose: 3000,
         position: toast.POSITION.BOTTOM_RIGHT,
       });
     }
-    mutate({
-      file: formData,
-      timeLimit: activeOption['유지기간']
-        ? expireTime.minute + expireTime.hour * 60 + expireTime.day * 1440
-        : 180,
-      downloadLimit: activeOption['비밀번호'] ? downloadLimit : 100,
-      password: password !== '' ? password : undefined,
-    });
+
+    setText('');
+
     setFile({
       filename: '',
       size: '',
@@ -115,61 +148,120 @@ export const MainPage: React.FC = () => {
 
   return (
     <S.MainPageContainer>
-      <S.MainPageUploadOptionWrapper>
-        {UPLOAD_OPTIONS_LIST.map((option, i) => (
-          <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
-            <S.MainPageCheckBox>
-              {activeOption[option] && <S.MainPageCheckIcon />}
-            </S.MainPageCheckBox>
-            <S.MainPageOptionName>{option}</S.MainPageOptionName>
-          </S.MainPageUploadOption>
-        ))}
-      </S.MainPageUploadOptionWrapper>
-      {activeOption['유지기간'] && (
-        <ExpireTime onExpireTimeClick={onExpireTimeClick} expireTime={expireTime} />
-      )}
-      {activeOption['다운로드 횟수'] && (
-        <DownloadLimit setDownloadLimit={setDownloadLimit} downloadLimit={downloadLimit} />
-      )}
-      {activeOption['비밀번호'] && <Password setPassword={setPassword} password={password} />}
-      <S.MainPageFindContainer textClick={textClick}>
-        <S.MainPageTextWrapper textClick={textClick}>
+      <AnimatePresence>
+        <S.MainPageUploadOptionWrapper>
+          {UPLOAD_OPTIONS_LIST.map((option, i) => (
+            <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
+              <S.MainPageCheckBox>
+                <motion.div
+                  variants={variants}
+                  animate={activeOption[option] ? 'visible' : 'hidden'}
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <S.MainPageCheckIcon />
+                </motion.div>
+              </S.MainPageCheckBox>
+              <S.MainPageOptionName>{option}</S.MainPageOptionName>
+            </S.MainPageUploadOption>
+          ))}
+        </S.MainPageUploadOptionWrapper>
+      </AnimatePresence>
+      <AnimatePresence>
+        {activeOption['유지기간'] && (
+          <ExpireTime
+            animate={activeOption['유지기간'] ? 'visible' : 'hidden'}
+            onExpireTimeClick={onExpireTimeClick}
+            expireTime={expireTime}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {activeOption['다운로드 횟수'] && (
+          <DownloadLimit
+            animate={activeOption['다운로드 횟수'] ? 'visible' : 'hidden'}
+            setDownloadLimit={setDownloadLimit}
+            downloadLimit={downloadLimit}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {activeOption['비밀번호'] && (
+          <Password
+            animate={activeOption['비밀번호'] ? 'visible' : 'hidden'}
+            setPassword={setPassword}
+            password={password}
+          />
+        )}
+      </AnimatePresence>
+      <S.MainPageFindContainer
+        animate={{ y: 0, opacity: 1 }}
+        key={!textClick ? 'file' : 'text'}
+        initial={{ y: 20, opacity: 0 }}
+        exit={{ y: -20, opacity: 0 }}
+        transition={{ duration: 0.4 }}
+        css={
+          textClick &&
+          css`
+            display: flex;
+          `
+        }
+      >
+        <S.MainPageTextWrapper
+          css={
+            textClick &&
+            css`
+              height: auto;
+              padding: 0;
+            `
+          }
+        >
           {!textClick ? (
-            <>
-              {!isFileExits ? (
-                <>
-                  <S.MainPageTextButton>NEW!</S.MainPageTextButton>
-                  <S.MainPageText onClick={() => setTextClick(true)}>
-                    텍스트를 붙혀넣어 보세요
-                  </S.MainPageText>
-                </>
-              ) : (
-                <>
-                  <S.MainPageText>
-                    이름: {file.filename} / 크기:({file.size}) / 타입: {file.fileType}
-                  </S.MainPageText>
-                </>
-              )}
-            </>
+            !isFileExits ? (
+              <>
+                <S.MainPageTextButton>NEW!</S.MainPageTextButton>
+                <S.MainPageText onClick={() => setTextClick(true)}>
+                  텍스트를 붙혀넣어 보세요
+                </S.MainPageText>
+              </>
+            ) : (
+              <>
+                <S.MainPageText>
+                  이름: {file.filename} / 크기:({file.size}) / 타입: {file.fileType}
+                </S.MainPageText>
+              </>
+            )
           ) : (
             <S.MainPageTextArea
+              value={text}
               ref={textRef}
-              onChange={autoHeight}
+              onChange={onTextChange}
               placeholder="여기에 텍스트를 붙혀넣어 보세요"
-            ></S.MainPageTextArea>
+            />
           )}
         </S.MainPageTextWrapper>
         {!textClick && (
-          <S.MainPageFindFileButton id="label-file-upload" htmlFor="input-file-upload">
-            파일 찾기
-          </S.MainPageFindFileButton>
+          <>
+            <S.MainPageFindFileButton id="label-file-upload" htmlFor="input-file-upload">
+              파일 찾기
+            </S.MainPageFindFileButton>
+            <input
+              placeholder="파일 찾기"
+              id="input-file-upload"
+              type={'file'}
+              css={css`
+                display: none;
+              `}
+              onChange={handleChangeFile}
+            />
+          </>
         )}
-        <input
-          id="input-file-upload"
-          type={'file'}
-          style={{ display: 'none' }}
-          onChange={handleChangeFile}
-        />
+        {textClick && (
+          <S.MainPageSwitchButtonWrapper variant="contained" onClick={() => setTextClick(false)}>
+            <S.MainPageChangeIcon size={26} />
+          </S.MainPageSwitchButtonWrapper>
+        )}
       </S.MainPageFindContainer>
       <S.MainPageUploadButton onClick={onSubmit}>업로드</S.MainPageUploadButton>
     </S.MainPageContainer>

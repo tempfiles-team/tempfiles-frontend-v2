@@ -22,6 +22,22 @@ export interface APIErrorResponse {
   result?: null;
 }
 
+export interface UploadOptions {
+  timeLimit: number;
+  downloadLimit: number;
+  password?: string;
+}
+
+export interface UploadResponse {
+  downloadCount: number;
+  downloadLimit: number;
+  expireTime: string;
+  id: string;
+  isEncrypted: boolean;
+  token: string;
+  uploadDate: string;
+}
+
 export const instance = axios.create({
   baseURL: API_SUFFIX.BASEURL,
   headers: {
