@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useDelete, useGetItem } from '@/hooks';
 import { Button, FileDetails, SkeletonUI } from '@/components';
 import { getDate, getExpireTime, getFileSize, toastSuccess } from '@/utils';
-import { API_SUFFIX, GetFileResponse, GetTextResponse } from '@/api';
+import { GetFileResponse, GetTextResponse } from '@/api';
 import { useDownload } from '@/hooks/query/download';
 
 import * as S from './styled';
@@ -49,11 +49,7 @@ export const DetailPage: React.FC = () => {
   const uploadDate = getDate(data.data.uploadDate);
   const fileSize = getFileSize(fileData.size);
 
-  const filenameLength = fileData.filename.length;
-
-  const fileDownload = `${API_SUFFIX.BASEURL}${API_SUFFIX.DOWNLOAD}/${id}${
-    data?.data.isEncrypted ? `?token=${data.data.token}` : ''
-  }`;
+  const fileDownload = data.data.download_url;
 
   const onDeleteClick = () => {
     deleteMutate({ type, id: id ? id : '' });
@@ -75,7 +71,7 @@ export const DetailPage: React.FC = () => {
           <FileDetails
             fileData={fileData}
             fileSize={fileSize}
-            filenameLength={filenameLength}
+            filenameLength={fileData.filename.length}
             uploadDate={uploadDate}
           />
         ) : (
@@ -94,7 +90,7 @@ export const DetailPage: React.FC = () => {
           링크 복사
         </Button>
         <Button isPrimary={false} onClick={() => onDeleteClick()}>
-          파일 삭제
+          {type === 'file' ? '파일' : '텍스트'} 삭제
         </Button>
       </S.DetailPageButtonContainer>
     </S.DetailPageContainer>

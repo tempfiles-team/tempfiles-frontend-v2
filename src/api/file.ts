@@ -5,13 +5,14 @@ import {
   instance,
   GetItemOptions,
   CommonValue,
+  DataUploadResponse,
 } from './api';
 
 export interface FileUploadValues extends UploadOptions {
   file: FormData;
 }
 
-export interface FileUploadResponse extends DataResponse {
+export interface FileUploadResponse extends DataUploadResponse {
   filename: string;
   size: number;
 }

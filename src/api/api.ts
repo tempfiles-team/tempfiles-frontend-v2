@@ -30,7 +30,7 @@ export interface UploadOptions {
   password?: string;
 }
 
-export interface DataResponse {
+export interface DataUploadResponse {
   downloadCount: number;
   downloadLimit: number;
   expireTime: string;
@@ -39,6 +39,11 @@ export interface DataResponse {
   token: string;
   uploadDate: string;
   provide_token?: boolean;
+}
+
+export interface DataResponse extends DataUploadResponse {
+  delete_url: string;
+  download_url: string;
 }
 
 export interface GetItemOptions {

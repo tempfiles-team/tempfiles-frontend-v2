@@ -2,6 +2,7 @@ import { UseQueryResult, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
+import { useRecoilValue } from 'recoil';
 
 import {
   APIErrorResponse,
@@ -13,6 +14,7 @@ import {
   getText,
 } from '@/api';
 import { toastError } from '@/utils';
+import { checkPwState } from '@/atom';
 
 export interface GetItemValues {
   type: 'file' | 'text';
@@ -21,35 +23,37 @@ export interface GetItemValues {
 
 export const useGetItem = ({
   type,
-  options,
+  options: { id, token },
 }: GetItemValues): UseQueryResult<
   APIResponse<GetTextResponse | GetFileResponse>,
   AxiosError<APIErrorResponse>
 > => {
   const navigation = useNavigate();
+  const checkPw = useRecoilValue(checkPwState);
   return useQuery(
     'useGetItem',
     () => {
-      if (options.id === '' || options.id === undefined) {
+      if (id === '' || id === undefined) {
         toastError('잘못된 접근입니다.');
         navigation('/');
       } else {
         if (type === 'file') {
-          return getFile({ ...options });
+          return getFile({ id, token: checkPw.token || token });
         } else {
-          return getText({ ...options });
+          return getText({ id, token: checkPw.token || token });
         }
       }
     },
     {
       onSuccess: ({ data: { isEncrypted, provide_token } }) => {
         if (isEncrypted && !provide_token) {
+          toastError('비밀번호가 필요해요.');
           navigation('/check/pw');
         }
       },
       onError: () => {
-        toastError('잘못된 접근입니다.');
-        navigation('/');
+        toastError('비밀번호가 필요해요.');
+        navigation('/check/pw');
       },
       retry: 0,
     },

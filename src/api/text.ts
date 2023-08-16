@@ -1,12 +1,19 @@
 import { UploadOptions } from '@/api';
 
-import { API_SUFFIX, DataResponse, CommonValue, GetItemOptions, instance } from './api';
+import {
+  API_SUFFIX,
+  DataResponse,
+  CommonValue,
+  GetItemOptions,
+  instance,
+  DataUploadResponse,
+} from './api';
 
 export interface UploadTextValues extends UploadOptions {
   textData: string;
 }
 
-export interface UploadTextResponse extends DataResponse {
+export interface UploadTextResponse extends DataUploadResponse {
   data: string;
   numberOfText: number;
 }
