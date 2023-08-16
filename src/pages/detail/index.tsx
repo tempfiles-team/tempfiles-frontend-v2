@@ -5,7 +5,6 @@ import { useDelete, useGetItem } from '@/hooks';
 import { Button, DataBox, FileDetails, SkeletonUI } from '@/components';
 import { getDate, getExpireTime, getFileSize, toastSuccess } from '@/utils';
 import { GetFileResponse, GetTextResponse } from '@/api';
-import { useDownload } from '@/hooks/query/download';
 
 import * as S from './styled';
 
@@ -24,7 +23,6 @@ export const DetailPage: React.FC = () => {
   });
 
   const { mutate: deleteMutate } = useDelete();
-  const { mutate: downloadMutate } = useDownload();
 
   if (isLoading || !data) {
     return (
@@ -54,13 +52,14 @@ export const DetailPage: React.FC = () => {
     deleteMutate({ type, id: id ? id : '' });
   };
 
-  const onDownloadClick = () => {
-    downloadMutate({ type, id: id ? id : '' });
-  };
-
-  const onLinkClick = () => {
+  const onLinkCopy = () => {
     toastSuccess('링크가 복사되었어요.');
     navigator.clipboard.writeText(window.location.href);
+  };
+
+  const onTextCopy = () => {
+    toastSuccess('텍스트가 복사되었어요.');
+    navigator.clipboard.writeText(textData.textData);
   };
 
   return (
@@ -82,10 +81,14 @@ export const DetailPage: React.FC = () => {
         남았습니다.
       </S.DetailPageInfo>
       <S.DetailPageButtonContainer>
-        <Button isPrimary onClick={onDownloadClick}>
-          <a href={fileDownload}>다운로드</a>
+        <Button isPrimary>
+          {type === 'file' ? (
+            <a href={fileDownload}>다운로드</a>
+          ) : (
+            <a onClick={onTextCopy}>텍스트 복사</a>
+          )}
         </Button>
-        <Button isPrimary onClick={onLinkClick}>
+        <Button isPrimary onClick={onLinkCopy}>
           링크 복사
         </Button>
         <Button isPrimary={false} onClick={onDeleteClick}>
