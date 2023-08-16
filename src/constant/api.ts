@@ -68,10 +68,10 @@ export const API_LIST: ApiListItem = {
     },
     {
       apiId: '/text-upload',
-      url: `${API_SUFFIX.BASEURL}${API_SUFFIX.TEXT}${API_SUFFIX.TEXT_UPLOAD}`,
+      url: `${API_SUFFIX.BASEURL}${API_SUFFIX.TEXT_UPLOAD}`,
       method: '/text/new / method: POST',
       description: '새로운 텍스트를 서버에 업로드해요.',
-      curl: `curl -X POST ${API_SUFFIX.BASEURL}${API_SUFFIX.TEXT}${API_SUFFIX.TEXT_UPLOAD} -H accept: application/json -d '여기에 텍스트 입력' `,
+      curl: `curl -X POST ${API_SUFFIX.BASEURL}${API_SUFFIX.TEXT_UPLOAD} -H accept: application/json -d '여기에 텍스트 입력' `,
     },
     {
       apiId: '/text-del',
