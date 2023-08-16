@@ -18,6 +18,9 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
   padding: 0 2rem;
   overflow: hidden;
   max-width: 1250px;
+  @media screen and (min-width: 1800px) {
+    max-width: 1500px;
+  }
   @media screen and (min-height: 800px) and (max-height: 1100px) {
     height: 76%;
   }

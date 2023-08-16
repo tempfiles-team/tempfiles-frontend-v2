@@ -48,7 +48,6 @@ export const upLoadFile = async ({
       },
     },
   );
-  console.log(data);
   return data;
 };
 

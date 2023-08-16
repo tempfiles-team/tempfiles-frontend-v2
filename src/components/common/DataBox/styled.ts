@@ -16,6 +16,8 @@ export const DataBoxElement = styled.div`
   line-height: 1.8rem;
   overflow: auto;
   cursor: default;
+  display: flex;
+  align-items: center;
   &::-webkit-scrollbar {
     z-index: 999;
     width: 0.4rem;

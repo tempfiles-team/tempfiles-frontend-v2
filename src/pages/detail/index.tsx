@@ -14,6 +14,7 @@ type ItemType = 'file' | 'text';
 export const DetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { search } = useLocation();
+  console.log(search);
   const type = search.split('=')[1] as ItemType;
 
   const { data, isLoading } = useGetItem({
@@ -33,9 +34,9 @@ export const DetailPage: React.FC = () => {
         <SkeletonUI width="70%" height="3rem" margin="3rem 0px 0px 0px" />
         <SkeletonUI width="40%" height="2.8rem" margin="0" />
         <S.DetailPageButtonContainer>
-          <SkeletonUI width="7rem" height="3.8rem" margin="0px" />
-          <SkeletonUI width="7rem" height="3.8rem" margin="0px" />
-          <SkeletonUI width="7rem" height="3.8rem" margin="0px" />
+          <SkeletonUI width="7rem" height="3.8rem" margin="0" />
+          <SkeletonUI width="7rem" height="3.8rem" margin="0" />
+          <SkeletonUI width="7rem" height="3.8rem" margin="0" />
         </S.DetailPageButtonContainer>
       </>
     );
