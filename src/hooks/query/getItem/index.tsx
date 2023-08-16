@@ -59,10 +59,11 @@ export const useGetItem = ({
         if (res.response?.status === 401) {
           toastError('비밀번호가 필요해요.');
           navigation(`/checkPw/${id}?type=${type}`);
+        } else {
+          navigation('/');
         }
       },
       retry: 0,
-      staleTime: Infinity,
     },
   );
 };

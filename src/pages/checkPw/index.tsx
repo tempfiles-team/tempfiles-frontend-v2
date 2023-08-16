@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { Button, DataBox, FileDetails, Password, SkeletonUI } from '@/components';
-import { useGetItem } from '@/hooks';
+import { useGetItem, useCheckPw } from '@/hooks';
 import { LockSVG } from '@/assets';
 import { GetFileResponse } from '@/api';
 import { getDate, getFileSize } from '@/utils';
-import { useCheckPw } from '@/hooks/query/checkPw';
 
 import * as S from './styled';
 
 type ItemType = 'file' | 'text';
+
 export const CheckPwPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { search } = useLocation();

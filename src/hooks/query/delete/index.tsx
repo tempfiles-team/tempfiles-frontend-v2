@@ -3,14 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 
-import {
-  APIErrorResponse,
-  APIResponse,
-  FileUploadResponse,
-  UploadTextResponse,
-  deleteFile,
-  deleteText,
-} from '@/api';
+import { APIErrorResponse, APIResponse, deleteFile, deleteText } from '@/api';
 import { toastError, toastSuccess } from '@/utils';
 
 export interface DeleteValues {
@@ -19,7 +12,7 @@ export interface DeleteValues {
 }
 
 export const useDelete = (): UseMutationResult<
-  APIResponse<UploadTextResponse | FileUploadResponse>, // 수정 필요
+  APIResponse<null>,
   AxiosError<APIErrorResponse>,
   DeleteValues
 > => {
