@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 
 import { Button, DataBox, FileDetails, Password, SkeletonUI } from '@/components';
 import { useGetItem, useCheckPw } from '@/hooks';
 import { LockSVG } from '@/assets';
 import { GetFileResponse } from '@/api';
 import { getDate, getFileSize } from '@/utils';
+import { useGetInfo } from '@/hooks';
 
 import * as S from './styled';
 
-type ItemType = 'file' | 'text';
-
 export const CheckPwPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const { search } = useLocation();
-  const type = search.split('=')[1] as ItemType;
+  const { id, type } = useGetInfo();
 
   const [password, setPassword] = useState<string>('');
 
