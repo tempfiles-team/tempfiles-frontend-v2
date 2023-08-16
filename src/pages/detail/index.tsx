@@ -1,19 +1,14 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 
-import { useDelete, useGetItem } from '@/hooks';
+import { useDelete, useGetInfo, useGetItem } from '@/hooks';
 import { Button, DataBox, FileDetails, SkeletonUI } from '@/components';
 import { getDate, getExpireTime, getFileSize, toastSuccess } from '@/utils';
 import { GetFileResponse, GetTextResponse } from '@/api';
 
 import * as S from './styled';
 
-type ItemType = 'file' | 'text';
-
 export const DetailPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const { search } = useLocation();
-  const type = search.split('=')[1] as ItemType;
+  const { id, type } = useGetInfo();
 
   const { data, isLoading } = useGetItem({
     type,
@@ -42,6 +37,7 @@ export const DetailPage: React.FC = () => {
   const fileData = data.data as GetFileResponse;
 
   const { expireTime, downloadLimit } = data.data;
+
   const expireDate = getExpireTime(expireTime);
   const uploadDate = getDate(data.data.uploadDate);
   const fileSize = getFileSize(fileData.size);
