@@ -189,6 +189,7 @@ export const MainPage: React.FC = () => {
       <AnimatePresence>
         {activeOption['비밀번호'] && (
           <Password
+            isMainPage
             animate={activeOption['비밀번호'] ? 'visible' : 'hidden'}
             setPassword={setPassword}
             password={password}

@@ -28,3 +28,9 @@ export const CheckPwLockIcon = styled.img`
   margin: 0;
   margin-right: 0.6rem;
 `;
+
+export const CheckPwSkeletonContainer = styled.div`
+  display: flex;
+  width: 60%;
+  column-gap: 1.4rem;
+`;

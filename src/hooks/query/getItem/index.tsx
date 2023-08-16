@@ -62,6 +62,7 @@ export const useGetItem = ({
         }
       },
       retry: 0,
+      staleTime: Infinity,
     },
   );
 };

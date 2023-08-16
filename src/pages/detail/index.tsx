@@ -14,7 +14,6 @@ type ItemType = 'file' | 'text';
 export const DetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { search } = useLocation();
-  console.log(search);
   const type = search.split('=')[1] as ItemType;
 
   const { data, isLoading } = useGetItem({
@@ -26,7 +25,6 @@ export const DetailPage: React.FC = () => {
 
   const { mutate: deleteMutate } = useDelete();
   const { mutate: downloadMutate } = useDownload();
-  const location = useLocation();
 
   if (isLoading || !data) {
     return (
@@ -61,8 +59,8 @@ export const DetailPage: React.FC = () => {
   };
 
   const onLinkClick = () => {
-    navigator.clipboard.writeText(location.pathname);
     toastSuccess('링크가 복사되었어요.');
+    navigator.clipboard.writeText(window.location.href);
   };
 
   return (
@@ -90,7 +88,7 @@ export const DetailPage: React.FC = () => {
         <Button isPrimary onClick={onLinkClick}>
           링크 복사
         </Button>
-        <Button isPrimary={false} onClick={() => onDeleteClick()}>
+        <Button isPrimary={false} onClick={onDeleteClick}>
           {type === 'file' ? '파일' : '텍스트'} 삭제
         </Button>
       </S.DetailPageButtonContainer>

@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 export const API_SUFFIX = {
-  BASEURL: import.meta.env.DEV ? 'http://127.0.0.1:5050' : import.meta.env.VITE_BASEURL,
+  BASEURL: import.meta.env.DEV ? 'http://172.30.1.13:5050' : import.meta.env.VITE_BASEURL,
   UPLOAD: '/upload',
   FILE: '/file',
   TEXT: '/text',
   TEXTS: '/texts',
   LIST: '/list',
   DOWNLOAD: '/dl',
+  CHECK_PW: '/checkpw',
 };
 
 export type APIResponseStatusType = 'SUCCESS' | 'FAILED';
