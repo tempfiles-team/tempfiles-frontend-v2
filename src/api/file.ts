@@ -47,6 +47,7 @@ export const upLoadFile = async ({
       },
     },
   );
+  console.log(data);
   return data;
 };
 
@@ -61,6 +62,6 @@ export const deleteFile = async ({ id }: DeleteFileValue) => {
 };
 
 export const downloadFile = async ({ id }: DownloadFileValue) => {
-  const { data } = await instance.put(`${API_SUFFIX.FILE}/${id}/download`);
+  const { data } = await instance.get(`/dl/${id}`);
   return data;
 };

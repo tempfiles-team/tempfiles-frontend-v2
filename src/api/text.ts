@@ -52,6 +52,6 @@ export const deleteText = async ({ id }: DeleteTextValue) => {
 };
 
 export const downloadText = async ({ id }: DownloadTextValue) => {
-  const { data } = await instance.get(`${API_SUFFIX.TEXT}/${id}/download`);
+  const { data } = await instance.get(`${API_SUFFIX.TEXT}/${id}`);
   return data;
 };
