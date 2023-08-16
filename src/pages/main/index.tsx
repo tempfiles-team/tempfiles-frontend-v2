@@ -137,6 +137,9 @@ export const MainPage: React.FC = () => {
     }
 
     setText('');
+    setDownloadLimit(50);
+    setPassword('');
+    setExpireTime({ day: 0, hour: 3, minute: 0 });
 
     setFile({
       filename: '',
