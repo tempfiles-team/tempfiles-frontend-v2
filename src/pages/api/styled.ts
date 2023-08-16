@@ -16,15 +16,18 @@ export const ApiPageMethodWrapper = styled.div`
 `;
 
 export const ApiPageDescription = styled.span`
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 600;
+  line-height: 2rem;
 `;
 
 export const ApiPageCurl = styled.div`
+  max-width: 100%;
+  word-wrap: break-word;
   background-color: #373c62cc;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
   border-radius: 0.8rem;
-  padding: 2rem 1rem;
+  padding: 1.6rem 1rem;
   line-height: 2rem;
 `;
