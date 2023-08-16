@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-import { DataBox } from '@/components';
-import { API_LIST } from '@/constant/api';
+import { API_LIST } from '@/constant';
+import { ApiBox } from '@/components';
 
 import * as S from './styled';
 
 const FILE = 'file';
 const TEXT = 'text';
 
-export const ApiListPage: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<'file' | 'text'>(FILE);
+const ApiListPage: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState(FILE);
 
   return (
     <S.ApiListPageContainer>
@@ -34,11 +34,15 @@ export const ApiListPage: React.FC = () => {
         exit={{ y: -10, opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
-        {selectedCategory === FILE
-          ? API_LIST.file.map((api) => <DataBox>{api.url}</DataBox>)
-          : API_LIST.text.map((api) => <DataBox>{api.url}</DataBox>)}
-        <S.ApiListPageBoxShoadow />
+        {selectedCategory === FILE ? (
+          <ApiBox apiList={API_LIST.file} />
+        ) : (
+          <ApiBox apiList={API_LIST.text} />
+        )}
+        <S.ApiListPageBoxShadow />
       </S.ApiList>
     </S.ApiListPageContainer>
   );
 };
+
+export default ApiListPage;

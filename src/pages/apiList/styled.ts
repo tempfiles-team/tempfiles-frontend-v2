@@ -55,7 +55,7 @@ export const ApiList = styled(motion.div)`
   }
 `;
 
-export const ApiListPageBoxShoadow = styled.div`
+export const ApiListPageBoxShadow = styled.div`
   width: 100%;
   height: 6rem;
   position: relative;

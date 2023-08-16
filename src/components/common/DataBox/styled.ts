@@ -30,6 +30,10 @@ export const DataBoxElement = styled.div`
     background-color: #4f4f4f;
     border-radius: 1rem;
   }
+  & > a {
+    color: ${colors.text};
+    text-decoration: none;
+  }
   @media screen and (min-width: 700px) and (max-width: 1000px) {
     max-height: 8rem;
   }
