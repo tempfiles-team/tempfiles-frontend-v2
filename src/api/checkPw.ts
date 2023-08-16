@@ -10,9 +10,6 @@ export interface CheckPwResponse {
 }
 
 export const checkPw = async ({ id, password }: CheckPwValues) => {
-  if (id === '' || id === undefined) {
-    return;
-  }
   const { data } = await instance.post(`${API_SUFFIX.CHECK_PW}/${id}?pw=${password}`);
   return data;
 };
