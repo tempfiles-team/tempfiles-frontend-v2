@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE, variants } from '@/constant';
-import { DownloadLimit, ExpireTime, Password } from '@/components';
+import { DownloadSlider, ExpireTime, Password } from '@/components';
 import { useUpload } from '@/hooks';
 import { getFileSize } from '@/utils';
 
@@ -179,7 +179,7 @@ export const MainPage: React.FC = () => {
       </AnimatePresence>
       <AnimatePresence>
         {activeOption['다운로드 횟수'] && (
-          <DownloadLimit
+          <DownloadSlider
             animate={activeOption['다운로드 횟수'] ? 'visible' : 'hidden'}
             setDownloadLimit={setDownloadLimit}
             downloadLimit={downloadLimit}
