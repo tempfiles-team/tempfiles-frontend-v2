@@ -6,6 +6,7 @@ import { useGetItem } from '@/hooks';
 import { LockSVG } from '@/assets';
 import { GetFileResponse } from '@/api';
 import { getDate, getFileSize } from '@/utils';
+import { useCheckPw } from '@/hooks/query/checkPw';
 
 import * as S from './styled';
 
@@ -25,14 +26,16 @@ export const CheckPwPage: React.FC = () => {
     isCheckPwPage: true,
   });
 
+  const { mutate } = useCheckPw();
+
   if (isLoading) {
     return (
       <>
         <SkeletonUI width="60%" height="3rem" margin="3rem 0px 0px 0px" />
-        <div style={{ display: 'flex', columnGap: '1.4rem', width: '60%' }}>
+        <S.CheckPwSkeletonContainer>
           <SkeletonUI width="79%" height="2.8rem" margin="0" />
           <SkeletonUI width="7rem" height="3.4rem" margin="0px" />
-        </div>
+        </S.CheckPwSkeletonContainer>
       </>
     );
   }
@@ -41,6 +44,10 @@ export const CheckPwPage: React.FC = () => {
 
   const fileSize = data && getFileSize(fileData.size);
   const uploadDate = data && getDate(fileData.uploadDate);
+
+  const onPasswordSubmit = () => {
+    mutate({ id: id ? id : '', password });
+  };
 
   return (
     <S.CheckPwPageContainer>
@@ -60,7 +67,9 @@ export const CheckPwPage: React.FC = () => {
       </DataBox>
       <S.CheckPwPasswordContainer>
         <Password setPassword={setPassword} password={password} animate="visible" />
-        <Button isPrimary>전송</Button>
+        <Button isPrimary onClick={onPasswordSubmit}>
+          전송
+        </Button>
       </S.CheckPwPasswordContainer>
     </S.CheckPwPageContainer>
   );

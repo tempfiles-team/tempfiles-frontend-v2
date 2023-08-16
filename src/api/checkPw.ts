@@ -1,0 +1,18 @@
+import { API_SUFFIX, instance } from './api';
+
+export interface CheckPwValues {
+  id: string;
+  password: string;
+}
+
+export interface CheckPwResponse {
+  token: string;
+}
+
+export const checkPw = async ({ id, password }: CheckPwValues) => {
+  if (id === '' || id === undefined) {
+    return;
+  }
+  const { data } = await instance.post(`${API_SUFFIX.CHECK_PW}/${id}?pw=${password}`);
+  return data;
+};
