@@ -23,7 +23,7 @@ export interface GetItemValues {
 
 export const useGetItem = ({
   type,
-  options: { id, token },
+  options: { id },
 }: GetItemValues): UseQueryResult<
   APIResponse<GetTextResponse | GetFileResponse>,
   AxiosError<APIErrorResponse>
@@ -38,9 +38,9 @@ export const useGetItem = ({
         navigation('/');
       } else {
         if (type === 'file') {
-          return getFile({ id, token: checkPw.token || token });
+          return getFile({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt });
         } else {
-          return getText({ id, token: checkPw.token || token });
+          return getText({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt });
         }
       }
     },
@@ -48,12 +48,12 @@ export const useGetItem = ({
       onSuccess: ({ data: { isEncrypted, provide_token } }) => {
         if (isEncrypted && !provide_token) {
           toastError('비밀번호가 필요해요.');
-          navigation('/check/pw');
+          navigation(`/checkPw/${id}`);
         }
       },
       onError: () => {
         toastError('비밀번호가 필요해요.');
-        navigation('/check/pw');
+        navigation(`/checkPw/${id}`);
       },
       retry: 0,
     },

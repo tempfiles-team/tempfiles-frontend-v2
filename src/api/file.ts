@@ -52,8 +52,10 @@ export const upLoadFile = async ({
   return data;
 };
 
-export const getFile = async ({ id, token }: GetFileOptions) => {
-  const { data } = await instance.get(`${API_SUFFIX.FILE}/${id}${token ? `?token=${token}` : ''}`);
+export const getFile = async ({ id, token, isEncrypted }: GetFileOptions) => {
+  const { data } = await instance.get(
+    `${API_SUFFIX.FILE}/${id}${isEncrypted ? `?token=${token}` : ''}`,
+  );
   return data;
 };
 
