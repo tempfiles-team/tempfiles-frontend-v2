@@ -7,6 +7,7 @@ export const API_SUFFIX = {
   TEXT: '/text',
   TEXTS: '/texts',
   LIST: '/list',
+  DOWNLOAD: '/dl',
 };
 
 export type APIResponseStatusType = 'SUCCESS' | 'FAILED';

@@ -39,7 +39,6 @@ export const useDownload = (): UseMutationResult<
     },
     {
       onSuccess: () => {
-        navigation(`/`);
         toastSuccess(`다운로드에 성공했어요!`);
       },
       onError: () => {
