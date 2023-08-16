@@ -2,7 +2,9 @@ import { UseMutationResult, useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
+import { useSetRecoilState } from 'recoil';
 
+import { checkPwState } from '@/atom';
 import {
   APIErrorResponse,
   APIResponse,
@@ -26,6 +28,7 @@ export const useUpload = (): UseMutationResult<
   UploadValues
 > => {
   const navigation = useNavigate();
+  const checkPw = useSetRecoilState(checkPwState);
   return useMutation(
     'useUpload',
     ({ type, data, options }) => {
@@ -37,6 +40,7 @@ export const useUpload = (): UseMutationResult<
     },
     {
       onSuccess: ({ data }, variables) => {
+        checkPw({ isEncrypt: data.isEncrypted, token: data.token });
         navigation(`/dl/${data.id}?type=${variables.type}`);
         toastSuccess(`업로드에 성공했어요!`);
       },
