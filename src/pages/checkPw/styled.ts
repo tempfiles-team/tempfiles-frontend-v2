@@ -1,3 +1,7 @@
 import styled from '@emotion/styled';
 
-export const CheckPwPageContainer = styled.div``;
+import { colors } from '@/styles';
+
+export const CheckPwPageContainer = styled.div`
+  width: 60%;
+`;

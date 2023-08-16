@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { useDelete, useGetItem } from '@/hooks';
-import { Button, FileDetails, SkeletonUI } from '@/components';
+import { Button, DataBox, FileDetails, SkeletonUI } from '@/components';
 import { getDate, getExpireTime, getFileSize, toastSuccess } from '@/utils';
 import { GetFileResponse, GetTextResponse } from '@/api';
 import { useDownload } from '@/hooks/query/download';
@@ -66,7 +66,7 @@ export const DetailPage: React.FC = () => {
 
   return (
     <S.DetailPageContainer>
-      <S.DetailPageContent>
+      <DataBox>
         {type === 'file' ? (
           <FileDetails
             fileData={fileData}
@@ -77,7 +77,7 @@ export const DetailPage: React.FC = () => {
         ) : (
           <>{textData.textData}</>
         )}
-      </S.DetailPageContent>
+      </DataBox>
       <S.DetailPageInfo>
         만료까지 {expireDate.day}일 {expireDate.hour}시간 {expireDate.minute}분 / {downloadLimit}번
         남았습니다.
