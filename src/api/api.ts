@@ -48,6 +48,7 @@ export interface DataResponse extends DataUploadResponse {
 
 export interface GetItemOptions {
   id: string;
+  isEncrypted?: boolean;
   token?: string;
 }
 

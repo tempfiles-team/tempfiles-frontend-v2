@@ -48,8 +48,10 @@ export const upLoadText = async ({
   return data;
 };
 
-export const getText = async ({ id, token }: GetTextOptions) => {
-  const { data } = await instance.get(`${API_SUFFIX.TEXT}/${id}${token ? `?token=${token}` : ''}`);
+export const getText = async ({ id, token, isEncrypted }: GetTextOptions) => {
+  const { data } = await instance.get(
+    `${API_SUFFIX.TEXT}/${id}${isEncrypted ? `?token=${token}` : ''}`,
+  );
   return data;
 };
 
