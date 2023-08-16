@@ -8,8 +8,8 @@ import * as S from './styled';
 const FILE = 'file';
 const TEXT = 'text';
 
-const ApiListPage: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState(FILE);
+export const ApiListPage: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<'file' | 'text'>(FILE);
 
   return (
     <S.ApiListPageContainer>
@@ -44,5 +44,3 @@ const ApiListPage: React.FC = () => {
     </S.ApiListPageContainer>
   );
 };
-
-export default ApiListPage;
