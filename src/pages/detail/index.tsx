@@ -30,8 +30,13 @@ export const DetailPage: React.FC = () => {
   if (isLoading || !data) {
     return (
       <>
-        <SkeletonUI width="100%" height="3rem" margin="3rem 0px 0px 0px" />
-        <SkeletonUI width="80%" height="2.8rem" margin="0" />
+        <SkeletonUI width="70%" height="3rem" margin="3rem 0px 0px 0px" />
+        <SkeletonUI width="40%" height="2.8rem" margin="0" />
+        <S.DetailPageButtonContainer>
+          <SkeletonUI width="7rem" height="3.8rem" margin="0px" />
+          <SkeletonUI width="7rem" height="3.8rem" margin="0px" />
+          <SkeletonUI width="7rem" height="3.8rem" margin="0px" />
+        </S.DetailPageButtonContainer>
       </>
     );
   }

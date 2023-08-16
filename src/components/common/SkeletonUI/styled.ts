@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { colors } from '@/styles';
+
 export const SkeletonUIElement = styled.div<{
   width: string;
   height: string;
@@ -9,7 +11,7 @@ export const SkeletonUIElement = styled.div<{
   min-width: ${({ width }) => width};
   min-height: ${({ height }) => height};
   margin: ${({ margin }) => margin};
-  background: var(--color-backgorund-filelistbox);
+  background: ${colors.file};
   border-radius: 0.8rem;
   overflow: hidden;
   &::before {
