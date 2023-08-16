@@ -1,27 +1,67 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
-import { Password } from '@/components';
+import { Button, DataBox, FileDetails, Password, SkeletonUI } from '@/components';
 import { useGetItem } from '@/hooks';
+import { LockSVG } from '@/assets';
+import { GetFileResponse } from '@/api';
+import { getDate, getFileSize } from '@/utils';
 
 import * as S from './styled';
 
+type ItemType = 'file' | 'text';
 export const CheckPwPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { search } = useLocation();
+  const type = search.split('=')[1] as ItemType;
+
   const [password, setPassword] = useState<string>('');
 
   const { data, isLoading } = useGetItem({
-    type: 'file',
+    type: type === 'file' ? 'file' : 'none',
     options: {
       id: id ? id : '',
     },
     isCheckPwPage: true,
   });
 
-  //   console.log(data);
+  if (isLoading) {
+    return (
+      <>
+        <SkeletonUI width="60%" height="3rem" margin="3rem 0px 0px 0px" />
+        <div style={{ display: 'flex', columnGap: '1.4rem', width: '60%' }}>
+          <SkeletonUI width="79%" height="2.8rem" margin="0" />
+          <SkeletonUI width="7rem" height="3.4rem" margin="0px" />
+        </div>
+      </>
+    );
+  }
+
+  const fileData = data?.data as GetFileResponse;
+
+  const fileSize = data && getFileSize(fileData.size);
+  const uploadDate = data && getDate(fileData.uploadDate);
+
   return (
     <S.CheckPwPageContainer>
-      <Password setPassword={setPassword} password={password} animate="visible" />
+      <DataBox>
+        {!data ? (
+          <>
+            <S.CheckPwLockIcon src={LockSVG} /> 텍스트를 확인하려면 비밀번호를 입력하세요{' '}
+          </>
+        ) : (
+          <FileDetails
+            fileData={fileData}
+            fileSize={fileSize || ''}
+            filenameLength={fileData.filename.length}
+            uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
+          />
+        )}
+      </DataBox>
+      <S.CheckPwPasswordContainer>
+        <Password setPassword={setPassword} password={password} animate="visible" />
+        <Button isPrimary>전송</Button>
+      </S.CheckPwPasswordContainer>
     </S.CheckPwPageContainer>
   );
 };

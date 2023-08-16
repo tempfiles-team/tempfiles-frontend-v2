@@ -18,7 +18,7 @@ import { checkPwState } from '@/atom';
 
 export interface GetItemValues {
   isCheckPwPage?: boolean;
-  type: 'file' | 'text';
+  type: 'file' | 'text' | 'none';
   options: GetItemOptions;
 }
 
@@ -41,6 +41,8 @@ export const useGetItem = ({
       } else {
         if (type === 'file') {
           return getFile({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt });
+        } else if (type === 'none') {
+          return null;
         } else {
           return getText({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt });
         }
@@ -50,17 +52,16 @@ export const useGetItem = ({
       onSuccess: ({ data: { isEncrypted, provide_token } }) => {
         if (!isCheckPwPage && isEncrypted && !provide_token) {
           toastError('비밀번호가 필요해요.');
-          navigation(`/checkPw/${id}`);
+          navigation(`/checkPw/${id}?type=${type}`);
         }
       },
       onError: (res) => {
         if (res.response?.status === 401) {
           toastError('비밀번호가 필요해요.');
-          navigation(`/checkPw/${id}`);
+          navigation(`/checkPw/${id}?type=${type}`);
         }
       },
       retry: 0,
-      staleTime: Infinity,
     },
   );
 };

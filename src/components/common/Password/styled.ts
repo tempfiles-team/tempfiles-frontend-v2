@@ -12,7 +12,7 @@ export const PasswordContainer = styled(motion.div)`
   column-gap: 0.4rem;
   background-color: ${colors.secondary};
   border-radius: 0.8rem;
-  height: 3rem;
+  height: 3.4rem;
   border: 0.2rem solid ${colors.softPrimary};
 `;
 
