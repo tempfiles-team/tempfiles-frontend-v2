@@ -4,7 +4,6 @@ import { useGetWindowSize } from '@/hooks';
 import { FileResponse } from '@/api';
 
 export interface FileDetailProps {
-  filenameLength: number;
   uploadDate: {
     year: number;
     month: number;
@@ -16,7 +15,6 @@ export interface FileDetailProps {
 }
 
 export const FileDetail: React.FC<FileDetailProps> = ({
-  filenameLength,
   uploadDate,
   fileData,
   fileSize,
@@ -51,13 +49,14 @@ export const FileDetail: React.FC<FileDetailProps> = ({
   };
 
   const fileName = fileData.filename;
+  const fileNameLength = fileName.length;
 
   const maxFilenameLength = calculateMaxFilenameLength();
   const shortFileName = getShortFileName(fileName, maxFilenameLength);
 
   let detailsText: React.ReactNode;
 
-  if (windowSize < 550 && filenameLength <= 18) {
+  if (windowSize < 550 && fileNameLength <= 18) {
     detailsText = (
       <>
         {!isDetailPage ? shortFileName : fileName} / {fileSize} <br />
@@ -65,8 +64,8 @@ export const FileDetail: React.FC<FileDetailProps> = ({
       </>
     );
   } else if (
-    (windowSize > 550 && filenameLength >= 18) ||
-    (windowSize < 550 && filenameLength > 30)
+    (windowSize > 550 && fileNameLength >= 18) ||
+    (windowSize < 550 && fileNameLength > 30)
   ) {
     detailsText = (
       <>

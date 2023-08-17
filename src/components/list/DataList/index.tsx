@@ -5,6 +5,8 @@ import { FileResponse, TextResponse } from '@/api';
 import { FileDetail, DataBox } from '@/components';
 import { getDate, getFileSize } from '@/utils';
 
+import { TextDetail } from '../TextDetail';
+
 export interface DataListProps {
   type: 'file' | 'text';
   dataList: TextResponse[] | FileResponse[];
@@ -24,12 +26,7 @@ export const DataList: React.FC<DataListProps> = ({ dataList, type }) => {
 
     return (
       <DataBox onClick={() => handleDataBoxClick(file.id, 'file', file.isEncrypted)} key={file.id}>
-        <FileDetail
-          fileData={file}
-          fileSize={fileSize}
-          filenameLength={file.filename.length}
-          uploadDate={uploadDate}
-        />
+        <FileDetail fileData={file} fileSize={fileSize} uploadDate={uploadDate} />
       </DataBox>
     );
   };
@@ -39,8 +36,7 @@ export const DataList: React.FC<DataListProps> = ({ dataList, type }) => {
 
     return (
       <DataBox onClick={() => handleDataBoxClick(text.id, 'text', text.isEncrypted)} key={text.id}>
-        {text.data} / {text.data.length}글자 / 업로드된 날짜: {uploadDate.year}-{uploadDate.month}-
-        {uploadDate.day}
+        <TextDetail textData={text} uploadDate={uploadDate} />
       </DataBox>
     );
   };

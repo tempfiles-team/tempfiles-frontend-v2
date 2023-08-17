@@ -21,7 +21,7 @@ export const ListPageListWrapper = styled.div`
 
 export const ListPageBoxShadow = styled.div`
   width: 100%;
-  height: 6rem;
+  height: 5rem;
   position: relative;
   top: -2rem;
   background: linear-gradient(180deg, rgba(40, 42, 58, 0) 0%, #282a3a 45.31%);

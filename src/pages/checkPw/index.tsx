@@ -56,7 +56,6 @@ export const CheckPwPage: React.FC = () => {
           <FileDetail
             fileData={fileData}
             fileSize={fileSize || ''}
-            filenameLength={fileData.filename.length}
             uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
           />
         )}

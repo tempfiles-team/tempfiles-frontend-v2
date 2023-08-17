@@ -66,7 +66,6 @@ export const DetailPage: React.FC = () => {
             isDetailPage
             fileData={fileData}
             fileSize={fileSize}
-            filenameLength={fileData.filename.length}
             uploadDate={uploadDate}
           />
         ) : (
