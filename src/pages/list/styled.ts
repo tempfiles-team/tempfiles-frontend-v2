@@ -14,7 +14,6 @@ export const ListPageContainer = styled.div`
   @media screen and (max-width: 500px) {
     width: 100%;
   }
-  border: 1px solid red;
 `;
 
 export const ListPageListWrapper = styled.div`

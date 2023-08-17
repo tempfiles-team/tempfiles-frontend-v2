@@ -19,7 +19,7 @@ export const DetailPage: React.FC = () => {
 
   const { mutate: deleteMutate } = useDelete();
 
-  if (isLoading || !data) {
+  if (isLoading || !data?.data.uploadDate) {
     return (
       <>
         <SkeletonUI width="70%" height="3rem" margin="3rem 0px 0px 0px" />
@@ -39,7 +39,7 @@ export const DetailPage: React.FC = () => {
   const { expireTime, downloadLimit } = data.data;
 
   const expireDate = getExpireTime(expireTime);
-  const uploadDate = getDate(data.data.uploadDate);
+  const uploadDate = getDate(fileData.uploadDate);
   const fileSize = getFileSize(fileData.size);
 
   const fileDownload = data.data.download_url;
@@ -61,7 +61,7 @@ export const DetailPage: React.FC = () => {
   return (
     <S.DetailPageContainer>
       <DataBox>
-        {type === 'file' ? (
+        {fileData.filename ? (
           <FileDetails
             fileData={fileData}
             fileSize={fileSize}
@@ -78,7 +78,7 @@ export const DetailPage: React.FC = () => {
       </S.DetailPageInfo>
       <S.DetailPageButtonContainer>
         <Button isPrimary>
-          {type === 'file' ? (
+          {fileData.filename ? (
             <a href={fileDownload}>다운로드</a>
           ) : (
             <a onClick={onTextCopy}>텍스트 복사</a>
@@ -88,7 +88,7 @@ export const DetailPage: React.FC = () => {
           링크 복사
         </Button>
         <Button isPrimary={false} onClick={onDeleteClick}>
-          {type === 'file' ? '파일' : '텍스트'} 삭제
+          {fileData.filename ? '파일' : '텍스트'} 삭제
         </Button>
       </S.DetailPageButtonContainer>
     </S.DetailPageContainer>

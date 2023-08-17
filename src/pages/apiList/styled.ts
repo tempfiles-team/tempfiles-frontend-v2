@@ -59,6 +59,6 @@ export const ApiListPageBoxShadow = styled.div`
   width: 100%;
   height: 6rem;
   position: relative;
-  top: -2.5rem; //-25px
+  top: -3.2rem;
   background: linear-gradient(180deg, rgba(40, 42, 58, 0) 0%, #282a3a 45.31%);
 `;
