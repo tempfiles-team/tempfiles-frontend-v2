@@ -20,6 +20,7 @@ export const CheckPwPage: React.FC = () => {
       id: id ? id : '',
     },
     isCheckPwPage: true,
+    isEncrypt: true,
   });
 
   const { mutate } = useCheckPw();
@@ -36,11 +37,24 @@ export const CheckPwPage: React.FC = () => {
     );
   }
 
-  const fileData = data?.data as GetFileResponse;
+  const fileRender = () => {
+    if (data?.data.uploadDate) {
+      const fileData = data.data as GetFileResponse;
 
-  const fileSize = data && getFileSize(fileData.size);
-  const uploadDate = data && getDate(fileData.uploadDate);
-
+      const fileSize = getFileSize(fileData.size);
+      const uploadDate = getDate(fileData.uploadDate);
+      return (
+        <>
+          <FileDetail
+            fileData={fileData}
+            fileSize={fileSize || ''}
+            uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
+          />
+          asdf
+        </>
+      );
+    }
+  };
   const onPasswordSubmit = () => {
     mutate({ id: id ? id : '', password });
   };
@@ -48,16 +62,12 @@ export const CheckPwPage: React.FC = () => {
   return (
     <S.CheckPwPageContainer>
       <DataBox>
-        {!data ? (
+        {!data?.data ? (
           <>
             <S.CheckPwLockIcon src={LockSVG} /> 텍스트를 확인하려면 비밀번호를 입력하세요{' '}
           </>
         ) : (
-          <FileDetail
-            fileData={fileData}
-            fileSize={fileSize || ''}
-            uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
-          />
+          fileRender()
         )}
       </DataBox>
       <S.CheckPwPasswordContainer>

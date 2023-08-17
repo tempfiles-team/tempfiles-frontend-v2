@@ -9,8 +9,6 @@ import * as S from './styled';
 export const ListPage: React.FC = () => {
   const { data, isLoading } = useGetList();
 
-  const fileData = data?.data.files;
-  const textData = data?.data.texts;
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
 
   const randomSkeletonWidths = Array.from(
@@ -18,7 +16,7 @@ export const ListPage: React.FC = () => {
     () => SkeletonUIRandomWidth[Math.floor(Math.random() * 6)],
   );
 
-  if (isLoading || !fileData || !textData) {
+  if (isLoading || !data?.data || !data?.data.files || !data?.data.texts) {
     return (
       <S.ListPageContainer>
         {randomSkeletonWidths.map((width, i) => (
@@ -27,6 +25,9 @@ export const ListPage: React.FC = () => {
       </S.ListPageContainer>
     );
   }
+
+  const fileData = data.data.files;
+  const textData = data.data.texts;
 
   return (
     <>

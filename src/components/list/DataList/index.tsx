@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { FileResponse, TextResponse } from '@/api';
 import { FileDetail, DataBox } from '@/components';
 import { getDate, getFileSize } from '@/utils';
+import { LockSVG } from '@/assets';
 
 import { TextDetail } from '../TextDetail';
+
+import * as S from './styled';
 
 export interface DataListProps {
   type: 'file' | 'text';
@@ -26,6 +29,7 @@ export const DataList: React.FC<DataListProps> = ({ dataList, type }) => {
 
     return (
       <DataBox onClick={() => handleDataBoxClick(file.id, 'file', file.isEncrypted)} key={file.id}>
+        {file.isEncrypted && <S.DataListLockIcon src={LockSVG} />}
         <FileDetail fileData={file} fileSize={fileSize} uploadDate={uploadDate} />
       </DataBox>
     );
@@ -36,7 +40,14 @@ export const DataList: React.FC<DataListProps> = ({ dataList, type }) => {
 
     return (
       <DataBox onClick={() => handleDataBoxClick(text.id, 'text', text.isEncrypted)} key={text.id}>
-        <TextDetail textData={text} uploadDate={uploadDate} />
+        {text.isEncrypted ? (
+          <>
+            <S.DataListLockIcon src={LockSVG} />
+            비밀글입니다
+          </>
+        ) : (
+          <TextDetail textData={text} uploadDate={uploadDate} />
+        )}
       </DataBox>
     );
   };
