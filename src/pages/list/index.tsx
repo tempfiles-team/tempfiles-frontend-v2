@@ -8,7 +8,10 @@ import * as S from './styled';
 export const ListPage: React.FC = () => {
   const { data, isLoading } = useGetList();
 
-  if (isLoading || !data?.data.files || !data?.data.texts) {
+  const fileData = data?.data.files;
+  const textData = data?.data.texts;
+
+  if (isLoading || !fileData || !textData) {
     return (
       <S.ListPageContainer>
         <h1>loading..</h1>
@@ -19,10 +22,14 @@ export const ListPage: React.FC = () => {
   return (
     <>
       <S.ListPageContainer>
-        <S.ListPageListWrapper>
-          <DataList type="file" dataList={data.data.files} />
-          <DataList type="text" dataList={data.data.texts} />
-        </S.ListPageListWrapper>
+        {fileData.length !== 0 || textData.length !== 0 ? (
+          <S.ListPageListWrapper>
+            <DataList type="file" dataList={fileData} />
+            <DataList type="text" dataList={textData} />
+          </S.ListPageListWrapper>
+        ) : (
+          <h1>업로드된 파일이나 텍스트가 없어요</h1>
+        )}
       </S.ListPageContainer>
       <S.ListPageBoxShadow />
     </>

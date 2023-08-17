@@ -45,7 +45,7 @@ export const DetailPage: React.FC = () => {
 
   const fileDownload = data.data.download_url;
 
-  const onDeleteClick = (id: string) => {
+  const onDeleteClick = () => {
     navigate(`/del/${id}?type=${type}`);
   };
 
@@ -88,7 +88,7 @@ export const DetailPage: React.FC = () => {
         <Button isPrimary onClick={onLinkCopy}>
           링크 복사
         </Button>
-        <Button isPrimary={false} onClick={() => onDeleteClick(fileData.id || textData.id)}>
+        <Button isPrimary={false} onClick={onDeleteClick}>
           {fileData.filename ? '파일' : '텍스트'} 삭제
         </Button>
       </S.DetailPageButtonContainer>
