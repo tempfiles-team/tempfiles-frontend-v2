@@ -5,7 +5,7 @@ import { colors } from '@/styles';
 export const SkeletonUIBoxElement = styled.div`
   display: flex;
   background-color: ${colors.file};
-  border-radius: 1rem;
+  border-radius: 0.6rem;
   margin-bottom: 1.5rem;
   min-height: 3rem;
   overflow: hidden;

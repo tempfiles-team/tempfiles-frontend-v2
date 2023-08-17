@@ -30,7 +30,11 @@ export const ListPage: React.FC = () => {
 
   return (
     <>
-      <S.ListPageContainer>
+      <S.ListPageContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+      >
         {fileData.length !== 0 || textData.length !== 0 ? (
           <S.ListPageListWrapper>
             <DataList type="file" dataList={fileData} />

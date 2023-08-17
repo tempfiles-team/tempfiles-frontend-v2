@@ -44,11 +44,19 @@ export const CheckPwPage: React.FC = () => {
       const fileSize = getFileSize(fileData.size);
       const uploadDate = getDate(fileData.uploadDate);
       return (
-        <FileDetail
-          fileData={fileData}
-          fileSize={fileSize || ''}
-          uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
-        />
+        <DataBox>
+          <FileDetail
+            fileData={fileData}
+            fileSize={fileSize || ''}
+            uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
+          />
+        </DataBox>
+      );
+    } else {
+      return (
+        <>
+          <SkeletonUI width="100%" height="3rem" margin="0" />
+        </>
       );
     }
   };
@@ -59,15 +67,13 @@ export const CheckPwPage: React.FC = () => {
 
   return (
     <S.CheckPwPageContainer>
-      <DataBox>
-        {!data?.data ? (
-          <>
-            <S.CheckPwLockIcon src={LockSVG} /> 텍스트를 확인하려면 비밀번호를 입력하세요{' '}
-          </>
-        ) : (
-          fileRender()
-        )}
-      </DataBox>
+      {!data?.data ? (
+        <DataBox>
+          <S.CheckPwLockIcon src={LockSVG} /> 텍스트를 확인하려면 비밀번호를 입력하세요
+        </DataBox>
+      ) : (
+        fileRender()
+      )}
       <S.CheckPwPasswordContainer>
         <Password setPassword={setPassword} password={password} animate="visible" />
         <Button isPrimary onClick={onPasswordSubmit}>

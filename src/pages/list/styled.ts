@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 
-export const ListPageContainer = styled.div`
+export const ListPageContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;

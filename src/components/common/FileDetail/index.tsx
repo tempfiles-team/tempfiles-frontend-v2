@@ -33,7 +33,7 @@ export const FileDetail: React.FC<FileDetailProps> = ({
       case windowSize > 530:
         return 42;
       default:
-        return 27;
+        return 24;
     }
   };
 
