@@ -12,10 +12,12 @@ export interface FileUploadValues extends UploadOptions {
   file: FormData;
 }
 
-export interface FileUploadResponse extends DataUploadResponse {
+export interface FileResponse extends DataUploadResponse {
   filename: string;
   size: number;
 }
+
+export type FileUploadResponse = FileResponse;
 
 export type GetFileOptions = GetItemOptions;
 

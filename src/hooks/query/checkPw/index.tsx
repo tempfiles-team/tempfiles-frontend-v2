@@ -13,21 +13,21 @@ export const useCheckPw = (): UseMutationResult<
   AxiosError<APIErrorResponse>,
   CheckPwValues
 > => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const setCheckPw = useSetRecoilState(checkPwState);
   return useMutation(
     'useCheckPw',
     ({ id, password }) => {
       if (id === '' || id === undefined) {
         toastError('잘못된 접근입니다.');
-        navigation('/');
+        navigate('/');
       }
       return checkPw({ id, password });
     },
     {
       onSuccess: ({ token }, variables) => {
         setCheckPw({ token: token, isEncrypt: true });
-        navigation(`/dl/${variables.id}`);
+        navigate(`/dl/${variables.id}`);
       },
       onError: () => {
         toastError('비밀번호가 틀렸어요.');

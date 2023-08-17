@@ -13,10 +13,12 @@ export interface UploadTextValues extends UploadOptions {
   textData: string;
 }
 
-export interface UploadTextResponse extends DataUploadResponse {
+export interface TextResponse extends DataUploadResponse {
   data: string;
   numberOfText: number;
 }
+
+export type UploadTextResponse = TextResponse;
 
 export interface GetTextResponse extends DataResponse {
   textData: string;
@@ -35,7 +37,7 @@ export const upLoadText = async ({
   timeLimit,
 }: UploadTextValues) => {
   const { data } = await instance.post(
-    `${API_SUFFIX.TEXT}${API_SUFFIX.TEXT_UPLOAD}${password ? `?pw=${password}` : ''}`,
+    `${API_SUFFIX.TEXT_UPLOAD}${password ? `?pw=${password}` : ''}`,
     textData,
     {
       headers: {
