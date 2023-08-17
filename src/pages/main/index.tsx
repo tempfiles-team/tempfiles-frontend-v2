@@ -71,9 +71,9 @@ export const MainPage: React.FC = () => {
 
   const { mutate } = useUpload();
 
-  const onOptionClick = (index: number) => {
-    const option = UPLOAD_OPTIONS_LIST[index];
-    setActiveOption((prev) => ({ ...prev, [option]: !prev[option] }));
+  const onOptionClick = (option: string) => {
+    const optionName = option as UPLOAD_OPTIONS_LIST_TYPE;
+    setActiveOption((prev) => ({ ...prev, [optionName]: !prev[optionName] }));
   };
 
   const onExpireTimeClick = (type: string, value: number) => {
@@ -154,7 +154,7 @@ export const MainPage: React.FC = () => {
       <AnimatePresence>
         <S.MainPageUploadOptionWrapper>
           {UPLOAD_OPTIONS_LIST.map((option, i) => (
-            <S.MainPageUploadOption onClick={() => onOptionClick(i)} key={i}>
+            <S.MainPageUploadOption onClick={() => onOptionClick(option)} key={i}>
               <S.MainPageCheckBox>
                 <motion.div
                   variants={variants}
