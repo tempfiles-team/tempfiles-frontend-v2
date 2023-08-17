@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { UPLOAD_OPTIONS_LIST, UPLOAD_OPTIONS_LIST_TYPE, variants } from '@/constant';
-import { DownloadLimit, ExpireTime, Password } from '@/components';
+import { DownloadSlider, ExpireTime, Password } from '@/components';
 import { useUpload } from '@/hooks';
 import { getFileSize } from '@/utils';
 
@@ -137,6 +137,9 @@ export const MainPage: React.FC = () => {
     }
 
     setText('');
+    setDownloadLimit(50);
+    setPassword('');
+    setExpireTime({ day: 0, hour: 3, minute: 0 });
 
     setFile({
       filename: '',
@@ -179,7 +182,7 @@ export const MainPage: React.FC = () => {
       </AnimatePresence>
       <AnimatePresence>
         {activeOption['다운로드 횟수'] && (
-          <DownloadLimit
+          <DownloadSlider
             animate={activeOption['다운로드 횟수'] ? 'visible' : 'hidden'}
             setDownloadLimit={setDownloadLimit}
             downloadLimit={downloadLimit}
@@ -189,6 +192,7 @@ export const MainPage: React.FC = () => {
       <AnimatePresence>
         {activeOption['비밀번호'] && (
           <Password
+            isMainPage
             animate={activeOption['비밀번호'] ? 'visible' : 'hidden'}
             setPassword={setPassword}
             password={password}
@@ -263,7 +267,9 @@ export const MainPage: React.FC = () => {
           </S.MainPageSwitchButtonWrapper>
         )}
       </S.MainPageFindContainer>
-      <S.MainPageUploadButton onClick={onSubmit}>업로드</S.MainPageUploadButton>
+      <S.MainPageUploadButton onClick={onSubmit} variant="contained">
+        업로드
+      </S.MainPageUploadButton>
     </S.MainPageContainer>
   );
 };

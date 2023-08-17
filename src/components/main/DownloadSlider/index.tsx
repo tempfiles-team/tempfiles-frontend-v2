@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OptionSection } from '../optionSection';
+import { OptionSection } from '@/components';
 
 import * as S from './styled';
 
@@ -10,7 +10,7 @@ export interface DownloadLimitProps {
   animate: 'visible' | 'hidden';
 }
 
-export const DownloadLimit: React.FC<DownloadLimitProps> = ({
+export const DownloadSlider: React.FC<DownloadLimitProps> = ({
   setDownloadLimit,
   downloadLimit,
   animate,

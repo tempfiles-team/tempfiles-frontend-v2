@@ -4,8 +4,13 @@ export const API_SUFFIX = {
   BASEURL: import.meta.env.DEV ? 'http://127.0.0.1:5050' : import.meta.env.VITE_BASEURL,
   UPLOAD: '/upload',
   FILE: '/file',
+  FILES: '/files',
   TEXT: '/text',
+  TEXTS: '/texts',
+  TEXT_UPLOAD: 'text/new',
   LIST: '/list',
+  DOWNLOAD: '/dl',
+  CHECK_PW: '/checkpw',
 };
 
 export type APIResponseStatusType = 'SUCCESS' | 'FAILED';
@@ -13,13 +18,13 @@ export type APIResponseStatusType = 'SUCCESS' | 'FAILED';
 export interface APIResponse<T = unknown> {
   status: APIResponseStatusType;
   message: string;
-  result: T;
+  data: T;
 }
 
 export interface APIErrorResponse {
   status: 'FAILED';
   message: string;
-  result?: null;
+  data?: null;
 }
 
 export interface UploadOptions {
@@ -28,7 +33,7 @@ export interface UploadOptions {
   password?: string;
 }
 
-export interface UploadResponse {
+export interface DataUploadResponse {
   downloadCount: number;
   downloadLimit: number;
   expireTime: string;
@@ -36,6 +41,22 @@ export interface UploadResponse {
   isEncrypted: boolean;
   token: string;
   uploadDate: string;
+  provide_token?: boolean;
+}
+
+export interface DataResponse extends DataUploadResponse {
+  delete_url: string;
+  download_url: string;
+}
+
+export interface GetItemOptions {
+  id: string;
+  isEncrypted?: boolean;
+  token?: string;
+}
+
+export interface CommonValue {
+  id: string;
 }
 
 export const instance = axios.create({

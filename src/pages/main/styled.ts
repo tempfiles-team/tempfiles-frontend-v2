@@ -8,20 +8,12 @@ import { motion } from 'framer-motion';
 import { colors } from '@/styles';
 
 export const MainPageContainer = styled.div`
-  width: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   row-gap: 1.4rem;
-`;
-
-export const MainPageUploadOptionWrapper = styled.div`
-  display: flex;
-  width: 50%;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
   @media screen and (min-width: 500px) and (max-width: 850px) {
     width: 70%;
   }
@@ -30,17 +22,21 @@ export const MainPageUploadOptionWrapper = styled.div`
   }
 `;
 
+export const MainPageUploadOptionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 2rem;
+`;
+
 export const MainPageFindContainer = styled(motion.div)`
-  width: 58%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 0.24fr;
   column-gap: 0.4rem;
-  @media screen and (min-width: 500px) and (max-width: 850px) {
-    width: 70%;
-  }
   @media screen and (max-width: 500px) {
     grid-template-columns: 1fr 0.3fr;
-    width: 90%;
   }
   @media screen and (max-width: 375px) {
     grid-template-columns: 1fr 0.26fr;
@@ -84,6 +80,7 @@ export const MainPageText = styled.span`
   font-weight: 700;
   white-space: nowrap;
   color: #c8beac;
+  padding: 0 0.6rem;
   @media screen and (max-width: 500px) {
     font-size: 1rem;
     font-weight: 600;
@@ -107,6 +104,7 @@ export const MainPageTextArea = styled.textarea`
     color: #c8beac;
   }
   &::-webkit-scrollbar {
+    z-index: 999;
     width: 0.4rem;
   }
   &::-webkit-scrollbar-track {
@@ -187,7 +185,7 @@ export const MainPageUploadOption = styled.div`
 export const MainPageOptionName = styled.span`
   font-size: 1.2rem;
   font-weight: 700;
-  @media screen and (max-width: 500px) {
+  @media screen and (min-width: 380px) and (max-width: 500px) {
     font-size: 1rem;
   }
 `;

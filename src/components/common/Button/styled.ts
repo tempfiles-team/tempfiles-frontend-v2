@@ -1,21 +1,24 @@
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
 
 import { colors } from '@/styles';
 
-export const ButtonElement = styled.div<{ isTertiary?: boolean }>`
-  padding: 0 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background-color: ${({ isTertiary }) => (isTertiary ? colors.tertiary : colors.primary)};
+export const ButtonElement = styled(Button)<{ isPrimary: boolean }>`
+  background-color: ${({ isPrimary }) => (isPrimary ? colors.primary : colors.tertiary)};
   border-radius: 0.6rem;
-  cursor: pointer;
-  @media screen and (max-width: 630px) {
-    padding: 0 0.6rem;
-    font-size: 0.8rem;
-    font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 600;
+  height: 3.4rem;
+  border: 0;
+  color: ${colors.white};
+  &:hover {
+    background-color: ${({ isPrimary }) => (isPrimary ? colors.primary : colors.tertiary)};
+  }
+  & > a {
+    color: ${colors.white};
+    text-decoration: none;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 1.1rem;
   }
 `;

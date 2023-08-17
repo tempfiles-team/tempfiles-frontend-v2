@@ -1,8 +1,10 @@
 import { UseMutationResult, useMutation } from 'react-query';
-import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
+import { useSetRecoilState } from 'recoil';
 
+import { checkPwState } from '@/atom';
 import {
   APIErrorResponse,
   APIResponse,
@@ -12,6 +14,7 @@ import {
   upLoadFile,
   upLoadText,
 } from '@/api';
+import { toastError, toastSuccess } from '@/utils';
 
 export interface UploadValues {
   type: 'file' | 'text';
@@ -24,6 +27,8 @@ export const useUpload = (): UseMutationResult<
   AxiosError<APIErrorResponse>,
   UploadValues
 > => {
+  const navigation = useNavigate();
+  const checkPw = useSetRecoilState(checkPwState);
   return useMutation(
     'useUpload',
     ({ type, data, options }) => {
@@ -34,17 +39,13 @@ export const useUpload = (): UseMutationResult<
       }
     },
     {
-      onSuccess: () => {
-        toast.success(` 업로드에 성공했어요!`, {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+      onSuccess: ({ data }, variables) => {
+        checkPw({ isEncrypt: data.isEncrypted, token: data.token });
+        navigation(`/dl/${data.id}?type=${variables.type}`);
+        toastSuccess(`업로드에 성공했어요!`);
       },
       onError: () => {
-        toast.error(`업로드에 실패했어요`, {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+        toastError('업로드에 실패했어요.');
       },
       retry: 0,
     },

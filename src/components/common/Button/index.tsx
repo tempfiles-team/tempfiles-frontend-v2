@@ -4,13 +4,13 @@ import * as S from './styled';
 
 export interface ButtonProps {
   children: React.ReactNode;
+  isPrimary: boolean;
   onClick?: () => void;
-  isTertiary?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, onClick, isTertiary }) => {
+export const Button: React.FC<ButtonProps> = ({ children, isPrimary, onClick }) => {
   return (
-    <S.ButtonElement onClick={onClick} isTertiary={isTertiary}>
+    <S.ButtonElement variant="contained" isPrimary={isPrimary} onClick={onClick}>
       {children}
     </S.ButtonElement>
   );
