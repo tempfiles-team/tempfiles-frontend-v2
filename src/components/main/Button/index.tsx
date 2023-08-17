@@ -12,10 +12,8 @@ export const MainPageButton: React.FC<MainPageButtonProps> = ({
   children,
   onClick,
   isTertiary,
-}) => {
-  return (
-    <S.ButtonElement onClick={onClick} variant="contained" isTertiary={isTertiary}>
-      {children}
-    </S.ButtonElement>
-  );
-};
+}) => (
+  <S.ButtonElement onClick={onClick} variant="contained" isTertiary={isTertiary}>
+    {children}
+  </S.ButtonElement>
+);

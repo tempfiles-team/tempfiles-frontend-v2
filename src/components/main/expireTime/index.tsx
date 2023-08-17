@@ -16,6 +16,7 @@ export const ExpireTime: React.FC<ExpireTimeProps> = ({
   expireTime,
   animate,
 }) => {
+  /** 시간 초기화 함수 */
   const onResetClick = () => {
     onExpireTimeClick('minute', 0);
     onExpireTimeClick('hour', 0);

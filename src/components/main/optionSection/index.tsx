@@ -9,17 +9,15 @@ export interface OptionSectionProps {
   animate: 'visible' | 'hidden';
 }
 
-export const OptionSection: React.FC<OptionSectionProps> = ({ children, text, animate }) => {
-  return (
-    <S.OptionSection
-      variants={variants}
-      animate={animate}
-      transition={{ duration: 0.2 }}
-      initial={{ opacity: 0 }}
-      exit={{ opacity: 0 }}
-    >
-      <S.OptionSectionTextWrapper>{text}</S.OptionSectionTextWrapper>
-      {children}
-    </S.OptionSection>
-  );
-};
+export const OptionSection: React.FC<OptionSectionProps> = ({ children, text, animate }) => (
+  <S.OptionSection
+    variants={variants}
+    animate={animate}
+    transition={{ duration: 0.2 }}
+    initial={{ opacity: 0 }}
+    exit={{ opacity: 0 }}
+  >
+    <S.OptionSectionTextWrapper>{text}</S.OptionSectionTextWrapper>
+    {children}
+  </S.OptionSection>
+);
