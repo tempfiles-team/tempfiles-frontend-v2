@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useGetWindowSize } from '@/hooks';
 import { TextResponse } from '@/api';
+import { calculateMaxDataLength, getShortData } from '@/utils';
 
 export interface TextDetailProps {
   uploadDate: {
@@ -15,34 +16,11 @@ export interface TextDetailProps {
 export const TextDetail: React.FC<TextDetailProps> = ({ uploadDate, textData }) => {
   const { windowSize } = useGetWindowSize();
 
-  const calculateMaxTextLength = () => {
-    switch (true) {
-      case windowSize > 1250:
-        return 80;
-      case windowSize > 1180:
-        return 60;
-      case windowSize > 768:
-        return 55;
-      case windowSize > 530:
-        return 42;
-      default:
-        return 27;
-    }
-  };
-
-  const getShortText = (text: string, maxTextLength: number) => {
-    if (text.length > maxTextLength) {
-      return `${text.slice(0, maxTextLength)}...`;
-    }
-
-    return textName;
-  };
-
   const textName = textData.data;
   const textNameLength = textName.length;
 
-  const maxTextLength = calculateMaxTextLength();
-  const shortText = getShortText(textName, maxTextLength);
+  const maxTextLength = calculateMaxDataLength(windowSize);
+  const shortText = getShortData(textName, maxTextLength);
 
   let detailsText: React.ReactNode;
 

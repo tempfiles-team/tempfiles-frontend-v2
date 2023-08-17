@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useGetWindowSize } from '@/hooks';
 import { FileResponse } from '@/api';
+import { calculateMaxDataLength, getShortData } from '@/utils';
 
 export interface FileDetailProps {
   uploadDate: {
@@ -22,37 +23,11 @@ export const FileDetail: React.FC<FileDetailProps> = ({
 }) => {
   const { windowSize } = useGetWindowSize();
 
-  const calculateMaxFilenameLength = () => {
-    switch (true) {
-      case windowSize > 1250:
-        return 80;
-      case windowSize > 1180:
-        return 60;
-      case windowSize > 768:
-        return 55;
-      case windowSize > 530:
-        return 42;
-      default:
-        return 24;
-    }
-  };
-
-  const getShortFileName = (fileName: string, maxFilenameLength: number) => {
-    const lastDot = fileName.lastIndexOf('.');
-    const fileExtension = lastDot === -1 ? '' : fileName.substring(lastDot + 1);
-
-    if (fileName.length > maxFilenameLength) {
-      return `${fileName.slice(0, maxFilenameLength)}(...).${fileExtension}`;
-    }
-
-    return fileName;
-  };
-
   const fileName = fileData.filename;
   const fileNameLength = fileName.length;
 
-  const maxFilenameLength = calculateMaxFilenameLength();
-  const shortFileName = getShortFileName(fileName, maxFilenameLength);
+  const maxFilenameLength = calculateMaxDataLength(windowSize);
+  const shortFileName = getShortData(fileName, maxFilenameLength);
 
   let detailsText: React.ReactNode;
 
