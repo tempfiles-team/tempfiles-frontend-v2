@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { useGetList } from '@/hooks';
-import { DataList } from '@/components';
+import { Button, DataList } from '@/components';
+import { SkeletonUIBox } from '@/components/common/SkeletonUIBox';
 
 import * as S from './styled';
 
@@ -10,11 +11,19 @@ export const ListPage: React.FC = () => {
 
   const fileData = data?.data.files;
   const textData = data?.data.texts;
+  const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
+
+  const randomSkeletonWidths = Array.from(
+    { length: 7 },
+    () => SkeletonUIRandomWidth[Math.floor(Math.random() * 6)],
+  );
 
   if (isLoading || !fileData || !textData) {
     return (
       <S.ListPageContainer>
-        <h1>loading..</h1>
+        {randomSkeletonWidths.map((width, i) => (
+          <SkeletonUIBox key={i} randomWidth={width} />
+        ))}
       </S.ListPageContainer>
     );
   }
@@ -28,7 +37,12 @@ export const ListPage: React.FC = () => {
             <DataList type="text" dataList={textData} />
           </S.ListPageListWrapper>
         ) : (
-          <h1>업로드된 파일이나 텍스트가 없어요</h1>
+          <>
+            <S.ListPageText>업로드된 파일이나 텍스트가 없어요.</S.ListPageText>
+            <Button isPrimary={true} onClick={() => window.location.replace('/')}>
+              &larr; 업로드하러 가기
+            </Button>
+          </>
         )}
       </S.ListPageContainer>
       <S.ListPageBoxShadow />

@@ -7,7 +7,7 @@ export const SkeletonUIBoxElement = styled.div`
   background-color: ${colors.file};
   border-radius: 1rem;
   margin-bottom: 1.5rem;
-  min-height: 4.6rem;
+  min-height: 3rem;
   overflow: hidden;
   &::before {
     content: ' ';

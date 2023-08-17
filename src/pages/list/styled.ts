@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const ListPageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow: scroll;
   height: 100vh;
   width: 100%;
@@ -28,5 +29,14 @@ export const ListPageBoxShadow = styled.div`
   @media screen and (max-width: 500px) {
     top: -1rem;
     height: 4rem;
+  }
+`;
+
+export const ListPageText = styled.h1`
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 2rem 0;
+  @media screen and (max-width: 500px) {
+    font-size: 1.2rem;
   }
 `;

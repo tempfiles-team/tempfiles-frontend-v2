@@ -11,6 +11,9 @@ export const DeletePageContainer = styled.div`
 export const DeletePageMainText = styled.h1`
   font-size: 1.4rem;
   font-weight: 700;
+  @media screen and (max-width: 500px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const DeletePageButtonContainer = styled.div`

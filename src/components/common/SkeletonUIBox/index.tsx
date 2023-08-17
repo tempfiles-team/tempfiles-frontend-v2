@@ -12,7 +12,7 @@ export const SkeletonUIBox: React.FC<SkeletonUIBoxProps> = ({ randomWidth }) => 
   return (
     <S.SkeletonUIBoxElement
       css={css`
-        min-width: ${randomWidth};
+        min-width: ${randomWidth}rem;
       `}
     />
   );
