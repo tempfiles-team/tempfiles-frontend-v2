@@ -11,6 +11,7 @@ export const DataBoxElement = styled.div`
   flex-wrap: wrap;
   word-break: break-all;
   font-size: 1.3rem;
+  width: fit-content;
   max-width: 100%;
   max-height: 10rem;
   line-height: 1.8rem;

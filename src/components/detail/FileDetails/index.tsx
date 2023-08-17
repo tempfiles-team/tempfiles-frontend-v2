@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useGetWindowSize } from '@/hooks';
-import { GetFileResponse } from '@/api';
+import { FileResponse } from '@/api';
 
 export interface FileDetailsProps {
   filenameLength: number;
@@ -10,7 +10,7 @@ export interface FileDetailsProps {
     month: number;
     day: number;
   };
-  fileData: GetFileResponse;
+  fileData: FileResponse;
   fileSize: string;
 }
 
