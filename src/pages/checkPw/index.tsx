@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, DataBox, FileDetails, Password, SkeletonUI } from '@/components';
+import { Button, DataBox, FileDetail, Password, SkeletonUI } from '@/components';
 import { useGetItem, useCheckPw } from '@/hooks';
 import { LockSVG } from '@/assets';
 import { GetFileResponse } from '@/api';
@@ -53,7 +53,7 @@ export const CheckPwPage: React.FC = () => {
             <S.CheckPwLockIcon src={LockSVG} /> 텍스트를 확인하려면 비밀번호를 입력하세요{' '}
           </>
         ) : (
-          <FileDetails
+          <FileDetail
             fileData={fileData}
             fileSize={fileSize || ''}
             filenameLength={fileData.filename.length}

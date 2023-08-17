@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDelete, useGetInfo, useGetItem } from '@/hooks';
-import { Button, DataBox, FileDetails, SkeletonUI } from '@/components';
+import { Button, DataBox, FileDetail, SkeletonUI } from '@/components';
 import { getDate, getExpireTime, getFileSize, toastSuccess } from '@/utils';
 import { GetFileResponse, GetTextResponse } from '@/api';
 
@@ -62,7 +62,8 @@ export const DetailPage: React.FC = () => {
     <S.DetailPageContainer>
       <DataBox>
         {fileData.filename ? (
-          <FileDetails
+          <FileDetail
+            isDetailPage
             fileData={fileData}
             fileSize={fileSize}
             filenameLength={fileData.filename.length}

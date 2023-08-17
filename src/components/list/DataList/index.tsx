@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { FileResponse, TextResponse } from '@/api';
-import { FileDetails, DataBox } from '@/components';
+import { FileDetail, DataBox } from '@/components';
 import { getDate, getFileSize } from '@/utils';
 
 export interface DataListProps {
@@ -24,7 +24,7 @@ export const DataList: React.FC<DataListProps> = ({ dataList, type }) => {
 
     return (
       <DataBox onClick={() => handleDataBoxClick(file.id, 'file', file.isEncrypted)} key={file.id}>
-        <FileDetails
+        <FileDetail
           fileData={file}
           fileSize={fileSize}
           filenameLength={file.filename.length}
