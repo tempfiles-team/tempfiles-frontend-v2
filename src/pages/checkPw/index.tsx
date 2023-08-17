@@ -44,17 +44,15 @@ export const CheckPwPage: React.FC = () => {
       const fileSize = getFileSize(fileData.size);
       const uploadDate = getDate(fileData.uploadDate);
       return (
-        <>
-          <FileDetail
-            fileData={fileData}
-            fileSize={fileSize || ''}
-            uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
-          />
-          asdf
-        </>
+        <FileDetail
+          fileData={fileData}
+          fileSize={fileSize || ''}
+          uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
+        />
       );
     }
   };
+
   const onPasswordSubmit = () => {
     mutate({ id: id ? id : '', password });
   };

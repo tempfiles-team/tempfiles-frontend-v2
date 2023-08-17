@@ -8,6 +8,7 @@ import * as S from './styled';
 export const DeletePage: React.FC = () => {
   const { id, type } = useGetInfo();
   const { mutate } = useDelete();
+
   const onDeleteClick = () => {
     mutate({ id: id ? id : '', type });
   };

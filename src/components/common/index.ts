@@ -5,3 +5,4 @@ export * from './Button';
 export * from './Password';
 export * from './DataBox';
 export * from './FileDetail';
+export * from './SkeletonUIBox';

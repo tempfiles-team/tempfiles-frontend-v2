@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { useGetList } from '@/hooks';
-import { Button, DataList } from '@/components';
-import { SkeletonUIBox } from '@/components/common/SkeletonUIBox';
+import { Button, DataList, SkeletonUIBox } from '@/components';
 
 import * as S from './styled';
 
