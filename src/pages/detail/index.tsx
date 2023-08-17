@@ -1,6 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { useDelete, useGetInfo, useGetItem } from '@/hooks';
+import { useGetInfo, useGetItem } from '@/hooks';
 import { Button, DataBox, FileDetail, SkeletonUI } from '@/components';
 import { getDate, getExpireTime, getFileSize, toastSuccess } from '@/utils';
 import { GetFileResponse, GetTextResponse } from '@/api';
@@ -17,7 +18,7 @@ export const DetailPage: React.FC = () => {
     },
   });
 
-  const { mutate: deleteMutate } = useDelete();
+  const navigate = useNavigate();
 
   if (isLoading || !data?.data.uploadDate) {
     return (
@@ -44,8 +45,8 @@ export const DetailPage: React.FC = () => {
 
   const fileDownload = data.data.download_url;
 
-  const onDeleteClick = () => {
-    deleteMutate({ type, id: id ? id : '' });
+  const onDeleteClick = (id: string) => {
+    navigate(`/del/${id}?type=${type}`);
   };
 
   const onLinkCopy = () => {
@@ -87,7 +88,7 @@ export const DetailPage: React.FC = () => {
         <Button isPrimary onClick={onLinkCopy}>
           링크 복사
         </Button>
-        <Button isPrimary={false} onClick={onDeleteClick}>
+        <Button isPrimary={false} onClick={() => onDeleteClick(fileData.id || textData.id)}>
           {fileData.filename ? '파일' : '텍스트'} 삭제
         </Button>
       </S.DetailPageButtonContainer>
