@@ -2,10 +2,12 @@ import styled from '@emotion/styled';
 
 import { colors } from '@/styles';
 
-export const SkeletonUIElement = styled.div`
+export const SkeletonUIBoxElement = styled.div`
   display: flex;
-  background: ${colors.file};
-  border-radius: 0.8rem;
+  background-color: ${colors.file};
+  border-radius: 0.6rem;
+  margin-bottom: 1.5rem;
+  min-height: 3rem;
   overflow: hidden;
   &::before {
     content: ' ';

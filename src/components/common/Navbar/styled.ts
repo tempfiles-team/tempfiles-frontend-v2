@@ -13,7 +13,7 @@ export const NavbarContainer = styled.div`
   justify-content: center;
   column-gap: 6rem;
   @media screen and (max-width: 500px) {
-    padding: 1.6rem 0;
+    padding-bottom: 1.6rem;
   }
 `;
 

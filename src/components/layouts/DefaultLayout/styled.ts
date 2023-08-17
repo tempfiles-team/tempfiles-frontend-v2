@@ -13,11 +13,11 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
   justify-content: flex-start;
   position: relative;
   height: 68%;
-  row-gap: 3rem;
   width: 100%;
   padding: 0 2rem;
   overflow: hidden;
   max-width: 1250px;
+  row-gap: 1rem;
   @media screen and (min-width: 1800px) {
     max-width: 1500px;
   }
@@ -25,6 +25,7 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
     height: 76%;
   }
   @media screen and (max-width: 500px) {
+    row-gap: 0;
     padding: 0 1rem;
     height: 80%;
   }
@@ -33,4 +34,8 @@ export const DefaultLayoutWrapper = styled(DefaultLayoutContainer)`
 export const DefaultLayoutTitleContainer = styled.div`
   position: static;
   top: 0;
+  margin-bottom: 3rem;
+  @media screen and (max-width: 500px) {
+    margin-bottom: 3rem;
+  }
 `;

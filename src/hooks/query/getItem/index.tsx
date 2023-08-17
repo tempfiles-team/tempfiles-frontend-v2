@@ -20,47 +20,49 @@ export interface GetItemValues {
   isCheckPwPage?: boolean;
   type: 'file' | 'text' | 'none';
   options: GetItemOptions;
+  isEncrypt?: boolean;
 }
 
 export const useGetItem = ({
   isCheckPwPage,
   type,
   options: { id },
+  isEncrypt,
 }: GetItemValues): UseQueryResult<
   APIResponse<GetTextResponse | GetFileResponse>,
   AxiosError<APIErrorResponse>
 > => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const checkPw = useRecoilValue(checkPwState);
   return useQuery(
     'useGetItem',
     () => {
       if (id === '' || id === undefined) {
         toastError('잘못된 접근입니다.');
-        navigation('/');
+        navigate('/');
       } else {
         if (type === 'file') {
-          return getFile({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt });
+          return getFile({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt || isEncrypt });
         } else if (type === 'none') {
-          return null;
+          return [];
         } else {
-          return getText({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt });
+          return getText({ id, token: checkPw.token, isEncrypted: checkPw.isEncrypt || isEncrypt });
         }
       }
     },
     {
-      onSuccess: ({ data: { isEncrypted, provide_token } }) => {
-        if (!isCheckPwPage && isEncrypted && !provide_token) {
+      onSuccess: ({ data }) => {
+        if (!isCheckPwPage && data.isEncrypted && !data.provide_token) {
           toastError('비밀번호가 필요해요.');
-          navigation(`/checkPw/${id}?type=${type}`);
+          navigate(`/checkPw/${id}?type=${type}`);
         }
       },
       onError: (res) => {
         if (res.response?.status === 401) {
           toastError('비밀번호가 필요해요.');
-          navigation(`/checkPw/${id}?type=${type}`);
+          navigate(`/checkPw/${id}?type=${type}`);
         } else {
-          navigation('/');
+          navigate('/');
         }
       },
       retry: 0,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, DataBox, FileDetails, Password, SkeletonUI } from '@/components';
+import { Button, DataBox, FileDetail, Password, SkeletonUI } from '@/components';
 import { useGetItem, useCheckPw } from '@/hooks';
 import { LockSVG } from '@/assets';
 import { GetFileResponse } from '@/api';
@@ -20,6 +20,7 @@ export const CheckPwPage: React.FC = () => {
       id: id ? id : '',
     },
     isCheckPwPage: true,
+    isEncrypt: true,
   });
 
   const { mutate } = useCheckPw();
@@ -36,10 +37,29 @@ export const CheckPwPage: React.FC = () => {
     );
   }
 
-  const fileData = data?.data as GetFileResponse;
+  const fileRender = () => {
+    if (data?.data.uploadDate) {
+      const fileData = data.data as GetFileResponse;
 
-  const fileSize = data && getFileSize(fileData.size);
-  const uploadDate = data && getDate(fileData.uploadDate);
+      const fileSize = getFileSize(fileData.size);
+      const uploadDate = getDate(fileData.uploadDate);
+      return (
+        <DataBox>
+          <FileDetail
+            fileData={fileData}
+            fileSize={fileSize || ''}
+            uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
+          />
+        </DataBox>
+      );
+    } else {
+      return (
+        <>
+          <SkeletonUI width="100%" height="3rem" margin="0" />
+        </>
+      );
+    }
+  };
 
   const onPasswordSubmit = () => {
     mutate({ id: id ? id : '', password });
@@ -47,20 +67,13 @@ export const CheckPwPage: React.FC = () => {
 
   return (
     <S.CheckPwPageContainer>
-      <DataBox>
-        {!data ? (
-          <>
-            <S.CheckPwLockIcon src={LockSVG} /> 텍스트를 확인하려면 비밀번호를 입력하세요{' '}
-          </>
-        ) : (
-          <FileDetails
-            fileData={fileData}
-            fileSize={fileSize || ''}
-            filenameLength={fileData.filename.length}
-            uploadDate={uploadDate || { year: 0, month: 0, day: 0 }}
-          />
-        )}
-      </DataBox>
+      {!data?.data ? (
+        <DataBox>
+          <S.CheckPwLockIcon src={LockSVG} /> 텍스트를 확인하려면 비밀번호를 입력하세요
+        </DataBox>
+      ) : (
+        fileRender()
+      )}
       <S.CheckPwPasswordContainer>
         <Password setPassword={setPassword} password={password} animate="visible" />
         <Button isPrimary onClick={onPasswordSubmit}>

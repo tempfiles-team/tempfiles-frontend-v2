@@ -16,13 +16,13 @@ export const useDelete = (): UseMutationResult<
   AxiosError<APIErrorResponse>,
   DeleteValues
 > => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   return useMutation(
     'useDelete',
     ({ type, id }) => {
       if (id === '' || id === undefined) {
         toastError('잘못된 접근입니다.');
-        navigation('/');
+        navigate('/');
       }
       if (type === 'file') {
         return deleteFile({ id });
@@ -32,7 +32,7 @@ export const useDelete = (): UseMutationResult<
     },
     {
       onSuccess: () => {
-        navigation(`/`);
+        navigate(`/`);
         toastSuccess(`삭제에 성공했어요!`);
       },
       onError: () => {

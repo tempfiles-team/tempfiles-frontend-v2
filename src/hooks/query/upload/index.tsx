@@ -27,7 +27,7 @@ export const useUpload = (): UseMutationResult<
   AxiosError<APIErrorResponse>,
   UploadValues
 > => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const checkPw = useSetRecoilState(checkPwState);
   return useMutation(
     'useUpload',
@@ -41,7 +41,7 @@ export const useUpload = (): UseMutationResult<
     {
       onSuccess: ({ data }, variables) => {
         checkPw({ isEncrypt: data.isEncrypted, token: data.token });
-        navigation(`/dl/${data.id}?type=${variables.type}`);
+        navigate(`/dl/${data.id}?type=${variables.type}`);
         toastSuccess(`업로드에 성공했어요!`);
       },
       onError: () => {
