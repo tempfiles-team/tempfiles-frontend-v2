@@ -2,7 +2,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 
-import { CheckPwPage, DetailPage, MainPage } from './pages';
+import { ApiListPage, ApiPage, DetailPage, MainPage, CheckPwPage } from './pages';
 import { DefaultLayout } from './components';
 
 export const App: React.FC = () => {
@@ -18,6 +18,8 @@ export const App: React.FC = () => {
       >
         <Route path="/" element={<MainPage />} />
         <Route path="/dl/:id" element={<DetailPage />} />
+        <Route path="/apiList" element={<ApiListPage />} />
+        <Route path="/api/:apiId" element={<ApiPage />} />
         <Route path="/checkPw/:id" element={<CheckPwPage />} />
       </Route>
     </Routes>

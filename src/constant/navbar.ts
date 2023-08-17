@@ -10,7 +10,7 @@ export const NAVBAR_MENU: NavbarMenuItems[] = [
   },
   {
     text: 'API',
-    href: '/api',
+    href: '/apiList',
   },
   {
     text: 'List',

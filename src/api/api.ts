@@ -7,7 +7,7 @@ export const API_SUFFIX = {
   FILES: '/files',
   TEXT: '/text',
   TEXTS: '/texts',
-  TEXT_UPLOAD: 'text/new',
+  TEXT_UPLOAD: '/text/new',
   LIST: '/list',
   DOWNLOAD: '/dl',
   CHECK_PW: '/checkpw',
